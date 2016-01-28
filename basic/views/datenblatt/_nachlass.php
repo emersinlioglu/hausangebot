@@ -8,6 +8,7 @@ use kartik\datecontrol\DateControl;
 /* @var $modelNachlass app\models\Nachlass */
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
+<div class="col-md-6">
 <div class="box-group" id="accordion">
     <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
     <div class="panel box box-primary">
@@ -100,4 +101,4 @@ use kartik\datecontrol\DateControl;
         </div>
     </div>
 </div>
-
+</div>

@@ -4,23 +4,20 @@ namespace app\controllers;
 
 use Yii;
 use yii\data\ActiveDataProvider;
+use app\models\Datenblatt;
+use app\models\DatenblattSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
-//use \yii\base\Model;
-//use yii\web\Response;
-//use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 
 use app\models\DynamicForm;
-use app\models\Datenblatt;
 use app\models\Nachlass;
 use app\models\Zahlung;
 use app\models\Kaeufer;
 use app\models\Sonderwunsch;
 use app\models\Abschlag;
-use app\models\DatenblattSearch;
+
 
 /**
  * DatenblattController implements the CRUD actions for Datenblatt model.
@@ -40,7 +37,34 @@ class DatenblattController extends Controller
     }
 
     /**
-     * Creates a new Person model.
+     * Lists all Datenblatt models.
+     * @return mixed
+     */
+    public function actionIndex()
+    {
+        $searchModel = new DatenblattSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Displays a single Datenblatt model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Creates a new Datenblatt model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
@@ -123,7 +147,7 @@ class DatenblattController extends Controller
 
                     if ($flag) {
                         $transaction->commit();
-                        return $this->redirect(['update', 'id' => $modelDatenblatt->id]);
+                        return $this->redirect(['view', 'id' => $modelDatenblatt->id]);
                     } else {
                         $transaction->rollBack();
                     }
@@ -143,12 +167,12 @@ class DatenblattController extends Controller
     }
 
     /**
-     * Updates an existing Person model.
+     * Updates an existing Datenblatt model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+     public function actionUpdate($id)
     {
         $modelDatenblatt = $this->findModel($id);
         
@@ -285,6 +309,7 @@ class DatenblattController extends Controller
         ]);
     }
     
+
     /**
      * Add new datenblatt
      * @param int $datenblattId
@@ -337,8 +362,9 @@ class DatenblattController extends Controller
         $this->redirect(['update', 'id' => $datenblattId]);
     }
 
+
     /**
-     * Deletes an existing Person model.
+     * Deletes an existing Datenblatt model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -354,6 +380,7 @@ class DatenblattController extends Controller
 
         return $this->redirect(['index']);
     }
+
 
     /**
      * Deletes sonderwunsch
@@ -421,44 +448,34 @@ class DatenblattController extends Controller
 
         return $this->redirect(['update', 'id' => $datenblattId]);
     }
-     
-    /**
-     * Displays a single Projekt model.
-     * @param string $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-    
-    /**
-     * Lists all Projekt models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        
-        $searchModel = new DatenblattSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        
-//        $dataProvider = new ActiveDataProvider([
-//            'query' => Datenblatt::find(),
-//        ]);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+
+    public function actionSubcat() {
+    $out = [];
+    if (isset($_POST['depdrop_parents'])) {
+        $parents = $_POST['depdrop_parents'];
+        if ($parents != null) {
+            $firma_id = $parents[0];
+            $out = self::getSubCatList($firma_id); 
+            // the getSubCatList function will query the database based on the
+            // cat_id and return an array like below:
+            // [
+            //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
+            //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
+            // ]
+            echo Json::encode(['output'=>$out, 'selected'=>'']);
+            return;
+        }
     }
+    echo Json::encode(['output'=>'', 'selected'=>'']);
+}
+
 
     /**
-     * Finds the Person model based on its primary key value.
+     * Finds the Datenblatt model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Person the loaded model
+     * @return Datenblatt the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)

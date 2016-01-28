@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 26. Jan 2016 um 23:30
+-- Erstellungszeit: 26. Jan 2016 um 22:08
 -- Server-Version: 10.1.8-MariaDB
 -- PHP-Version: 5.5.30
 
@@ -73,11 +73,7 @@ CREATE TABLE `datenblatt` (
 INSERT INTO `datenblatt` (`id`, `firma_id`, `projekt_id`, `haus_id`, `nummer`, `kaeufer_id`, `besondere_regelungen_kaufvertrag`, `sonstige_anmerkungen`) VALUES
 (1, 2, 2, 1, 111, 5, '', ''),
 (2, NULL, NULL, NULL, 222, 6, NULL, NULL),
-(3, 1, 3, NULL, 999, 7, 'blsdkfjasldflskf\r\nsdflaksdjflaskjdf\r\nsadflskadfjasd\r\nfsadlfkj', NULL),
-(4, NULL, NULL, NULL, 3344, NULL, NULL, NULL),
-(5, NULL, NULL, NULL, 4444, NULL, NULL, NULL),
-(6, NULL, NULL, NULL, 6666, NULL, NULL, NULL),
-(7, NULL, NULL, NULL, 9898, NULL, NULL, NULL);
+(3, 1, 3, NULL, 999, 7, 'blsdkfjasldflskf\r\nsdflaksdjflaskjdf\r\nsadflskadfjasd\r\nfsadlfkj', NULL);
 
 -- --------------------------------------------------------
 
@@ -209,11 +205,7 @@ CREATE TABLE `nachlass` (
 INSERT INTO `nachlass` (`id`, `datenblatt_id`, `schreiben_vom`, `betrag`, `bemerkung`) VALUES
 (1, 1, '2016-01-11', 100, 'blablablablabla'),
 (2, 2, NULL, NULL, NULL),
-(3, 3, NULL, NULL, NULL),
-(5, 4, NULL, NULL, NULL),
-(6, 5, NULL, NULL, NULL),
-(7, 6, NULL, NULL, NULL),
-(8, 7, NULL, NULL, NULL);
+(3, 3, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -449,7 +441,7 @@ ALTER TABLE `abschlag`
 -- AUTO_INCREMENT für Tabelle `datenblatt`
 --
 ALTER TABLE `datenblatt`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT für Tabelle `einheitstyp`
 --
@@ -474,7 +466,7 @@ ALTER TABLE `kaeufer`
 -- AUTO_INCREMENT für Tabelle `nachlass`
 --
 ALTER TABLE `nachlass`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT für Tabelle `projekt`
 --

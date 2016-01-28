@@ -1,15 +1,36 @@
 <?php
 
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+use yii\widgets\ActiveForm;
+
+/* @var $this yii\web\View */
+/* @var $model app\models\Datenblatt */
+/* @var $form yii\widgets\ActiveForm */
+
+
 use yii\helpers\ArrayHelper;
 use app\models\Firma;
+use yii\widgets\Pjax;
 ?>
+<?php
+ 
+$this->registerJs(
+   '$("document").ready(function(){ 
+        $("#dynamic-form").on("pjax:end", function() {
+            $.pjax.reload({container:"#datenblatt-form"});  //Reload GridView
+        });
+    });'
+);
+?>
+
+<?php yii\widgets\Pjax::begin(['id' => 'dynamic-form']) ?>
+<?php //$form = ActiveForm::begin(['options' => ['data-pjax' => true ]]); ?>
 
 <div class="datenblatt-form">
 
     <?php $form = ActiveForm::begin(['id' => 'dynamic-form', 
         'options'=>array(
+            'data-pjax' => true, 
             'class' => 'datenblatt-form'
         )
     ]); ?>
@@ -131,7 +152,9 @@ use app\models\Firma;
             'form' => $form,
             'modelDatenblatt' => $modelDatenblatt,
         ]) ?>
-    
+    <div class="row">
+        <div class="col-md-12">
+
     <?= $this->render('_nachlass', [
             'form' => $form,
             'modelDatenblatt' => $modelDatenblatt,
@@ -141,7 +164,8 @@ use app\models\Firma;
             'form' => $form,
             'modelDatenblatt' => $modelDatenblatt,
         ]) ?>
-
+        </div>
+    </div>
     
     <div class="row">
         <div class="col-sm-10">
@@ -155,5 +179,5 @@ use app\models\Firma;
     </div>
 
     <?php ActiveForm::end(); ?>
-
+<?php yii\widgets\Pjax::end() ?>
 </div>

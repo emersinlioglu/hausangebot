@@ -12,14 +12,26 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id')->textInput() ?>
-
     <?= $form->field($model, 'datenblatt_id')->textInput() ?>
 
-    <?= $form->field($model, 'sonderwunch_id')->textInput() ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'kaufvertrag_prozent')->textInput() ?>
+
+    <?= $form->field($model, 'kaufvertrag_betrag')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'kaufvertrag_angefordert')->textInput() ?>
+
+    <?= $form->field($model, 'sonderwunsch_prozent')->textInput() ?>
+
+    <?= $form->field($model, 'sonderwunsch_betrag')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'sonderwunsch_angefordert')->textInput() ?>
+
+    <?= $form->field($model, 'summe')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -2,13 +2,13 @@
 use yii\helpers\Html;
 //use kartik\datetime\DateTimePicker;
 use kartik\datecontrol\DateControl;
-
+use yii\widgets\Pjax;
 
 /* @var $modelDatenblatt app\models\Datenblatt */
 /* @var $modelNachlass app\models\Nachlass */
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
-
+<div class="col-md-6">
 <div class="box-group" id="accordion">
     <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
     <div class="panel box box-primary">
@@ -25,7 +25,7 @@ use kartik\datecontrol\DateControl;
                     (Summe: <?= Yii::$app->formatter->asCurrency($total) ?>)
                 </a>
             </h4>
-        </div>
+        </div><?php Pjax::begin(); ?>
         <div id="collapse-zahlung" class="panel-collapse collapse" aria-expanded="false">
             <div class="box-body">
 
@@ -39,7 +39,7 @@ use kartik\datecontrol\DateControl;
                             Yii::$app->urlManager->createUrl(["datenblatt/addzahlung", 'datenblattId' => $modelDatenblatt->id]), 
                             ['class' => 'add-zahlung btn btn-success btn-xl']) ?>
                         </th>
-                    </tr>
+                    </tr><?php Pjax::end(); ?>
                 <?php 
 
                 $rechnungstellungBetrag = 0;
@@ -105,6 +105,7 @@ use kartik\datecontrol\DateControl;
             </div>
         </div>
     </div>
+</div>
 </div>
 
 

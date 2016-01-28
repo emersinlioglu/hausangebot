@@ -5,12 +5,12 @@ namespace app\controllers;
 use Yii;
 use app\models\Haus;
 use app\models\HausSearch;
-use app\models\Teileigentumseinheit;
-use app\models\Zaehlerstand;
-use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Teileigentumseinheit;
+use app\models\Zaehlerstand;
+use yii\data\ActiveDataProvider;
 
 /**
  * HausController implements the CRUD actions for Haus model.
@@ -46,7 +46,7 @@ class HausController extends Controller
 
     /**
      * Displays a single Haus model.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
     public function actionView($id)
@@ -66,7 +66,7 @@ class HausController extends Controller
         $model = new Haus();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -77,10 +77,10 @@ class HausController extends Controller
     /**
      * Updates an existing Haus model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
-    public function actionUpdate($id)
+     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
         
@@ -157,7 +157,7 @@ class HausController extends Controller
     /**
      * Deletes an existing Haus model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -166,7 +166,7 @@ class HausController extends Controller
 
         return $this->redirect(['index']);
     }
-     
+
     /**
      * Deletes an existing Teileigentumseinheit model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -197,10 +197,18 @@ class HausController extends Controller
         
         return $this->redirect(['update', 'id' => $hausId]);
     }
+
+
+
+
+
+
+
+
     /**
      * Finds the Haus model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param string $id
      * @return Haus the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

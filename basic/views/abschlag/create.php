@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Abschlag */
 
-$this->title = Yii::t('app', 'Create Abschlag');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Abschlags'), 'url' => ['index']];
+$this->title = 'Create Abschlag';
+$this->params['breadcrumbs'][] = ['label' => 'Abschlags', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="abschlag-create">

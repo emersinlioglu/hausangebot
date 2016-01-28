@@ -4,23 +4,28 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Projekt;
+use app\models\Firma;
 use app\models\Einheitstyp;
 //use kartik\datetime\DateTimePicker;
 use kartik\datecontrol\DateControl;
-
 /* @var $this yii\web\View */
 /* @var $model app\models\Haus */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+
 
 <div class="haus-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="row">
+    <div class="col-sm-3">
+            <?= $form->field($model, 'firma_id')->dropDownList(ArrayHelper::map(Firma::find()->all(), 'id', 'name')) ?>
+        </div>
         <div class="col-sm-3">
             <?= $form->field($model, 'projekt_id')->dropDownList(ArrayHelper::map(Projekt::find()->all(), 'id', 'name')) ?>
         </div>
+        
     </div>
     <div class="row">
         <div class="col-sm-3">
@@ -147,3 +152,4 @@ use kartik\datecontrol\DateControl;
     <?php ActiveForm::end(); ?>
 
 </div>
+

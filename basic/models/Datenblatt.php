@@ -42,8 +42,7 @@ class Datenblatt extends \yii\db\ActiveRecord
     {
         return [
             [['firma_id', 'projekt_id', 'haus_id', 'nummer', 'kaeufer_id'], 'integer'],
-            [['besondere_regelungen_kaufvertrag', 'sonstige_anmerkungen'], 'string'],
-           
+            [['besondere_regelungen_kaufvertrag', 'sonstige_anmerkungen'], 'string']
         ];
     }
 
@@ -55,7 +54,6 @@ class Datenblatt extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'firma_id' => Yii::t('app', 'Firma ID'),
-            
             'projekt_id' => Yii::t('app', 'Projekt ID'),
             'haus_id' => Yii::t('app', 'Haus ID'),
             'nummer' => Yii::t('app', 'Nummer'),
@@ -128,27 +126,4 @@ class Datenblatt extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Zahlung::className(), ['datenblatt_id' => 'id']);
     }
-
-
-public function actionProjekt() {
-    $out = [];
-    if (isset($_POST['depdrop_parents'])) {
-        $parents = $_POST['depdrop_parents'];
-        if ($parents != null) {
-            $firma_id = $parents[0];
-            $out = self::getSubCatList($firma_id); 
-            // the getSubCatList function will query the database based on the
-            // cat_id and return an array like below:
-            // [
-            //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
-            //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
-            // ]
-            echo Json::encode(['output'=>$out, 'selected'=>'']);
-            return;
-        }
-    }
-    echo Json::encode(['output'=>'', 'selected'=>'']);
-}
-
-
 }

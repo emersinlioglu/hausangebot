@@ -201,6 +201,7 @@ use kartik\datecontrol\DateControl;
                         <?= $form->field($modelKaeufer, 'titel')->textInput([]) ?>
                         <?= $form->field($modelKaeufer, 'vorname')->textInput([]) ?>
                         <?= $form->field($modelKaeufer, 'nachname')->textInput([]) ?>
+                        <?= $form->field($modelKaeufer, 'email')->textInput([]) ?>
                     </div>
                     <div class="col-sm-3">
                         <?= $form->field($modelKaeufer, 'anrede2')->dropDownList([0 => 'Herr', 1 => 'Frau']) ?>

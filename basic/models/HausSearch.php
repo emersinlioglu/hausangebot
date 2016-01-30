@@ -15,7 +15,6 @@ class HausSearch extends Haus
    
 public $projekt;
 public $projekt_name;
-public $firma;
 public $firma_name;
 public $firma_nr;
     /**
@@ -24,7 +23,7 @@ public $firma_nr;
     public function rules()
     {
         return [
-            [['id', 'projekt_id', 'firma_id', 'reserviert', 'verkauft', 'rechnung_vertrieb'], 'integer'],
+            [['id', 'projekt_id', 'reserviert', 'verkauft', 'rechnung_vertrieb'], 'integer'],
             [['plz', 'ort', 'strasse', 'hausnr'], 'safe'],
             [['projekt_name','firma_name','firma_nr'], 'safe'],
         ];
@@ -97,9 +96,9 @@ public $firma_nr;
             ->andFilterWhere(['like', 'ort', $this->ort])
             ->andFilterWhere(['like', 'strasse', $this->strasse])
             ->andFilterWhere(['like', 'hausnr', $this->hausnr])
-->andFilterWhere(['like', 'projekt.name', $this->projekt_name])
-        ->andFilterWhere(['like', 'firma.name', $this->firma_name])
-        ->andFilterWhere(['like', 'firma.nr', $this->firma_nr])
+            ->andFilterWhere(['like', 'projekt.name', $this->projekt_name])
+            ->andFilterWhere(['like', 'firma.name', $this->firma_name])
+            ->andFilterWhere(['like', 'firma.nr', $this->firma_nr])
             ;
 
         return $dataProvider;

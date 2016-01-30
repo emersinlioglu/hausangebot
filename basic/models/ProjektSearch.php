@@ -86,9 +86,9 @@ public $firma_nr;
             'firma_id' => $this->firma_id,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-        ->andFilterWhere(['like', 'firma.name', $this->firma_name])
-        ->andFilterWhere(['like', 'firma.nr', $this->firma_nr])
+        $query->andFilterWhere(['like', 'projekt.name', $this->name])
+            ->andFilterWhere(['like', 'firma.name', $this->firma_name])
+            ->andFilterWhere(['like', 'firma.nr', $this->firma_nr])
         ;
 
         return $dataProvider;

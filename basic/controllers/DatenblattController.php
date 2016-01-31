@@ -45,6 +45,12 @@ class DatenblattController extends Controller
         $searchModel = new DatenblattSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+
+        $modelsToDelete = DatenblattSearch::findAll(['aktiv' => 0]);
+        foreach ($modelsToDelete as $modelToDelete) {
+            $modelToDelete->delete();
+        }
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -85,19 +91,36 @@ class DatenblattController extends Controller
      public function actionUpdate($id)
     {
         $modelDatenblatt = $this->findModel($id);
-        
+        $modelDatenblatt->aktiv = 1;
+
+        $modelKaeufer = new Kaeufer();
+        if ($modelDatenblatt->kaeufer) {
+            $modelKaeufer = $modelDatenblatt->kaeufer;
+        }
+
         $data = Yii::$app->request->post();
         
         if ($modelDatenblatt->load($data) && $modelDatenblatt->save()) {
             
             // Käufer
-            $modelKaeufer = $modelDatenblatt->kaeufer;
-            if (!$modelKaeufer) {
-                $modelKaeufer = new Kaeufer();
-            }
             if ($modelKaeufer->load(Yii::$app->request->post())) {
+
+                $isEmpty = true;
+                foreach ($modelKaeufer->attributes as $attr => $value) {
+                    if (!empty($value)) {
+                        //error_log('not empty: ' . $attr . ' - ' . $value);
+                        $isEmpty = false;
+                        break;
+                    } else {
+                        //error_log('empty: ' . $attr . ' - ' . $value);
+                    }
+                }
+
                 // save
-                $modelKaeufer->save();
+                if (!$isEmpty) {
+                    $modelKaeufer->save();
+                }
+
                 // assign käufer
                 $modelDatenblatt->kaeufer_id = $modelKaeufer->id;
                 $modelDatenblatt->save();
@@ -166,7 +189,7 @@ class DatenblattController extends Controller
         return $this->render('update', [
             'modelDatenblatt' => $modelDatenblatt,
             'modelsZahlungs' => $modelDatenblatt->zahlungs,
-            'modelKaeufer' => $modelDatenblatt->kaeufer ? $modelDatenblatt->kaeufer : new Kaeufer(),
+            'modelKaeufer' => $modelKaeufer,
         ]);
     }
     

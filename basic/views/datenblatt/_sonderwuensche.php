@@ -28,9 +28,6 @@ use kartik\datecontrol\DateControl;
                         <th colspan="2" >Angebot</th>
                         <th colspan="2" >beuaftragt</th>
                         <th colspan="3" >Rechnungsstellung</th>
-                <!--        <th colspan="2" style="text-align: center;">Angebot</th>
-                        <th colspan="2" style="text-align: center;">beuaftragt</th>
-                        <th colspan="3" style="text-align: center;">Rechnungsstellung</th>-->
                     </tr>
                     <tr>
                         <th>Name</th>
@@ -61,27 +58,6 @@ use kartik\datecontrol\DateControl;
                     </td>
                     <td>
                             <?php
-//                                $datum = DateTime::createFromFormat('Y-m-d H:i:s', $modelSonderwunsch->angebot_datum);
-//                                if ($datum) {
-//                                    $datum = $datum->format('d.m.Y');
-//                                } else {
-//                                    $datum = '';
-//                                }
-                                //echo '<label>Übergang BNL:</label>';
-//                                echo DateTimePicker::widget([
-//                                    'name' => "Sonderwunsch[$key][angebot_datum]",
-//                                    'options' => ['placeholder' => 'Datum auswählen'],
-//                                    'convertFormat' => true,
-//                                    'value' => $datum,
-//                                    'pluginOptions' => [
-//                                        'minView' => 'month',
-//                                        'maxView' => 'month',
-//                                        'viewSelect' => 'month',
-//                                        'format' => 'dd.mm.yyyy',
-//                                        'autoclose' => true,
-//                                        'todayHighlight' => true
-//                                    ]
-//                                ]);
                                 echo $form->field($modelSonderwunsch, "[$key]angebot_datum")->widget(DateControl::classname(), [
                                     'type' => DateControl::FORMAT_DATE,
                                     'options' => [
@@ -98,28 +74,6 @@ use kartik\datecontrol\DateControl;
                     </td>
                     <td>
                         <?php
-//                            $datum = DateTime::createFromFormat('Y-m-d H:i:s', $modelSonderwunsch->beauftragt_datum);
-//                            if ($datum) {
-//                                $datum = $datum->format('d.m.Y');
-//                            } else {
-//                                $datum = '';
-//                            }
-//                            //echo '<label>Übergang BNL:</label>';
-//                            echo DateTimePicker::widget([
-//                                'name' => "Sonderwunsch[$key][beauftragt_datum]",
-//                                'options' => ['placeholder' => 'Datum auswählen'],
-//                                'convertFormat' => true,
-//                                'value' => $datum,
-//                                'pluginOptions' => [
-//                                    'minView' => 'month',
-//                                    'maxView' => 'month',
-//                                    'viewSelect' => 'month',
-//                                    'format' => 'dd.mm.yyyy',
-//                                    'autoclose' => true,
-//                                    'todayHighlight' => true
-//                                ]
-//                            ]);
-                            
                             echo $form->field($modelSonderwunsch, "[$key]beauftragt_datum")->widget(DateControl::classname(), [
                                 'type' => DateControl::FORMAT_DATE,
                                 'options' => [
@@ -135,28 +89,6 @@ use kartik\datecontrol\DateControl;
                     </td>
                     <td>
                         <?php
-//                            $datum = DateTime::createFromFormat('Y-m-d H:i:s', $modelSonderwunsch->rechnungsstellung_datum);
-//                            if ($datum) {
-//                                $datum = $datum->format('d.m.Y');
-//                            } else {
-//                                $datum = '';
-//                            }
-//                            //echo '<label>Übergang BNL:</label>';
-//                            echo DateTimePicker::widget([
-//                                'name' => "Sonderwunsch[$key][rechnungsstellung_datum]",
-//                                'options' => ['placeholder' => 'Datum auswählen'],
-//                                'convertFormat' => true,
-//                                'value' => $datum,
-//                                'pluginOptions' => [
-//                                    'minView' => 'month',
-//                                    'maxView' => 'month',
-//                                    'viewSelect' => 'month',
-//                                    'format' => 'dd.mm.yyyy',
-//                                    'autoclose' => true,
-//                                    'todayHighlight' => true
-//                                ]
-//                            ]);
-                            
                             echo $form->field($modelSonderwunsch, "[$key]rechnungsstellung_datum")->widget(DateControl::classname(), [
                                 'type' => DateControl::FORMAT_DATE,
                                 'options' => [

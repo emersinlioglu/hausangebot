@@ -29,8 +29,14 @@ $this->registerJs(
             new DatenblattForm();
         });
 
+        // To disable f5
+        $(document).bind("keydown", function(e){
+            if ((e.which || e.keyCode) == 116) {
+                e.preventDefault();
 
-//        $(document).pjax(".add-zahlung.btn", "#datenblatt-form");
+                $("#datenblatt-form").attr("action")
+            }
+        });
 
     });'
 );
@@ -54,6 +60,8 @@ $this->registerJs(
         <!-- ?= $form->field($modelDatenblatt, 'nummer')->textInput(['maxlength' => true]) ?-->
 <!--    </div>-->
 <!--</div>-->
+
+<div class="hide"><?= $form->field($modelDatenblatt, 'aktiv')->hiddenInput() ?></div>
 
 <?php if ($modelDatenblatt->id): ?>
     <div class="row">
@@ -115,12 +123,12 @@ $this->registerJs(
         'modelDatenblatt' => $modelDatenblatt
     ]) ?>
 
-    <?php if ($modelDatenblatt->kaeufer): ?>
+    <?php //if ($modelDatenblatt->kaeufer): ?>
         <?= $this->render('_kaeuferdaten', [
             'form' => $form,
-            'modelKaeufer' => $modelDatenblatt->kaeufer,
+            'modelKaeufer' => $modelKaeufer,
         ]) ?>
-    <?php endif; ?>
+    <?php //endif; ?>
 
     <div class="row">
         <div class="col-sm-10">

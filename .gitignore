@@ -6,4 +6,4 @@ themes/classic/views/
 
 .idea
 .nbproject
-basic/vendor/kartik-v/yii2-widget-datepicker/nbproject
+**/.nbproject

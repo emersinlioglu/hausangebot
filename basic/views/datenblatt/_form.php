@@ -28,6 +28,10 @@ $this->registerJs(
             console.log("new init");
             new DatenblattForm();
         });
+
+
+//        $(document).pjax(".add-zahlung.btn", "#datenblatt-form");
+
     });'
 );
 ?>
@@ -45,11 +49,11 @@ $this->registerJs(
     )
 ]); ?>
 
-<div class="row">
-    <div class="col-sm-2">
-        <?= $form->field($modelDatenblatt, 'nummer')->textInput(['maxlength' => true]) ?>
-    </div>
-</div>
+<!--<div class="row">-->
+<!--    <div class="col-sm-2">-->
+        <!-- ?= $form->field($modelDatenblatt, 'nummer')->textInput(['maxlength' => true]) ?-->
+<!--    </div>-->
+<!--</div>-->
 
 <?php if ($modelDatenblatt->id): ?>
     <div class="row">
@@ -150,7 +154,7 @@ $this->registerJs(
     </div>
 
     <div class="row">
-        <div class="col-sm-10">
+        <div class="col-sm-8">
             <?= $form->field($modelDatenblatt, 'sonstige_anmerkungen')->textarea(['rows' => '5']) ?>
         </div>
     </div>

@@ -26,7 +26,7 @@ use yii\widgets\Pjax;
                 </a>
             </h4>
         </div><?php Pjax::begin(); ?>
-        <div id="collapse-zahlung" class="panel-collapse collapse" aria-expanded="false">
+        <div id="collapse-zahlung" class="panel-collapse collapse in" aria-expanded="false">
             <div class="box-body">
 
                 <table class="table table-bordered">
@@ -51,28 +51,6 @@ use yii\widgets\Pjax;
                             <?= $form->field($modelZahlung, "[$key]id")->textInput() ?>
                         </div>
                         <?php
-//                            $datum = DateTime::createFromFormat('Y-m-d H:i:s', $modelZahlung->datum);
-//                            if ($datum) {
-//                                $datum = $datum->format('d.m.Y');
-//                            } else {
-//                                $datum = '';
-//                            }
-//                            //echo '<label>Übergang BNL:</label>';
-//                            echo DateTimePicker::widget([
-//                                'name' => "Zahlung[$key][datum]",
-//                                'options' => ['placeholder' => 'Datum auswählen'],
-//                                'convertFormat' => true,
-//                                'value' => $datum,
-//                                'pluginOptions' => [
-//                                    'minView' => 'month',
-//                                    'maxView' => 'month',
-//                                    'viewSelect' => 'month',
-//                                    'format' => 'dd.mm.yyyy',
-//                                    'autoclose' => true,
-//                                    'todayHighlight' => true
-//                                ]
-//                            ]);
-                            
                             echo $form->field($modelZahlung, "[$key]datum")->widget(DateControl::classname(), [
                                 'type' => DateControl::FORMAT_DATE,
                                 'options' => [
@@ -99,9 +77,7 @@ use yii\widgets\Pjax;
 
                 </table>
                 
-                
-                
-                
+
             </div>
         </div>
     </div>

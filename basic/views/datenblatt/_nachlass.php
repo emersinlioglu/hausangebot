@@ -26,7 +26,7 @@ use kartik\datecontrol\DateControl;
                 </a>
             </h4>
         </div>
-        <div id="collapse-nachlass" class="panel-collapse collapse" aria-expanded="false">
+        <div id="collapse-nachlass" class="panel-collapse collapse in" aria-expanded="false">
             <div class="box-body">
                 
                 <table class="table table-bordered">
@@ -49,28 +49,6 @@ use kartik\datecontrol\DateControl;
                             <?= $form->field($modelNachlass, "[$key]id")->textInput() ?>
                         </div>
                         <?php
-//                            $datum = DateTime::createFromFormat('Y-m-d H:i:s', $modelNachlass->schreiben_vom);
-//                            if ($datum) {
-//                                $datum = $datum->format('d.m.Y');
-//                            } else {
-//                                $datum = '';
-//                            }
-//                            //echo '<label>Übergang BNL:</label>';
-//                            echo DateTimePicker::widget([
-//                                'name' => "Nachlass[$key][schreiben_vom]",
-//                                'options' => ['placeholder' => 'Datum auswählen'],
-//                                'convertFormat' => true,
-//                                'value' => $datum,
-//                                'pluginOptions' => [
-//                                    'minView' => 'month',
-//                                    'maxView' => 'month',
-//                                    'viewSelect' => 'month',
-//                                    'format' => 'dd.mm.yyyy',
-//                                    'autoclose' => true,
-//                                    'todayHighlight' => true
-//                                ]
-//                            ]);
-                            
                             echo $form->field($modelNachlass, "[$key]schreiben_vom")->widget(DateControl::classname(), [
                                 'type' => DateControl::FORMAT_DATE,
                                 'options' => [

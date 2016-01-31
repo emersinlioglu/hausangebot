@@ -180,8 +180,9 @@ class DatenblattController extends Controller
         $new = new Sonderwunsch();
         $new->datenblatt_id = $datenblattId;
         $new->save();
-        
-        $this->redirect(['update', 'id' => $datenblattId]);
+
+        $this->actionUpdate($datenblattId);
+//        $this->redirect(['update', 'id' => $datenblattId]);
     }
     
     /**
@@ -193,8 +194,9 @@ class DatenblattController extends Controller
         $new = new Abschlag();
         $new->datenblatt_id = $datenblattId;
         $new->save();
-        
-        $this->redirect(['update', 'id' => $datenblattId]);
+
+        $this->actionUpdate($datenblattId);
+//        $this->redirect(['update', 'id' => $datenblattId]);
     }
     
     /**
@@ -206,8 +208,9 @@ class DatenblattController extends Controller
         $new = new Zahlung();
         $new->datenblatt_id = $datenblattId;
         $new->save();
-        
-        $this->redirect(['update', 'id' => $datenblattId]);
+
+        $this->actionUpdate($datenblattId);
+//        $this->redirect(['update', 'id' => $datenblattId]);
     }
     
     /**
@@ -219,8 +222,9 @@ class DatenblattController extends Controller
         $new = new Nachlass();
         $new->datenblatt_id = $datenblattId;
         $new->save();
-        
-        $this->redirect(['update', 'id' => $datenblattId]);
+
+        $this->actionUpdate($datenblattId);
+//        $this->redirect(['update', 'id' => $datenblattId]);
     }
 
 
@@ -256,7 +260,8 @@ class DatenblattController extends Controller
             $modelSonderwunsch->delete();
         }
 
-        return $this->redirect(['update', 'id' => $datenblattId]);
+        $this->actionUpdate($datenblattId);
+//        return $this->redirect(['update', 'id' => $datenblattId]);
     }
     
     /**
@@ -272,7 +277,8 @@ class DatenblattController extends Controller
             $modelAbschlag->delete();
         }
 
-        return $this->redirect(['update', 'id' => $datenblattId]);
+        $this->actionUpdate($datenblattId);
+//        return $this->redirect(['update', 'id' => $datenblattId]);
     }
     
     /**
@@ -290,7 +296,8 @@ class DatenblattController extends Controller
             $modelNachlass->delete();
         }
 
-        return $this->redirect(['update', 'id' => $datenblattId]);
+        $this->actionUpdate($datenblattId);
+//        return $this->redirect(['update', 'id' => $datenblattId]);
     }
     
     /**
@@ -307,7 +314,8 @@ class DatenblattController extends Controller
             $item->delete();
         }
 
-        return $this->redirect(['update', 'id' => $datenblattId]);
+        $this->actionUpdate($datenblattId);
+//        return $this->redirect(['update', 'id' => $datenblattId]);
     }
 
 

@@ -5,5 +5,5 @@ themes/classic/views/
 
 
 .idea
-.nbproject
-**/.nbproject
+nbproject
+**/nbproject

@@ -7,7 +7,7 @@
     <div class="panel box box-primary">
         <div class="box-header with-border">
             <h4 class="box-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapse-te" aria-expanded="true" class="">
+                <a data-toggle="collapse" data-parent="#collapse-te" href="#collapse-te" aria-expanded="true" class="">
                     Beschreibung Teileigentumseinheit:
                 </a>
             </h4>

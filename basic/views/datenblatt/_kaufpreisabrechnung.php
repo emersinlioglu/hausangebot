@@ -12,7 +12,7 @@ use kartik\datecontrol\DateControl;
     <div class="panel box box-primary">
         <div class="box-header with-border">
             <h4 class="box-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapse-kaufpreisabrechnung" aria-expanded="true" class="">
+                <a data-toggle="collapse" data-parent="#collapse-kaufpreisabrechnung" href="#collapse-kaufpreisabrechnung" aria-expanded="true" class="">
                     Kaufpreisabrechnung:
                 </a>
             </h4>

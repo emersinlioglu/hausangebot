@@ -10,12 +10,12 @@ use kartik\datecontrol\DateControl;
     <div class="panel box box-primary">
         <div class="box-header with-border">
             <h4 class="box-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapse-kaeuferdate" aria-expanded="true" class="">
+                <a data-toggle="collapse" data-parent="#collapse-kaeuferdaten" href="#collapse-kaeuferdaten" aria-expanded="true" class="">
                     Käuferdaten:
                 </a>
             </h4>
         </div>
-        <div id="collapse-kaeuferdate" class="panel-collapse collapse in" aria-expanded="false">
+        <div id="collapse-kaeuferdaten" class="panel-collapse collapse in" aria-expanded="false">
             <div class="box-body">
                 
                 

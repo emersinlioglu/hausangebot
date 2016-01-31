@@ -14,7 +14,7 @@ use yii\widgets\Pjax;
     <div class="panel box box-primary">
         <div class="box-header with-border">
             <h4 class="box-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapse-zahlung" aria-expanded="true" class="">
+                <a data-toggle="collapse" data-parent="#collapse-zahlung" href="#collapse-zahlung" aria-expanded="true" class="">
                     Zahlungen:
                     
                     <?php 

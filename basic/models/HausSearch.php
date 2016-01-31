@@ -12,11 +12,12 @@ use app\models\Haus;
  */
 class HausSearch extends Haus
 {
-   
-public $projekt;
-public $projekt_name;
-public $firma_name;
-public $firma_nr;
+    public $projekt;
+    public $projekt_name;
+    public $firma_name;
+    public $firma_nr;
+    public $onlyNotAssigned = false;
+
     /**
      * @inheritdoc
      */
@@ -25,7 +26,7 @@ public $firma_nr;
         return [
             [['id', 'projekt_id', 'reserviert', 'verkauft', 'rechnung_vertrieb'], 'integer'],
             [['plz', 'ort', 'strasse', 'hausnr'], 'safe'],
-            [['projekt_name','firma_name','firma_nr'], 'safe'],
+            [['projekt_name','firma_name','firma_nr', 'onlyNotAssigned'], 'safe'],
         ];
     }
 
@@ -48,7 +49,7 @@ public $firma_nr;
     public function search($params)
     {
         $query = Haus::find();
-        $query->joinWith(['projekt','projekt.firma']);
+        $query->joinWith(['projekt','projekt.firma', 'datenblatts']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -100,6 +101,10 @@ public $firma_nr;
             ->andFilterWhere(['like', 'firma.name', $this->firma_name])
             ->andFilterWhere(['like', 'firma.nr', $this->firma_nr])
             ;
+
+        if ($this->onlyNotAssigned) {
+            $query->andFilterWhere(['datenblatts.id' => null]);
+        }
 
         return $dataProvider;
     }

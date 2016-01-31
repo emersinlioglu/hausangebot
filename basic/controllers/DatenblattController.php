@@ -96,17 +96,6 @@ class DatenblattController extends Controller
                 $modelKaeufer = new Kaeufer();
             }
             if ($modelKaeufer->load(Yii::$app->request->post())) {
-
-//                $datumFelder = ['beurkundung_am', 'verbindliche_fertigstellung', 'uebergang_bnl', 'abnahme_se', 'abnahme_ge'];
-//                foreach($datumFelder as $feld) {
-//                    $datum = \DateTime::createFromFormat('d.m.Y', $modelKaeufer->{$feld}); 
-//                    if ($datum) {
-//                        $datum->setTime(0, 0, 0);
-//                        $modelKaeufer->{$feld} = $datum->format('Y-m-d H:i:s');
-//                    } else {
-//                        $modelKaeufer->{$feld} = '';
-//                    }
-//                }
                 // save
                 $modelKaeufer->save();
                 // assign käufer
@@ -117,17 +106,6 @@ class DatenblattController extends Controller
             // Sonderwünsche
             if (Sonderwunsch::loadMultiple($modelDatenblatt->sonderwunsches, $data)) {
                 foreach ($modelDatenblatt->sonderwunsches as $item) {
-//                    $datumFelder = ['angebot_datum', 'beauftragt_datum', 'rechnungsstellung_datum'];
-//                    foreach($datumFelder as $feld) {
-//                        $datum = \DateTime::createFromFormat('d.m.Y', $item->{$feld}); 
-//                        if ($datum) {
-//                            $datum->setTime(0, 0, 0);
-//                            $item->{$feld} = $datum->format('Y-m-d H:i:s');
-//                        } else {
-//                            $item->{$feld} = '';
-//                        }
-//                    }
-                    
                     $item->save();
                 }
             }
@@ -135,16 +113,6 @@ class DatenblattController extends Controller
             // Abschläge
             if ($modelsAbschlag = Abschlag::loadMultiple($modelDatenblatt->abschlags, $data)) {
                 foreach ($modelDatenblatt->abschlags as $item) {
-//                    $datumFelder = ['kaufvertrag_angefordert', 'sonderwunsch_angefordert'];
-//                    foreach($datumFelder as $feld) {
-//                        $datum = \DateTime::createFromFormat('d.m.Y', $item->{$feld}); 
-//                        if ($datum) {
-//                            $datum->setTime(0, 0, 0);
-//                            $item->{$feld} = $datum->format('Y-m-d H:i:s');
-//                        } else {
-//                            $item->{$feld} = '';
-//                        }
-//                    }
                     $item->save();
                 }
             }
@@ -152,16 +120,6 @@ class DatenblattController extends Controller
             // Nachlass
             if (Nachlass::loadMultiple($modelDatenblatt->nachlasses, $data)) {
                 foreach ($modelDatenblatt->nachlasses as $item) {
-//                    $datumFelder = ['schreiben_vom'];
-//                    foreach($datumFelder as $feld) {
-//                        $datum = \DateTime::createFromFormat('d.m.Y', $item->{$feld}); 
-//                        if ($datum) {
-//                            $datum->setTime(0, 0, 0);
-//                            $item->{$feld} = $datum->format('Y-m-d H:i:s');
-//                        } else {
-//                            $item->{$feld} = '';
-//                        }
-//                    }
                     $item->save();
                 }
             }
@@ -169,16 +127,6 @@ class DatenblattController extends Controller
             // Zahlung
             if (Zahlung::loadMultiple($modelDatenblatt->zahlungs, $data)) {
                 foreach ($modelDatenblatt->zahlungs as $item) {
-//                    $datumFelder = ['datum'];
-//                    foreach($datumFelder as $feld) {
-//                        $datum = \DateTime::createFromFormat('d.m.Y', $item->{$feld}); 
-//                        if ($datum) {
-//                            $datum->setTime(0, 0, 0);
-//                            $item->{$feld} = $datum->format('Y-m-d H:i:s');
-//                        } else {
-//                            $item->{$feld} = '';
-//                        }
-//                    }
                     $item->save();
                 }
             }
@@ -186,10 +134,8 @@ class DatenblattController extends Controller
             $this->redirect(['update', 'id' => $id]);
         }
         
-        
-        
-        
-        // kaufpreis
+
+        // calculate kaufpreis
         $kaufpreisTotal = 0;
         /* @var $teileh app\models\Teileigentumseinheit */
         if ($modelDatenblatt->haus) {
@@ -198,13 +144,14 @@ class DatenblattController extends Controller
             }
         }
         
-        // sonderwünche
+        // calculate sonderwünche
         $sonderwuenscheTotal = 0;
         /* @var $item app\models\Sonderwunsch */
         foreach ($modelDatenblatt->sonderwunsches as $item) {
             $sonderwuenscheTotal += (float)$item->rechnungsstellung_betrag;
         }
-        
+
+        // calculate abschlags
         /* @var $item \app\models\Abschlag */
         foreach ($modelDatenblatt->abschlags as $item) {
             if ($item->kaufvertrag_angefordert) {
@@ -286,7 +233,7 @@ class DatenblattController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        $name = $model->first_name;
+        $name = $model->id;
 
         if ($model->delete()) {
             Yii::$app->session->setFlash('success', 'Record  <strong>"' . $name . '"</strong> deleted successfully.');

@@ -14,6 +14,9 @@ use Yii;
  */
 class Einheitstyp extends \yii\db\ActiveRecord
 {
+
+    const TYPE_HAUS = 1;
+
     /**
      * @inheritdoc
      */

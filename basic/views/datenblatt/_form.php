@@ -40,7 +40,7 @@ $this->registerJs(
     'enableAjaxValidation' => false,
     'options' => array(
         'data-pjax' => true,
-//            'class' => 'datenblatt-form',
+        //'class' => 'datenblatt-form',
         'id' => 'datenblatt-form'
     )
 ]); ?>
@@ -69,10 +69,27 @@ $this->registerJs(
         <div class="col-sm-2">
             <?php
             $htmlOptions = ['prompt' => 'Haus auswählen'];
-            $haeuser = $modelDatenblatt->firma && $modelDatenblatt->projekt ? $modelDatenblatt->projekt->hauses : [];
-            $haeuserOptions = ArrayHelper::map($haeuser, 'id', 'id');
+            $haeuserOptions = [];
             if (!$modelDatenblatt->projekt_id) {
                 $htmlOptions['disabled'] = 'disabled';
+            } else {
+                /* @var $haus \app\models\Haus */
+                $haeuserOptions = [];
+                foreach ($modelDatenblatt->projekt->hauses as $haus) {
+                    if ($haus->id == $modelDatenblatt->haus_id || count($haus->datenblatts) == 0) {
+                        /* @var $te \app\models\Teileigentumseinheit */
+                        $teId = '';
+                        $teNr = '';
+                        //echo 'hid: ' . $haus->id . "<br>";
+                        foreach ($haus->teileigentumseinheits as $te) {
+                            //echo 'te-id: ' . $te->id . "<br>";
+                            if ($te->einheitstyp_id == \app\models\Einheitstyp::TYPE_HAUS) {
+                                $haeuserOptions[$haus->id] = ($te->te_nummer ? $te->te_nummer : "Keine TE-Nr (id: $te->id)");
+                                break;
+                            }
+                        }
+                    }
+                }
             }
             echo $form->field($modelDatenblatt, 'haus_id')->dropDownList($haeuserOptions, $htmlOptions);
             ?>

@@ -1,9 +1,29 @@
 <?php 
 //use kartik\datetime\DateTimePicker;
 use kartik\datecontrol\DateControl;
-//use yii\jui\AutoComplet e;
+//use kartik\typeahead\TypeaheadBasic;
+//use kartik\typeahead\Typeahead;
 
 /* @var $form yii\bootstrap\ActiveForm */
+?>
+
+<?php
+//$this->registerJs(
+//    '$("document").ready(function(){
+//        $("#dynamic-form").on("pjax:end", function() {
+//            $.pjax.reload({container:"#datenblatt-form"});  //Reload GridView
+//            console.log("reload form");
+//        });
+//    });'
+//);
+//$this->registerJs(
+//    '
+//    $(function(){
+//
+//
+//    });
+//    '
+//);
 ?>
 
 <div class="box-group" id="accordion">
@@ -24,6 +44,13 @@ use kartik\datecontrol\DateControl;
                 <div class="row">
                     <div class="col-sm-3">
                         <?= $form->field($modelKaeufer, 'debitor_nr')->textInput(['maxlength' => true]) ?>
+                        <?php
+//                            echo $form->field($modelKaeufer, 'debitor_nr')->widget(TypeaheadBasic::classname(), [
+//                                'data' => ['aaaa' => 'aaaaa', 'b' => 'bbbb'],
+//                                'pluginOptions' => ['highlight' => true],
+//                                'options' => ['placeholder' => 'Filter as you type ...'],
+//                            ]);
+                        ?>
                     </div>
                 </div>
                 <div class="row">

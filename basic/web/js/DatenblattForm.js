@@ -6,6 +6,55 @@ var DatenblattForm = function () {
     _selectedProjekt    = null;
     _selectedHaus       = null;
 
+
+    _.initAutocompleteKunden = function() {
+
+        $('[name="Kaeufer[debitor_nr]"]')
+            .keydown(function(e){
+                if(e.which == 13) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            })
+            .autocomplete({
+                source: "index.php?r=datenblatt/autocompletekunden",
+                minLength: 1,
+                select: function (event, ui) {
+
+                    if (ui.item && ui.item.id) {
+                        // item selected and has an id
+
+                        console.log(ui.item);
+
+                        //'anrede' => $kunde->anrede,
+                        //'titel' => $kunde->titel,
+                        //'vorname' => $kunde->vorname,
+                        //'nachname' => $kunde->nachname,
+                        //'email' => $kunde->email,
+                        //'strasse' => $kunde->strasse,
+                        //'hausnr' => $kunde->hausnr,
+                        //'plz' => $kunde->plz,
+                        //'ort' => $kunde->ort,
+                        //'festnetz' => $kunde->festnetz,
+                        //'handy' => $kunde->handy,
+
+                        $('[name="Kaeufer[anrede]"]').val(ui.item.anrede);
+                        $('[name="Kaeufer[titel]"]').val(ui.item.titel);
+                        $('[name="Kaeufer[vorname]"]').val(ui.item.vorname);
+                        $('[name="Kaeufer[nachname]"]').val(ui.item.nachname);
+                        $('[name="Kaeufer[email]"]').val(ui.item.email);
+                        $('[name="Kaeufer[strasse]"]').val(ui.item.strasse);
+                        $('[name="Kaeufer[hausnr]"]').val(ui.item.hausnr);
+                        $('[name="Kaeufer[plz]"]').val(ui.item.plz);
+                        $('[name="Kaeufer[ort]"]').val(ui.item.ort);
+                        $('[name="Kaeufer[festnetz]"]').val(ui.item.festnetz);
+                        $('[name="Kaeufer[handy]"]').val(ui.item.handy);
+
+                    }
+                }
+            });
+    }
+
     /**
      *
      */
@@ -46,6 +95,7 @@ var DatenblattForm = function () {
         if(!_form) return;
         
         _.initFirmaProjektHausDropdown();
+        _.initAutocompleteKunden();
     }
     
     _.init();

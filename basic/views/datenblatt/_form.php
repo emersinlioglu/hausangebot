@@ -20,27 +20,31 @@ use yii\widgets\Pjax;
 //    });'
 //);
 $this->registerJs(
-    '$(function(){
+    '
+
+    $(function(){
         $("#datenblatt-form").submit();
 
         // after reload form
         $(document).on(\'ready pjax:success\', function() {
-            console.log("new init");
             new DatenblattForm();
         });
 
-        // To disable f5
-        $(document).bind("keydown", function(e){
-            if ((e.which || e.keyCode) == 116) {
-                e.preventDefault();
-
-                $("#datenblatt-form").attr("action")
-            }
-        });
+//        // To disable f5
+//        $(document).bind("keydown", function(e){
+//            if ((e.which || e.keyCode) == 116) {
+//                e.preventDefault();
+//
+//                $("#datenblatt-form").attr("action")
+//            }
+//        });
 
     });'
 );
 ?>
+
+<!--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>-->
 
 <?php yii\widgets\Pjax::begin(['id' => 'datenblatt-form']) ?>
 <?php //$form = ActiveForm::begin(['options' => ['data-pjax' => true ]]); ?>

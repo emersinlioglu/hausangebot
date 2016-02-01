@@ -2,10 +2,12 @@
 
 namespace app\controllers;
 
+use app\models\Kunde;
 use Yii;
 use yii\data\ActiveDataProvider;
 use app\models\Datenblatt;
 use app\models\DatenblattSearch;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -124,6 +126,44 @@ class DatenblattController extends Controller
                 // assign käufer
                 $modelDatenblatt->kaeufer_id = $modelKaeufer->id;
                 $modelDatenblatt->save();
+
+
+                // add new kunde
+                if (!Kunde::find()
+                    ->where( [ 'debitor_nr' => $modelKaeufer->debitor_nr] )
+                    ->exists()) {
+
+                    $modelKunde = new Kunde();
+//                    * @property string $debitor_nr
+//                    * @property integer $anrede
+//                    * @property string $titel
+//                    * @property string $vorname
+//                    * @property string $nachname
+//                    * @property string $email
+//                    * @property string $strasse
+//                    * @property string $hausnr
+//                    * @property string $plz
+//                    * @property string $ort
+//                    * @property string $festnetz
+//                    * @property string $handy
+
+                    $kundeData = [
+                        'debitor_nr' => $modelKaeufer->debitor_nr,
+                        'anrede' => $modelKaeufer->anrede,
+                        'titel' => $modelKaeufer->titel,
+                        'vorname' => $modelKaeufer->vorname,
+                        'nachname' => $modelKaeufer->nachname,
+                        'email' => $modelKaeufer->email,
+                        'strasse' => $modelKaeufer->strasse,
+                        'hausnr' => $modelKaeufer->hausnr,
+                        'plz' => $modelKaeufer->plz,
+                        'ort' => $modelKaeufer->ort,
+                        'festnetz' => $modelKaeufer->festnetz,
+                        'handy' => $modelKaeufer->handy,
+                    ];
+                    $modelKunde->load(['Kunde' => $kundeData]);
+                    $modelKunde->save();
+                }
             }
 
             // Sonderwünsche
@@ -342,25 +382,89 @@ class DatenblattController extends Controller
     }
 
 
-    public function actionSubcat() {
-    $out = [];
-    if (isset($_POST['depdrop_parents'])) {
-        $parents = $_POST['depdrop_parents'];
-        if ($parents != null) {
-            $firma_id = $parents[0];
-            $out = self::getSubCatList($firma_id); 
-            // the getSubCatList function will query the database based on the
-            // cat_id and return an array like below:
-            // [
-            //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
-            //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
-            // ]
-            echo Json::encode(['output'=>$out, 'selected'=>'']);
+    public function actionSubcat()
+    {
+        $out = [];
+        if (isset($_POST['depdrop_parents'])) {
+            $parents = $_POST['depdrop_parents'];
+            if ($parents != null) {
+                $firma_id = $parents[0];
+                $out = self::getSubCatList($firma_id);
+                // the getSubCatList function will query the database based on the
+                // cat_id and return an array like below:
+                // [
+                //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
+                //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
+                // ]
+                echo Json::encode(['output' => $out, 'selected' => '']);
+                return;
+            }
+        }
+        echo Json::encode(['output' => '', 'selected' => '']);
+    }
+
+    public function actionAutocompletekunden()
+    {
+
+        $out = [];
+        if (isset($_GET['term'])) {
+
+//        die($_GET['term']);
+//            $kunden = Kunde::findAll(['debitor_nr like "%' . $_GET['term'] . '%"']);
+            $kunden = Kunde::find()->where(['like', 'debitor_nr', $_GET['term']])->all();
+//die('bbbb');
+//            $query = new Query;
+//
+//            $query->select('name')
+//                ->from('country')
+//                ->where('name LIKE "%' . $q .'%"')
+//                ->orderBy('name');
+//            $command = $query->createCommand();
+//            $data = $command->queryAll();
+//            $out = [];
+//            foreach ($data as $d) {
+//                $out[] = ['value' => $d['name']];
+//            }
+//            echo Json::encode($out);
+
+//            var_dump(count($kunden));
+
+            $results = array();
+            foreach ($kunden as $kunde) {
+
+//                $productName = $kunde->getCurrentTranslation()->getName();
+
+                $results[] = array(
+                    'id' => $kunde->debitor_nr,
+                    'label' => $kunde->debitor_nr,
+                    'value' => $kunde->debitor_nr,
+                    'anrede' => $kunde->anrede,
+                    'titel' => $kunde->titel,
+                    'vorname' => $kunde->vorname,
+                    'nachname' => $kunde->nachname,
+                    'email' => $kunde->email,
+                    'strasse' => $kunde->strasse,
+                    'hausnr' => $kunde->hausnr,
+                    'plz' => $kunde->plz,
+                    'ort' => $kunde->ort,
+                    'festnetz' => $kunde->festnetz,
+                    'handy' => $kunde->handy,
+                );
+            }
+
+//            if (count($results) == 0) {
+//                $results[] = array(
+//                    "id" => '',
+//                    "label" => '',
+//                    "value" => ''
+//                );
+//            }
+
+            echo Json::encode($results);
             return;
         }
+        echo Json::encode(['output' => '', 'selected' => '']);
     }
-    echo Json::encode(['output'=>'', 'selected'=>'']);
-}
 
 
     /**

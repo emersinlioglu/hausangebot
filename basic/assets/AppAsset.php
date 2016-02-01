@@ -22,9 +22,13 @@ class AppAsset extends AssetBundle
         'css/forms.css',
 //        'font-awesome-4.5.0/css/font-awesome.css',
         'font-awesome-4.5.0/css/font-awesome.min.css',
+        'js/jquery-ui-1.11.4.custom/jquery-ui.min.css',
+//        'js/jquery-ui-1.11.4.custom/jquery-ui.structure.min.css',
+//        'js/jquery-ui-1.11.4.custom/jquery-ui.theme.min.css',
     ];
     public $js = [
-        'js/DatenblattForm.js'
+        'js/DatenblattForm.js',
+        'js/jquery-ui-1.11.4.custom/jquery-ui.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

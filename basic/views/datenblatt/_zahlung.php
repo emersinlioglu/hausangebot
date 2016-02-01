@@ -25,7 +25,7 @@ use yii\widgets\Pjax;
                     (Summe: <?= Yii::$app->formatter->asCurrency($total) ?>)
                 </a>
             </h4>
-        </div><?php Pjax::begin(); ?>
+        </div>
         <div id="collapse-zahlung" class="panel-collapse collapse in" aria-expanded="false">
             <div class="box-body">
 
@@ -39,7 +39,7 @@ use yii\widgets\Pjax;
                             Yii::$app->urlManager->createUrl(["datenblatt/addzahlung", 'datenblattId' => $modelDatenblatt->id]), 
                             ['class' => 'add-zahlung btn btn-success btn-xl']) ?>
                         </th>
-                    </tr><?php Pjax::end(); ?>
+                    </tr>
                 <?php 
 
                 $rechnungstellungBetrag = 0;

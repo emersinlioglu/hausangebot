@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bf32068e21ea264a490ba6a5adf7babc",
-    "content-hash": "992e841b24774560f78c7736b90eb09c",
+    "hash": "540ba38a82a0448971bb9ccad77fa94f",
+    "content-hash": "7c42673c351c446810163328ccfd9b6e",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -46,6 +46,59 @@
                 "web"
             ],
             "time": "2015-10-23 14:50:49"
+        },
+        {
+            "name": "anmaslov/yii2-autocomplete-widget",
+            "version": "v1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/anmaslov/yii2-autocomplete-widget.git",
+                "reference": "08beb72c0fa554b91979b2a0ff0307268a4ebbb2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/anmaslov/yii2-autocomplete-widget/zipball/08beb72c0fa554b91979b2a0ff0307268a4ebbb2",
+                "reference": "08beb72c0fa554b91979b2a0ff0307268a4ebbb2",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/devbridge-autocomplete": "*",
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-bootstrap": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "anmaslov\\autocomplete\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maslov Alexey",
+                    "email": "lelick29@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Ajax AutoComplete widget for Yii2",
+            "keywords": [
+                "autocomplete",
+                "extension",
+                "jquery",
+                "widget",
+                "yii",
+                "yii 2",
+                "yii2"
+            ],
+            "time": "2015-06-29 20:56:52"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -94,6 +147,44 @@
                 "mobile-first",
                 "responsive",
                 "web"
+            ]
+        },
+        {
+            "name": "bower-asset/devbridge-autocomplete",
+            "version": "v1.2.24",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/devbridge/jQuery-Autocomplete.git",
+                "reference": "dfbca90052e83682233a2bcc67c668c644630b6b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/devbridge/jQuery-Autocomplete/zipball/dfbca90052e83682233a2bcc67c668c644630b6b",
+                "reference": "dfbca90052e83682233a2bcc67c668c644630b6b",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.7"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "dist/jquery.autocomplete.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "spec",
+                    "scripts",
+                    "content"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Autocomplete provides suggestions while you type into the text field.",
+            "keywords": [
+                "ajax",
+                "autocomplete"
             ]
         },
         {

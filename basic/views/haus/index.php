@@ -47,6 +47,21 @@ $this->params['breadcrumbs'][] = $this->title;
             'strasse',
             'plz',
             'ort',
+
+            [
+                'label' => 'Datenblatt',
+//                'attribute' => 'datenblatts',
+                'format' => 'raw',
+                'value' => function ($model, $key, $index, $widget) {
+                    $link = '';
+                    if (count($model->datenblatts) > 0) {
+                        $url = \yii\helpers\Url::to(['datenblatt/update', 'id' => $model->datenblatts[0]->id]);
+                        $link = Html::a('> Datenblatt', $url);
+                    }
+
+                    return $link ;
+                },
+            ],
             
            
             // 'hausnr',

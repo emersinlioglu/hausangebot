@@ -50,7 +50,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'label' => 'Datenblatt',
-//                'attribute' => 'datenblatts',
                 'format' => 'raw',
                 'value' => function ($model, $key, $index, $widget) {
                     $link = '';

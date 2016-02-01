@@ -21,6 +21,9 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
         'modelDatenblatt' => $modelDatenblatt,
         'modelsZahlung'  => $modelsZahlungs,
         'modelKaeufer' => $modelKaeufer,
+
+        'kaufpreisTotal' => $kaufpreisTotal,
+        'sonderwuenscheTotal' => $sonderwuenscheTotal,
     ]) ?>
 
 </div>

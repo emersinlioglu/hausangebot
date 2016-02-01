@@ -127,6 +127,17 @@ use kartik\datecontrol\DateControl;
                         <td><?= $kaufvertragBetragTotal + $sonderwunschBetragTotal ?> EUR</td>
                         <td></td>
                     </tr>
+                    <tr>
+                        <td>Offen</td>
+                        <td><?= 100 - $kaufvertragProzentTotal ?> %</td>
+                        <td><?= $kaufpreisTotal - $kaufvertragBetragTotal ?> EUR</td>
+                        <td></td>
+                        <td><?= 100 - $sonderwunschProzentTotal ?> %</td>
+                        <td><?= $sonderwuenscheTotal - $sonderwunschBetragTotal ?> EUR</td>
+                        <td></td>
+                        <td><?= ($kaufpreisTotal + $sonderwuenscheTotal) - ($kaufvertragBetragTotal + $sonderwunschBetragTotal) ?> EUR</td>
+                        <td></td>
+                    </tr>
 
                 </table>
 

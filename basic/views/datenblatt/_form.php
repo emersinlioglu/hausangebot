@@ -148,6 +148,8 @@ $this->registerJs(
     <?= $this->render('_kaufpreisabrechnung', [
         'form' => $form,
         'modelDatenblatt' => $modelDatenblatt,
+        'kaufpreisTotal' => $kaufpreisTotal,
+        'sonderwuenscheTotal' => $sonderwuenscheTotal,
     ]) ?>
 
     <div class="row">

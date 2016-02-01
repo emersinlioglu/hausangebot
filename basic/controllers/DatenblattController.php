@@ -230,6 +230,9 @@ class DatenblattController extends Controller
             'modelDatenblatt' => $modelDatenblatt,
             'modelsZahlungs' => $modelDatenblatt->zahlungs,
             'modelKaeufer' => $modelKaeufer,
+
+            'kaufpreisTotal' => $kaufpreisTotal,
+            'sonderwuenscheTotal' => $sonderwuenscheTotal,
         ]);
     }
     

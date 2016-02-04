@@ -194,7 +194,7 @@ class DatenblattController extends Controller
                 }
             }
             
-            $this->redirect(['update', 'id' => $id]);
+//            $this->redirect(['update', 'id' => $id]);
         }
         
 
@@ -326,7 +326,7 @@ class DatenblattController extends Controller
             $modelSonderwunsch->delete();
         }
 
-        $this->actionUpdate($datenblattId);
+//        $this->actionUpdate($datenblattId);
 //        return $this->redirect(['update', 'id' => $datenblattId]);
     }
     

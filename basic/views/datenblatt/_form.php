@@ -46,7 +46,7 @@ $this->registerJs(
 <!--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">-->
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>-->
 
-<?php yii\widgets\Pjax::begin(['id' => 'datenblatt-form']) ?>
+<?php //yii\widgets\Pjax::begin(['id' => 'datenblatt-form']) ?>
 <?php //$form = ActiveForm::begin(['options' => ['data-pjax' => true ]]); ?>
 
 <?php $form = ActiveForm::begin([
@@ -181,4 +181,4 @@ $this->registerJs(
 </div>
 
 <?php ActiveForm::end(); ?>
-<?php yii\widgets\Pjax::end() ?>
+<?php //yii\widgets\Pjax::end() ?>

@@ -20,17 +20,12 @@ use kartik\datecontrol\DateControl;
         <div id="collapse-kaufpreisabrechnung" class="panel-collapse collapse in" aria-expanded="false">
             <div class="box-body">
 
-                <!--<h3>Kaufpreisabrechnung:</h3>-->
-
                 <table class="table table-bordered">   
                     <tr>
                         <th>Bezeichnung</th>
                         <th colspan="3" >Kaufvertrag</th>
                         <th colspan="3" >beuaftragt</th>
                         <th >Summe</th>
-                <!--        <th colspan="2" style="text-align: center;">Angebot</th>
-                        <th colspan="2" style="text-align: center;">beuaftragt</th>
-                        <th colspan="3" style="text-align: center;">Rechnungsstellung</th>-->
                     </tr>
                     <tr>
                         <th></th>
@@ -44,7 +39,7 @@ use kartik\datecontrol\DateControl;
                         <th>
                             <?= Html::a('<span class="fa fa-plus"> </span>',
                                 Yii::$app->urlManager->createUrl(["datenblatt/addabschlag", 'datenblattId' => $modelDatenblatt->id]), 
-                                ['class' => 'add-zahlung btn btn-success btn-xl']) ?>
+                                ['class' => 'add-button add-zahlung btn btn-success btn-xl']) ?>
                         </th>
                     </tr>
                     <?php 
@@ -112,7 +107,7 @@ use kartik\datecontrol\DateControl;
                         <td>
                             <?= Html::a('<span class="fa fa-minus"></span>', 
                                 Yii::$app->urlManager->createUrl(["datenblatt/deleteabschlag", 'datenblattId' => $modelDatenblatt->id , 'abschlagId' => $modelAbschlag->id]), 
-                                ['class' => 'add-zahlung btn btn-danger btn-xl']) ?>
+                                ['class' => 'delete-button btn btn-danger btn-xl']) ?>
                         </td>
                     </tr>    
                     <?php endforeach;  ?>

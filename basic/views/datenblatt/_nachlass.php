@@ -36,7 +36,7 @@ use kartik\datecontrol\DateControl;
                         <th>Bemerkung</th>
                         <th><?= Html::a('<span class="fa fa-plus"> </span>',
                             Yii::$app->urlManager->createUrl(["datenblatt/addnachlass", 'datenblattId' => $modelDatenblatt->id]), 
-                            ['class' => 'add-zahlung btn btn-success btn-xl']) ?></th>
+                            ['class' => 'add-button add-zahlung btn btn-success btn-xl']) ?></th>
                     </tr>
                 <?php 
 
@@ -68,7 +68,7 @@ use kartik\datecontrol\DateControl;
                     <td>
                         <?= Html::a('<span class="fa fa-minus"></span>', 
                             Yii::$app->urlManager->createUrl(["datenblatt/deletenachlass", 'datenblattId' => $modelDatenblatt->id , 'nachlassId' => $modelNachlass->id]), 
-                            ['class' => 'add-zahlung btn btn-danger btn-xl']) ?>
+                            ['class' => 'delete-button add-zahlung btn btn-danger btn-xl']) ?>
                     </td>
                 </tr>    
                 <?php endforeach;  ?>

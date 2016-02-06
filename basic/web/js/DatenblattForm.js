@@ -12,7 +12,6 @@ var DatenblattForm = function () {
         _cnt = _form;
         if (typeof container !== 'undefined') {
             _cnt = $(container);
-            //console.log('should not');
         }
 
         _cnt.find('.add-button, .delete-button').click(function(e) {
@@ -20,44 +19,103 @@ var DatenblattForm = function () {
 
             var elm         = $(this);
             var panelId     = elm.closest('.panel-collapse').attr('id');
-            //var url         = _form.attr('action');
-            var url         = elm.attr('href');
 
-            //$.post(url, function(data) {
-            //
-            //    console.log($(data).find('#' + panelId + ' .box-body'));
-            //    var newContent = $(data).find('#' + panelId + ' .box-body');
-            //    _.initPlusMinusIcons(newContent);
-            //    _form.find('#' + panelId + ' .box-body').replaceWith(newContent);
-            //});
+            // POST Request
+            $.post(elm.attr('href') , _form.serialize(), function(data) {
 
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: _form.serialize(),
-                success: function() {
+                $('.skin-blue.sidebar-mini').html($(data).find('.skin-blue.sidebar-mini').html());
+                var newContent = $(data).find('#' + panelId + ' .box-body');
 
-                    $.ajax({
-                        type: "GET",
-                        url: _form.attr('action'),
-                        success: function(data) {
-                            console.log(data);
-console.log($(data).find('.skin-blue.sidebar-mini').html());
-                            $('.skin-blue.sidebar-mini').html($(data).find('.skin-blue.sidebar-mini').html());
-                            ////console.log($(data).find('#' + panelId + ' .box-body'));
-                            //var newContent = $(data).find('#' + panelId + ' .box-body');
-                            //_.initPlusMinusIcons(newContent);
-                            //
-                            //
-                            //
-                            //
-                            //
-                            //_form.find('#' + panelId + ' .box-body').replaceWith(newContent);
-                        }
-                    });
+                // init plus minus icons
+                _.initPlusMinusIcons(newContent);
 
-                },
-                //dataType: 'html'
+                newContent.delegate('input[name*="betrag"]', 'change', function() {
+
+                    console.log('val: ' + this.value);
+                    //yii.validation.number(this.value, [{"message": "Betrag muss eine Zahl sein."}], {"message": "Betrag muss eine Zahl sein."});
+
+                    var pattern = /^\s*[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?\s*$/;
+                    var msg = '';
+                    if (this.value && !pattern.test(this.value)) {
+                        var msg = 'Betrag muss eine Zahl sein.';
+                        $(this).closest('.form-group').addClass('has-error');
+                        $(this).closest('.form-group').removeClass('has-success');
+                    } else {
+                        $(this).closest('.form-group').addClass('has-success');
+                        $(this).closest('.form-group').removeClass('has-error');
+                    }
+                    $(this).next('.help-block').html(msg);
+
+                });
+
+
+//                var fildsConfig = [];
+//                newContent.find('input[name*="betrag"]').each(function(index, value) {
+//                    var input = $(value);
+//
+//                    var containerSelector = ''
+//                    var classList = input.parent().attr('class').split(/\s+/);
+//                    $.each(classList, function(index, item) {
+//                        containerSelector += '.' + item;
+//                    });
+//
+//                    var fieldConf =
+//                    {
+//                        //"id":"sonderwunsch-0-beauftragt_betrag",
+//                        //"name":"[0]beauftragt_betrag",
+//                        //"container":".field-sonderwunsch-0-beauftragt_betrag",
+//                        //"input":"#sonderwunsch-0-beauftragt_betrag",
+//                        "id": input.attr('id'),
+//                        "name": input.attr('name'),
+//                        "container": containerSelector,
+//                        "input": '#' + input.attr('id'),
+//                        "validate":function (attribute, value, messages, deferred, $form) {
+//
+//                            console.log('aaaaa');
+//                            yii.validation.number(value, messages, {"pattern":/^\s*[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?\s*$/,"message":"Betrag muss eine Zahl sein.","skipOnEmpty":1});
+//                        }
+//                    };
+//
+//                    fildsConfig.push(fieldConf);
+//
+//                });
+//console.log(fildsConfig);
+//                jQuery('#datenblatt-form').yiiActiveForm(fildsConfig, []);
+
+
+
+
+                _form.find('#' + panelId + ' .box-body').replaceWith(newContent);
+                _form.find('#' + panelId + ' .box-body').find('.input-group.date').each(function(index, value) {
+
+                    var inputGroup = $(value);
+                    var datecontrol_options = {
+                        "idSave": "", //"sonderwunsch-0-angebot_datum"
+                        "url":"\/index.php?r=datecontrol%2Fparse%2Fconvert",
+                        "type":"date",
+                        "saveFormat":"Y-m-d",
+                        "dispFormat":"d.m.Y",
+                        "saveTimezone":"Europe\/Berlin",
+                        "dispTimezone":"Europe\/Berlin",
+                        "asyncRequest":true,
+                        "language":"de",
+                        "dateSettings":{"days":["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag","Sonntag"],
+                            "daysShort":["Son","Mon","Die","Mit","Don","Fre","Sam","Son"],
+                            "months":["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],
+                            "monthsShort":["Jan","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"],
+                            "meridiem":["Vorm.","Nachm."]}
+                    };
+                    var kvDatepicker_options = {"autoclose":true,"format":"dd.mm.yyyy","language":"de"};
+                    var dateId = inputGroup.next('input[type="hidden"]').attr('id');
+                    datecontrol_options.idSave = dateId;
+                    inputGroup.find('.krajee-datepicker').datecontrol(datecontrol_options);
+                    if (inputGroup.find('.krajee-datepicker').data('kvDatepicker')) {
+                        inputGroup.find('.krajee-datepicker').kvDatepicker('destroy');
+                    }
+                    inputGroup.kvDatepicker(kvDatepicker_options);
+
+                });
+
             });
 
             return false;

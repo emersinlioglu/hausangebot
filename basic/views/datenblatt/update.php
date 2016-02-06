@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
     <?= $this->render('_form', [
         'modelDatenblatt' => $modelDatenblatt,
-        'modelsZahlung'  => $modelsZahlungs,
+        //'modelsZahlung'  => $modelsZahlungs,
         'modelKaeufer' => $modelKaeufer,
 
         'kaufpreisTotal' => $kaufpreisTotal,

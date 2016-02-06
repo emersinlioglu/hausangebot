@@ -50,8 +50,9 @@ $this->registerJs(
 <?php //$form = ActiveForm::begin(['options' => ['data-pjax' => true ]]); ?>
 
 <?php $form = ActiveForm::begin([
-    'enableClientValidation' => false,
-    'enableAjaxValidation' => false,
+    //'enableAjaxValidation' => false,
+    'enableClientValidation' => true,
+    //'validateOnSubmit' => true,
     'options' => array(
         'data-pjax' => true,
         //'class' => 'datenblatt-form',

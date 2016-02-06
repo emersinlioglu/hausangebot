@@ -19,6 +19,7 @@ use app\models\Zahlung;
 use app\models\Kaeufer;
 use app\models\Sonderwunsch;
 use app\models\Abschlag;
+use yii\widgets\ActiveForm;
 
 
 /**
@@ -90,7 +91,7 @@ class DatenblattController extends Controller
      * @param integer $id
      * @return mixed
      */
-     public function actionUpdate($id)
+     public function actionUpdate($id, $preventPost = false)
     {
         $modelDatenblatt = $this->findModel($id);
         $modelDatenblatt->aktiv = 1;
@@ -99,10 +100,14 @@ class DatenblattController extends Controller
         if ($modelDatenblatt->kaeufer) {
             $modelKaeufer = $modelDatenblatt->kaeufer;
         }
-
         $data = Yii::$app->request->post();
-        
-        if ($modelDatenblatt->load($data) && $modelDatenblatt->save()) {
+
+//        if ($preventPost && Yii::$app->request->isAjax) {
+//            Yii::$app->response->format = 'json';
+//            return ActiveForm::validateMultiple($modelDatenblatt->zahlungs);
+//        }
+
+        if (!$preventPost && $modelDatenblatt->load($data) && $modelDatenblatt->save()) {
             
             // Käufer
             if ($modelKaeufer->load(Yii::$app->request->post())) {
@@ -186,17 +191,31 @@ class DatenblattController extends Controller
                     $item->save();
                 }
             }
-            
+
             // Zahlung
             if (Zahlung::loadMultiple($modelDatenblatt->zahlungs, $data)) {
                 foreach ($modelDatenblatt->zahlungs as $item) {
+                    $item->validate();
+                    error_log($item->id . ' : ' . $item->betrag);
                     $item->save();
                 }
+
+                error_log('validate zahlung');
+//                $isVal = Zahlung::validateMultiple($modelDatenblatt->zahlungs);
+//                error_log('result: ' . ($isVal ? 'ja' : 'nein'));
             }
-            
+
+//            // reload models
+//            $modelDatenblatt = $this->findModel($id);
+//            $modelKaeufer = new Kaeufer();
+//            if ($modelDatenblatt->kaeufer) {
+//                $modelKaeufer = $modelDatenblatt->kaeufer;
+//            }
+
 //            $this->redirect(['update', 'id' => $id]);
         }
-        
+
+
 
         // calculate kaufpreis
         $kaufpreisTotal = 0;
@@ -228,7 +247,7 @@ class DatenblattController extends Controller
 
         return $this->render('update', [
             'modelDatenblatt' => $modelDatenblatt,
-            'modelsZahlungs' => $modelDatenblatt->zahlungs,
+            //'modelsZahlungs' => $modelDatenblatt->zahlungs,
             'modelKaeufer' => $modelKaeufer,
 
             'kaufpreisTotal' => $kaufpreisTotal,
@@ -247,7 +266,7 @@ class DatenblattController extends Controller
         $new->datenblatt_id = $datenblattId;
         $new->save();
 
-        $this->actionUpdate($datenblattId);
+        return $this->actionUpdate($datenblattId);
 //        $this->redirect(['update', 'id' => $datenblattId]);
     }
     
@@ -261,7 +280,7 @@ class DatenblattController extends Controller
         $new->datenblatt_id = $datenblattId;
         $new->save();
 
-        $this->actionUpdate($datenblattId);
+        return $this->actionUpdate($datenblattId);
 //        $this->redirect(['update', 'id' => $datenblattId]);
     }
     
@@ -275,7 +294,22 @@ class DatenblattController extends Controller
         $new->datenblatt_id = $datenblattId;
         $new->save();
 
-        $this->actionUpdate($datenblattId);
+//        // Zahlung
+//        $modelDatenblatt = $this->findModel($datenblattId);
+//        if (Zahlung::loadMultiple($modelDatenblatt->zahlungs, Yii::$app->request->post())) {
+//            /* @var $item Zahlung */
+//            foreach ($modelDatenblatt->zahlungs as $item) {
+//                $item->validate();
+//                $item->save();
+//            }
+//
+//        }
+//
+//        return $this->renderPartial('_zahlung', [
+//            'modelDatenblatt' => $modelDatenblatt
+//        ]);
+
+        return $this->actionUpdate($datenblattId);
 //        $this->redirect(['update', 'id' => $datenblattId]);
     }
     
@@ -289,7 +323,7 @@ class DatenblattController extends Controller
         $new->datenblatt_id = $datenblattId;
         $new->save();
 
-        $this->actionUpdate($datenblattId);
+        return $this->actionUpdate($datenblattId);
 //        $this->redirect(['update', 'id' => $datenblattId]);
     }
 
@@ -320,14 +354,14 @@ class DatenblattController extends Controller
      */
     public function actionDeletesonderwunsch($datenblattId, $sonderwunschId)
     {
-        $model = $this->findModel($datenblattId);
+        $this->actionUpdate($datenblattId);
 
+        $model = $this->findModel($datenblattId);
         if ($modelSonderwunsch = Sonderwunsch::findOne($sonderwunschId)) {
             $modelSonderwunsch->delete();
         }
 
-//        $this->actionUpdate($datenblattId);
-//        return $this->redirect(['update', 'id' => $datenblattId]);
+        return $this->actionUpdate($datenblattId, true);
     }
     
     /**
@@ -337,13 +371,14 @@ class DatenblattController extends Controller
      */
     public function actionDeleteabschlag($datenblattId, $abschlagId)
     {
-        $model = $this->findModel($datenblattId);
+        $this->actionUpdate($datenblattId);
 
+        $model = $this->findModel($datenblattId);
         if ($modelAbschlag = Abschlag::findOne($abschlagId)) {
             $modelAbschlag->delete();
         }
 
-        $this->actionUpdate($datenblattId);
+        return $this->actionUpdate($datenblattId, true);
 //        return $this->redirect(['update', 'id' => $datenblattId]);
     }
     
@@ -356,13 +391,14 @@ class DatenblattController extends Controller
      */
     public function actionDeletenachlass($datenblattId, $nachlassId)
     {
-        $model = $this->findModel($datenblattId);
+        $this->actionUpdate($datenblattId);
 
+        $model = $this->findModel($datenblattId);
         if ($modelNachlass = Nachlass::findOne($nachlassId)) {
             $modelNachlass->delete();
         }
 
-        $this->actionUpdate($datenblattId);
+        return $this->actionUpdate($datenblattId, true);
 //        return $this->redirect(['update', 'id' => $datenblattId]);
     }
     
@@ -374,16 +410,16 @@ class DatenblattController extends Controller
      */
     public function actionDeletezahlung($datenblattId, $zahlungId)
     {
-        $model = $this->findModel($datenblattId);
+        $this->actionUpdate($datenblattId);
 
+        $model = $this->findModel($datenblattId);
         if ($item = Zahlung::findOne($zahlungId)) {
             $item->delete();
         }
 
-        $this->actionUpdate($datenblattId);
+        return $this->actionUpdate($datenblattId, true);
 //        return $this->redirect(['update', 'id' => $datenblattId]);
     }
-
 
     public function actionSubcat()
     {

@@ -131,7 +131,9 @@ use kartik\datecontrol\DateControl;
                         <?= $form->field($modelKaeufer, 'titel2')->textInput([]) ?>
                         
                          <?= $form->field($modelKaeufer, 'hausnr')->textInput([]) ?>
-                        <?= $form->field($modelKaeufer, 'festnetz')->textInput([]) ?>
+                        <?= $form->field($modelKaeufer, 'festnetz')->textInput([])->widget(\yii\widgets\MaskedInput::className(), [
+    'mask' => '09999-9[9][9][9][9][9][9][9][9]',
+]) ?>
                         
                     </div>
                     <div class="col-sm-3">

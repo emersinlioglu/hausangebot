@@ -33,7 +33,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ort')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'festnetz')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'festnetz')->textInput(['maxlength' => true])->widget(\yii\widgets\MaskedInput::className(), [
+    'mask' => '09999-9[9][9][9][9][9][9][9][9]',
+]) ?>
 
     <?= $form->field($model, 'handy')->textInput(['maxlength' => true]) ?>
 

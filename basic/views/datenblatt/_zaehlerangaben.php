@@ -19,6 +19,7 @@
 
                 <table class="table">
                     <tr>
+                        <th>Medium-Name</th>
                         <th>Medium-Nr.</th>
                         <th>Zählerstand</th>
                         <th>Datum</th>
@@ -29,6 +30,7 @@
                     foreach ($modelDatenblatt->haus->zaehlerstands as $zaehlerstand): ?>
                         <tr>
                             <td><?= $zaehlerstand->name ?></td>
+                            <td><?= $zaehlerstand->nummer ?></td>
                             <td><?= $zaehlerstand->stand ?></td>
                             <td><?= Yii::$app->formatter->asDate($zaehlerstand->datum) ?>
                             </td>

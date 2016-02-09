@@ -121,6 +121,7 @@ $this->registerJs('
 
         <table class="table no-label">
             <tr>
+                <th>Medium-Name.</th>
                 <th>Medium-Nr.</th>
                 <th>Zählerstand</th>
                 <th>Datum</th>
@@ -143,6 +144,7 @@ $this->registerJs('
                         </span>
                         <?= $form->field($zaehlerstand, 'name')->textInput(['name' => "Zaehlerstand[$key][name]"]) ?>
                     </td>
+                    <td><?= $form->field($zaehlerstand, 'nummer')->textInput(['name' => "Zaehlerstand[$key][nummer]"]) ?></td>
                     <td><?= $form->field($zaehlerstand, 'stand')->textInput(['name' => "Zaehlerstand[$key][stand]"]) ?></td>
                     <td>
                         <?php 

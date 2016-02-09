@@ -9,6 +9,7 @@ use Yii;
  *
  * @property string $id
  * @property string $name
+ * @property string $nummer
  * @property string $stand
  * @property string $datum
  * @property string $haus_id
@@ -34,7 +35,7 @@ class Zaehlerstand extends \yii\db\ActiveRecord
             [['datum'], 'safe'],
             [['haus_id'], 'required'],
             [['haus_id'], 'integer'],
-            [['name', 'stand'], 'string', 'max' => 45]
+            [['name', 'nummer', 'stand'], 'string', 'max' => 45]
         ];
     }
 
@@ -44,11 +45,12 @@ class Zaehlerstand extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'stand' => Yii::t('app', 'Stand'),
-            'datum' => Yii::t('app', 'Datum'),
-            'haus_id' => Yii::t('app', 'Haus ID'),
+            'id' => 'ID',
+            'name' => 'Medium-Name',
+            'nummer' => 'Medium-Nr',
+            'stand' => 'Stand',
+            'datum' => 'Datum',
+            'haus_id' => 'Haus ID',
         ];
     }
 

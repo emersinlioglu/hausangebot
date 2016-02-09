@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\KaeuferSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Kaeufers';
+$this->title = 'Käufer';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="kaeufer-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Kaeufer', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Käufer erstellen', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

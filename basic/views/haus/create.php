@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Haus */
 
-$this->title = 'Create Haus';
-$this->params['breadcrumbs'][] = ['label' => 'Hauses', 'url' => ['index']];
+$this->title = 'Objekt erstellen';
+$this->params['breadcrumbs'][] = ['label' => 'Objekte', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="haus-create">

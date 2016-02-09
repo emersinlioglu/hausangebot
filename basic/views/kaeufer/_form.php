@@ -14,19 +14,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'debitor_nr')->textInput(['maxlength' => true]) ?>
 
-    <? // = $form->field($model, 'beurkundung_am')->textInput() ?>
+   
 
-    <?// = $form->field($model, 'verbindliche_fertigstellung')->textInput() ?>
-
-    <?// =  $form->field($model, 'uebergang_bnl')->textInput() ?>
-
-    <?// =  $form->field($model, 'abnahme_se')->textInput() ?>
-
-    <?// =  $form->field($model, 'abnahme_ge')->textInput() ?>
-
-    <?// =  $form->field($model, 'auflassung')->textInput() ?>
-
-    <?= $form->field($model, 'anrede')->textInput() ?>
+    <?= $form->field($model, 'anrede')->dropDownList([0 => 'Herr', 1 => 'Frau']) ?>
+   
 
     <?= $form->field($model, 'titel')->textInput(['maxlength' => true]) ?>
 
@@ -47,15 +38,15 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'handy')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+<!--
+    <? =  $form->field($model, 'anrede2')->textInput() ?>
 
-    <?// =  $form->field($model, 'anrede2')->textInput() ?>
+    <? =  $form->field($model, 'titel2')->textInput(['maxlength' => true]) ?>
 
-    <?// =  $form->field($model, 'titel2')->textInput(['maxlength' => true]) ?>
+    <? =  $form->field($model, 'vorname2')->textInput(['maxlength' => true]) ?>
 
-    <?// =  $form->field($model, 'vorname2')->textInput(['maxlength' => true]) ?>
-
-    <?// =  $form->field($model, 'nachname2')->textInput(['maxlength' => true]) ?>
-
+    <? =  $form->field($model, 'nachname2')->textInput(['maxlength' => true]) ?>
+-->
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

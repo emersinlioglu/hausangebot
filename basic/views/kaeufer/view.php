@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Kaeufer */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Kaeufers', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Käufer', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="kaeufer-view">
@@ -28,14 +28,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'debitor_nr',
-            'beurkundung_am',
-            'verbindliche_fertigstellung',
-            'uebergang_bnl',
-            'abnahme_se',
-            'abnahme_ge',
-            'auflassung',
+           // 'beurkundung_am',
+           // 'verbindliche_fertigstellung',
+           // 'uebergang_bnl',
+           // 'abnahme_se',
+           // 'abnahme_ge',
+           // 'auflassung',
             'anrede',
             'titel',
             'vorname',
@@ -47,10 +47,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'festnetz',
             'handy',
             'email:email',
-            'anrede2',
-            'titel2',
-            'vorname2',
-            'nachname2',
+            //'anrede2',
+            //'titel2',
+            //'vorname2',
+            //'nachname2',
         ],
     ]) ?>
 

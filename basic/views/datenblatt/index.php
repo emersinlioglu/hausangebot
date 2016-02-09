@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\DatenblattSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Datenblatts';
+$this->title = 'Datenblätter';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="datenblatt-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Datenblatt', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Datenblatt erstellen', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Datenblatt */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Datenblatts', 'url' => ['index']];
+$this->title = 'Datenblatt '.$model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Datenblätter', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="datenblatt-view">

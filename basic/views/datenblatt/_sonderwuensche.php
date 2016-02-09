@@ -26,7 +26,7 @@ use kartik\datecontrol\DateControl;
                     <tr>
                         <th></th>
                         <th colspan="2" >Angebot</th>
-                        <th colspan="2" >beuaftragt</th>
+                        <th colspan="2" >beauftragt</th>
                         <th colspan="3" >Rechnungsstellung</th>
                     </tr>
                     <tr>

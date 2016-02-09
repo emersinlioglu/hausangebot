@@ -24,7 +24,7 @@ use kartik\datecontrol\DateControl;
                     <tr>
                         <th>Bezeichnung</th>
                         <th colspan="3" >Kaufvertrag</th>
-                        <th colspan="3" >beuaftragt</th>
+                        <th colspan="3" >Sonderwünche/Ausstattung</th>
                         <th >Summe</th>
                     </tr>
                     <tr>

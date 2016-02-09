@@ -8,63 +8,37 @@
                 <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p>ABG Projekt Manager</p>
 
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
 
         <!-- search form -->
-        <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search..."/>
-              <span class="input-group-btn">
-                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-            </div>
-        </form>
+        
         <!-- /.search form -->
 
         <?= dmstr\widgets\Menu::widget(
             [
                 'options' => ['class' => 'sidebar-menu'],
                 'items' => [
-                    ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
-                    ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii']],
-                    ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug']],
-                    ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                    
+                    
+                    
+                    ['label' => 'Firmen', 'icon' => 'fa fa-building text-red', 'url' => ['firma/index']],
+                    ['label' => 'Projekte', 'icon' => 'fa fa-dashboard text-aqua','url' => ['projekt/index']],
+                    ['label' => 'Objekte', 'icon' => 'fa fa-home text-green','url' => ['haus/index']],
+                    ['label' => 'Datenblätter', 'icon' => 'fa fa-file-text text-blue','url' => ['datenblatt/index']],
+                    ['label' => 'Käufer', 'icon' => 'fa fa-users text-yellow', 'url' => ['kaeufer/index']],
                     [
-                        'label' => 'Same tools',
+                        'label' => 'Einstellungen',
                         'icon' => 'fa fa-share',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii'],],
-                            ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug'],],
-                            [
-                                'label' => 'Level One',
-                                'icon' => 'fa fa-circle-o',
-                                'url' => '#',
-                                'items' => [
-                                    ['label' => 'Level Two', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                                    [
-                                        'label' => 'Level Two',
-                                        'icon' => 'fa fa-circle-o',
-                                        'url' => '#',
-                                        'items' => [
-                                            ['label' => 'Level Three', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                                            ['label' => 'Level Three', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                                        ],
-                                    ],
-                                ],
-                            ],
+                            ['label' => 'Einheitstypen verwaltung', 'icon' => 'fa fa-file-code-o', 'url' => ['einheitstyp/index'],],
+                            
+                            
                         ],
                     ],
-                    ['label' => 'Firmen', 'url' => ['firma/index']],
-                    ['label' => 'Projekte', 'url' => ['projekt/index']],
-                    ['label' => 'Häuser', 'url' => ['haus/index']],
-                    ['label' => 'Datenblätter', 'url' => ['datenblatt/index']],
-                    ['label' => 'Käufer', 'url' => ['kaeufer/index']],
                 ],
             ]
         ) ?>

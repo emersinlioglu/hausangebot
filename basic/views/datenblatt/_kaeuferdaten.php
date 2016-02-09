@@ -119,22 +119,37 @@ use kartik\datecontrol\DateControl;
                 <div class="row">
                     <div class="col-sm-3">
                         <?= $form->field($modelKaeufer, 'anrede')->dropDownList([0 => 'Herr', 1 => 'Frau']) ?>
-                        <?= $form->field($modelKaeufer, 'titel')->textInput([]) ?>
-                        <?= $form->field($modelKaeufer, 'vorname')->textInput([]) ?>
-                        <?= $form->field($modelKaeufer, 'nachname')->textInput([]) ?>
-                        <?= $form->field($modelKaeufer, 'email')->textInput([]) ?>
-                    </div>
-                    <div class="col-sm-3">
-                        <?= $form->field($modelKaeufer, 'anrede2')->dropDownList([0 => 'Herr', 1 => 'Frau']) ?>
-                        <?= $form->field($modelKaeufer, 'titel2')->textInput([]) ?>
-                        <?= $form->field($modelKaeufer, 'vorname2')->textInput([]) ?>
-                        <?= $form->field($modelKaeufer, 'nachname2')->textInput([]) ?>
-                    </div>
-                    <div class="col-sm-3">
+                      
+                         <?= $form->field($modelKaeufer, 'anrede2')->dropDownList([0 => 'Herr', 1 => 'Frau']) ?>
+                        
                         <?= $form->field($modelKaeufer, 'strasse')->textInput([]) ?>
-                        <?= $form->field($modelKaeufer, 'hausnr')->textInput([]) ?>
+                        <?= $form->field($modelKaeufer, 'email')->textInput([]) ?>
+                        
+                    </div>
+                    <div class="col-sm-3">
+                          <?= $form->field($modelKaeufer, 'titel')->textInput([]) ?>
+                        <?= $form->field($modelKaeufer, 'titel2')->textInput([]) ?>
+                        
+                         <?= $form->field($modelKaeufer, 'hausnr')->textInput([]) ?>
+                        <?= $form->field($modelKaeufer, 'festnetz')->textInput([]) ?>
+                        
+                    </div>
+                    <div class="col-sm-3">
+                        <?= $form->field($modelKaeufer, 'vorname')->textInput([]) ?>
+                       
+                        <?= $form->field($modelKaeufer, 'vorname2')->textInput([]) ?>
+                       
                         <?= $form->field($modelKaeufer, 'plz')->textInput([]) ?>
+                        <?= $form->field($modelKaeufer, 'handy')->textInput([]) ?>
+                       
+                    </div>
+                    <div class="col-sm-3">
+                         <?= $form->field($modelKaeufer, 'nachname')->textInput([]) ?>
+                         <?= $form->field($modelKaeufer, 'nachname2')->textInput([]) ?>
                         <?= $form->field($modelKaeufer, 'ort')->textInput([]) ?>
+                        
+                       
+                        
                     </div>
                 </div>
     

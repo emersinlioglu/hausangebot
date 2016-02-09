@@ -85,7 +85,7 @@ $this->registerJs(
         </div>
         <div class="col-sm-2">
             <?php
-            $htmlOptions = ['prompt' => 'Haus auswählen'];
+            $htmlOptions = ['prompt' => 'Object auswählen'];
             $haeuserOptions = [];
             if (!$modelDatenblatt->projekt_id) {
                 $htmlOptions['disabled'] = 'disabled';

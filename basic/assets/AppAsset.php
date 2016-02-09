@@ -28,6 +28,7 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/DatenblattForm.js',
+        'js/HausForm.js',
         'js/jquery-ui-1.11.4.custom/jquery-ui.min.js',
     ];
     public $depends = [

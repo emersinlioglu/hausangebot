@@ -30,14 +30,14 @@ use kartik\datecontrol\DateControl;
                         <th colspan="3" >Rechnungsstellung</th>
                     </tr>
                     <tr>
-                        <th>Name</th>
-                        <th>-Datum</th>
-                        <th>-Betrag</th>
-                        <th>-Datum</th>
-                        <th>-Betrag</th>
-                        <th>-Datum</th>
-                        <th>-Betrag</th>
-                        <th>-Rg.-Nr</th>
+                        <th style="width: 15%;">Name</th>
+                        <th style="width: 10%;">-Datum</th>
+                        <th style="width: 15%;">-Betrag</th>
+                        <th style="width: 10%;">-Datum</th>
+                        <th style="width: 15%;">-Betrag</th>
+                        <th style="width: 10%;">-Datum</th>
+                        <th style="width: 15%;">-Betrag</th>
+                        <th style="width: 10%;">-Rg.-Nr</th>
                         <th>
                             <?= Html::a('<span class="fa fa-plus"> </span>',
                             Yii::$app->urlManager->createUrl(["datenblatt/addsonderwunsch", 'datenblattId' => $modelDatenblatt->id]), 

@@ -89,69 +89,30 @@ class HausController extends Controller
          if (!$preventPost && $model->load(Yii::$app->request->post()) && $model->save()) {
             
             $data = Yii::$app->request->post();
-            
-//            if (isset($data['addnewZaehlerstand'])) {
-//                $new = new Zaehlerstand();
-//                $new->haus_id = $id;
-//                $new->save();
-//                
-//                $this->redirect(['update', 'id' => $model->id]);
-//
-//            } else if (isset($data['addnew'])) {
-//                
-//                $new = new Teileigentumseinheit();
-//                $new->haus_id = $id;
-//                $new->einheitstyp_id = 1;
-//                $new->save();
-//                
-//                $this->redirect(['update', 'id' => $model->id]);
-//            } else {
-                
-//                if (isset($data['Teileigentumseinheiten'])) {
-//
-//                    foreach ($data['Teileigentumseinheiten'] as $objData) {
-//                        if (isset($objData['id']) && $objData['id'] > 0) {
-//                            $obj = Teileigentumseinheit::findOne($objData['id']);
-//                            $obj->load(['Teileigentumseinheit' => $objData]);
-//                            $obj->save();
-//                        }
-//                    }
-//                }
-                
-                if (Teileigentumseinheit::loadMultiple($model->teileigentumseinheits, $data, 'Teileigentumseinheiten')) {
-                    foreach ($model->teileigentumseinheits as $item) {
-                        $item->save();
-                    }
+ 
+            if (Teileigentumseinheit::loadMultiple($model->teileigentumseinheits, $data, 'Teileigentumseinheiten')) {
+                foreach ($model->teileigentumseinheits as $item) {
+                    $item->save();
                 }
-                
-//                if (isset($data['Zaehlerstaende'])) {
-//                    foreach ($data['Zaehlerstaende'] as $objData) {
-//                        if (isset($objData['id']) && $objData['id'] > 0) {
-//                            $obj = Zaehlerstand::findOne($objData['id']);
-//                            $obj->load(['Zaehlerstand' => $objData]);
-//                            
-//                            $date = \DateTime::createFromFormat('d.m.Y', $objData['datum']); 
-//                            if ($date) {
-//                                $date->setTime(0, 0, 0);
-//                                $obj->datum = $date->format('Y-m-d H:i:s');
-//                            } else {
-//                                $obj->datum = '';
-//                            }
-//                            $obj->save();
-//                        }
-//                    }
-//                }
-                
-                    if (Zaehlerstand::loadMultiple($model->zaehlerstands, $data)) {
-                        foreach ($model->zaehlerstands as $item) {
-                            $item->save();
-                        }
-                    }
-                
+            }
+
+            if (Zaehlerstand::loadMultiple($model->zaehlerstands, $data)) {
+                foreach ($model->zaehlerstands as $item) {
+                    $item->save();
+                }
+            }
+
 //                return $this->redirect(['update', 'id' => $model->id]);
-//            }
             
         } 
+        
+        foreach ($model->teileigentumseinheits as $te) {
+            if ($te->wohnflaeche > 0) {
+                $te->kp_einheit = (float)$te->kaufpreis / (float)$te->wohnflaeche;
+            } else {
+                $te->kp_einheit = (float)$te->kaufpreis;
+            }
+        }
         
             
         return $this->render('update', [

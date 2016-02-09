@@ -5,6 +5,20 @@ var HausForm = function () {
     _selectedFirma      = null;
     _selectedProjekt    = null;
     _selectedHaus       = null;
+    
+    _.initFirmaDropdown = function() {
+        
+        _form.find('[name="Haus[firma_id]"]').change(function() {
+            //if (_selectedFirma !== this.value) {
+                _form.find('[name="Haus[projekt_id]"]').val('');
+                _form.find('[type="submit"]').click();
+            //}
+        });
+        _form.find('[name="Haus[projekt_id]"]').change(function() {
+            _form.find('[type="submit"]').click();
+            
+        });
+    }
 
     _.initPlusMinusIcons = function(container) {
 
@@ -75,7 +89,7 @@ var HausForm = function () {
                         inputGroup.find('.krajee-datepicker').kvDatepicker('destroy');
                     }
                     inputGroup.kvDatepicker(kvDatepicker_options);
-console.log(datecontrol_options);
+
                 });
 
             });
@@ -87,11 +101,11 @@ console.log(datecontrol_options);
 
     _.init = function() {
         _form = $('.haus-form form');
-        console.log('init');
-        console.log(_form);
+        
         if(!_form) return;
         
         _.initPlusMinusIcons();
+        _.initFirmaDropdown();
     }
     
     _.init();

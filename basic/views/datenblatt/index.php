@@ -100,7 +100,11 @@ $this->params['breadcrumbs'][] = $this->title;
           //      },
           //      'label' => 'Hause-Adresse'
           //  ],
-            'nummer',
+          //  'nummer',
+            
+            
+            
+            
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

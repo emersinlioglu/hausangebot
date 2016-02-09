@@ -16,6 +16,7 @@ use yii\web\AssetBundle;
 class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
+    //public $sourcePath = '@vendor/almasaeed2010/adminlte/plugins/chartjs/';
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
@@ -27,6 +28,7 @@ class AppAsset extends AssetBundle
 //        'js/jquery-ui-1.11.4.custom/jquery-ui.theme.min.css',
     ];
     public $js = [
+        'js/Chart.min.js',
         'js/DatenblattForm.js',
         'js/HausForm.js',
         'js/jquery-ui-1.11.4.custom/jquery-ui.min.js',

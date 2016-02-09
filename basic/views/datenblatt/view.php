@@ -28,12 +28,22 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'firma_id',
-            'projekt_id',
-            'haus_id',
-            'nummer',
-            'kaeufer_id',
+            //'id',
+            'projekt.name',
+            'projekt.firma.name',
+            //'firma_id',
+            //'projekt_id',
+            //'haus_id',
+            //'nummer',
+            //'kaeufer_id',
+            'haus.reserviert',
+            
+            'haus.verkauft',
+            'haus.rechnung_vertrieb',
+            'kaeufer.debitor_nr',
+            'kaeufer.vorname',
+            'kaeufer.nachname',
+            
             'besondere_regelungen_kaufvertrag:ntext',
             'sonstige_anmerkungen:ntext',
         ],

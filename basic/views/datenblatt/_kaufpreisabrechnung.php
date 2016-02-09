@@ -44,6 +44,10 @@ use kartik\datecontrol\DateControl;
                     </tr>
                     <?php 
 
+                    $kvSummeProzent = 0;
+                    $kvSummeBetrag = 0;
+                    $swSummeProzent = 0;
+                    $swSummeBetrag = 0;
                     $kaufvertragProzentTotal  = 0;
                     $kaufvertragBetragTotal   = 0;
                     $sonderwunschProzentTotal = 0;
@@ -59,13 +63,18 @@ use kartik\datecontrol\DateControl;
                         </td>
                         <td>
                             <?= $form->field($modelAbschlag, "[$key]kaufvertrag_prozent")->textInput([]) ?>
-                            <?php $kaufvertragProzentTotal += $modelAbschlag->kaufvertrag_prozent ?>
+                            <?php 
+                                $kaufvertragProzentTotal += $modelAbschlag->kaufvertrag_prozent 
+                            ?>
                         </td>
                         <td>
                             <?= $form->field($modelAbschlag, "[$key]kaufvertrag_betrag")->textInput(['disabled' => 'disabled']) ?>
-                            <?php if($modelAbschlag->kaufvertrag_angefordert) {
-                                $kaufvertragBetragTotal += $modelAbschlag->kaufvertrag_betrag;
-                            } ?>
+                            <?php 
+                            if($modelAbschlag->kaufvertrag_angefordert) {
+                                $kaufvertragBetragTotal += (float)$modelAbschlag->kaufvertrag_betrag;
+                            } 
+                            $kvSummeBetrag += (float)$modelAbschlag->kaufvertrag_betrag;
+                            ?>
                         </td>
                         <td>
                             <?php
@@ -85,9 +94,12 @@ use kartik\datecontrol\DateControl;
                         </td>
                         <td>
                             <?= $form->field($modelAbschlag, "[$key]sonderwunsch_betrag")->textInput(['disabled' => 'disabled']) ?>
-                            <?php if($modelAbschlag->sonderwunsch_angefordert) {
+                            <?php 
+                            if($modelAbschlag->sonderwunsch_angefordert) {
                                 $sonderwunschBetragTotal += $modelAbschlag->sonderwunsch_betrag;
-                            } ?>
+                            } 
+                            $swSummeBetrag += $modelAbschlag->sonderwunsch_betrag;
+                            ?>
                         </td>
                         <td>
                             <?php
@@ -114,18 +126,19 @@ use kartik\datecontrol\DateControl;
                     <tr>
                         <td>Summe</td>
                         <td><?= $kaufvertragProzentTotal ?> %</td>
-                        <td><?= $kaufvertragBetragTotal ?> EUR</td>
+                        <td><?=  $kvSummeBetrag ?> EUR</td>
                         <td></td>
                         <td><?= $sonderwunschProzentTotal ?> %</td>
-                        <td><?= $sonderwunschBetragTotal ?> EUR</td>
+                        <td><?= $swSummeBetrag ?> EUR</td>
                         <td></td>
                         <td><?= $kaufvertragBetragTotal + $sonderwunschBetragTotal ?> EUR</td>
                         <td></td>
                     </tr>
+                    <!--
                     <tr>
                         <td>Offen</td>
                         <td><?= 100 - $kaufvertragProzentTotal ?> %</td>
-                        <td><?= $kaufpreisTotal - $kaufvertragBetragTotal ?> EUR</td>
+                        <td><?= '' ?> EUR</td>
                         <td></td>
                         <td><?= 100 - $sonderwunschProzentTotal ?> %</td>
                         <td><?= $sonderwuenscheTotal - $sonderwunschBetragTotal ?> EUR</td>
@@ -133,7 +146,76 @@ use kartik\datecontrol\DateControl;
                         <td><?= ($kaufpreisTotal + $sonderwuenscheTotal) - ($kaufvertragBetragTotal + $sonderwunschBetragTotal) ?> EUR</td>
                         <td></td>
                     </tr>
-
+                    -->
+                    <tr>
+                        <td>Minderungen/Nachlass</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                        <?php
+                            $totalNachlass = .0;
+                            foreach($modelDatenblatt->nachlasses as $nachlass) {
+                                $totalNachlass += (float) $nachlass->betrag;
+                            }
+                            echo $totalNachlass;
+                        ?> EUR
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Zwischensumme</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                        <?php
+                            echo $kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass;
+                        ?> EUR
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Zahlungen</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                        <?php
+                            //echo $kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass;
+                            $totalZahlungen = 0;
+                            foreach($modelDatenblatt->zahlungs as $zahlung) {
+                                $totalZahlungen += (float) $zahlung->betrag;
+                            }
+                            echo $totalZahlungen;
+                        ?> EUR
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Offene Posten</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                        <?php
+                            echo $kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass - $totalZahlungen;
+                        ?> EUR
+                        </td>
+                        <td></td>
+                    </tr>
                 </table>
 
             </div>

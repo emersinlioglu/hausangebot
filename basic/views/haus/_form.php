@@ -8,6 +8,7 @@ use app\models\Firma;
 use app\models\Einheitstyp;
 //use kartik\datetime\DateTimePicker;
 use kartik\datecontrol\DateControl;
+use kartik\money\MaskMoney;
 /* @var $this yii\web\View */
 /* @var $model app\models\Haus */
 /* @var $form yii\widgets\ActiveForm */
@@ -39,7 +40,15 @@ $this->registerJs('
             <?= $form->field($model, 'firma_id')->dropDownList(ArrayHelper::map(Firma::find()->all(), 'id', 'name')) ?>
         </div>
         <div class="col-sm-3">
-            <?= $form->field($model, 'projekt_id')->dropDownList(ArrayHelper::map(Projekt::find()->all(), 'id', 'name')) ?>
+            <!--?= $form->field($model, 'projekt_id')->dropDownList(ArrayHelper::map(Projekt::find()->all(), 'id', 'name')) ?-->
+            <?php
+            $htmlOptions = ['prompt' => 'Projekt auswählen'];
+            if (!$model->firma_id) {
+                $htmlOptions['disabled'] = 'disabled';
+            }
+            $projekte = $model->firma ? $model->firma->projekts : [];
+            echo $form->field($model, 'projekt_id')->dropDownList(ArrayHelper::map($projekte, 'id', 'name'), $htmlOptions);
+            ?>
         </div>
         
     </div>
@@ -67,15 +76,15 @@ $this->registerJs('
 
         <table class="table no-label">
             <tr>
-                <th>Typ</th>
-                <th>TE-Nummer</th>
-                <th>gefördert</th>
-                <th>geschoss</th>
-                <th>zimmer</th>
-                <th>ME-Anteil</th>
-                <th>Wohnfläche</th>
-                <th>Kaufpreis</th>
-                <th>KP-Einheit</th>
+                <th style="width: 15%;">Typ</th>
+                <th style="width: 10%;">TE-Nummer</th>
+                <th style="width: 10%;">gefördert</th>
+                <th style="width: 5%;">geschoss</th>
+                <th style="width: 5%;">zimmer</th>
+                <th style="width: 10%;">ME-Anteil</th>
+                <th style="width: 10%;">Wohnfläche</th>
+                <th style="width: 15%;">Kaufpreis</th>
+                <th style="width: 15%;">KP-Einheit</th>
                 <th>
                     <?php if (!$model->isNewRecord): ?>
                         <!--?= Html::submitButton('<span class="fa fa-plus"> Teileigentumseinheit hinzufügen</span>', ['class' => 'btn btn-success', 'name' => 'addnew']) ?-->
@@ -104,8 +113,36 @@ $this->registerJs('
                 <td><?= $form->field($modelTeilieigentum, 'zimmer')->textInput(["maxlength" => true, 'name' => "Teileigentumseinheiten[$key][zimmer]"]) ?></td>
                 <td><?= $form->field($modelTeilieigentum, 'me_anteil')->textInput(["maxlength" => true, 'name' => "Teileigentumseinheiten[$key][me_anteil]"]) ?></td>
                 <td><?= $form->field($modelTeilieigentum, 'wohnflaeche')->textInput(["maxlength" => true, 'name' => "Teileigentumseinheiten[$key][wohnflaeche]"]) ?></td>
-                <td><?= $form->field($modelTeilieigentum, 'kaufpreis')->textInput(['name' => "Teileigentumseinheiten[$key][kaufpreis]"]) ?></td>
-                <td><?= $form->field($modelTeilieigentum, 'kp_einheit')->textInput(['name' => "Teileigentumseinheiten[$key][kp_einheit]"]) ?></td>
+                <td><?= $form->field($modelTeilieigentum, 'kaufpreis')->textInput(['name' => "Teileigentumseinheiten[$key][kaufpreis]"])
+                    ->widget(MaskMoney::classname(), [
+                        'options' => [
+                            'id' => $key . '-teh-id'
+                        ],    
+                        'pluginOptions' => [
+                            'suffix' => ' €',
+                            'thousands' => '.',
+                            'decimal' => ',',
+                        ],
+                    ])
+                ?>
+                </td>
+                <td><?= $form->field($modelTeilieigentum, 'kp_einheit')->textInput([
+                        'name' => "Teileigentumseinheiten[$key][kp_einheit]",
+                    ])
+                    ->widget(MaskMoney::classname(), [
+                        'options' => [
+                            'id' => $key . '-teh-kpeinheit-id',
+                            'disabled' => "disabled"
+                        ],    
+                        'pluginOptions' => [
+                            'suffix' => ' €',
+                            'thousands' => '.',
+                            'decimal' => ',',
+                        ],
+                    ])
+                
+                ?>
+                </td>
                 <td>
                     <?= Html::a('<span class="fa fa-minus"></span>', 
                         Yii::$app->urlManager->createUrl(["haus/deleteteileigentumseinheit", 'hausId' => $model->id , 'teileigentumseinheitId' => $modelTeilieigentum->id]), 
@@ -121,10 +158,10 @@ $this->registerJs('
 
         <table class="table no-label">
             <tr>
-                <th>Medium-Name.</th>
-                <th>Medium-Nr.</th>
-                <th>Zählerstand</th>
-                <th>Datum</th>
+                <th style="width: 30%;">Medium-Name.</th>
+                <th style="width: 30%;">Medium-Nr.</th>
+                <th style="width: 20%;">Zählerstand</th>
+                <th style="width: 20%;">Datum</th>
                 <th>
                     <?php if (!$model->isNewRecord): ?>
                         <!--?= Html::submitButton('<span class="fa fa-plus"> Teileigentumseinheit hinzufügen</span>', ['class' => 'btn btn-success', 'name' => 'addnew']) ?-->

@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Einheitstyp */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Einheitstyps', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Einheitstypen', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="einheitstyp-view">
@@ -28,8 +28,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'name',
+            'einheit',
         ],
     ]) ?>
 

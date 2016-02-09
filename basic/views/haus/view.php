@@ -39,6 +39,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'strasse',
             'hausnr',
             'reserviert',
+//            [
+//                'attribute' => 'reserviert',
+//                'format' => 'raw',
+//                'value' => function ($model, $index, $widget) {
+//                    return $model->reserviert ? 'Ja' : 'Nein';
+//                    //return Html::checkbox('foo[]', $model->foo, ['value' => $index, 'disabled' => true]);
+//                },
+//            ],
+            [
+                'attribute' => 'reserviert',
+                'format' => 'boolean',
+            ],
             'verkauft',
             'rechnung_vertrieb',
         ],

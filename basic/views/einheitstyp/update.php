@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\models\Einheitstyp */
 
 $this->title = 'Update Einheitstyp: ' . ' ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Einheitstyps', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Einheitstypen', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

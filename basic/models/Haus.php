@@ -38,7 +38,7 @@ class Haus extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['projekt_id'], 'required'],
+//            [['projekt_id'], 'required'],
             [['projekt_id', 'firma_id', 'reserviert', 'verkauft', 'rechnung_vertrieb'], 'integer'],
             [['plz', 'ort', 'strasse'], 'string', 'max' => 255],
             [['hausnr'], 'string', 'max' => 45]

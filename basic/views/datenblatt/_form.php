@@ -19,9 +19,7 @@ use yii\widgets\Pjax;
 //        });
 //    });'
 //);
-$this->registerJs(
-    '
-
+$this->registerJs('
     $(function(){
         $("#datenblatt-form").submit();
 
@@ -29,7 +27,7 @@ $this->registerJs(
         $(document).on(\'ready pjax:success\', function() {
             new DatenblattForm();
         });
-
+        
 //        // To disable f5
 //        $(document).bind("keydown", function(e){
 //            if ((e.which || e.keyCode) == 116) {
@@ -39,8 +37,8 @@ $this->registerJs(
 //            }
 //        });
 
-    });'
-);
+    });
+');
 ?>
 
 <!--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">-->
@@ -71,7 +69,17 @@ $this->registerJs(
 <?php if ($modelDatenblatt->id): ?>
     <div class="row">
         <div class="col-sm-2">
-            <?= $form->field($modelDatenblatt, 'firma_id')->dropDownList(ArrayHelper::map(Firma::find()->all(), 'id', 'name'), ['prompt' => 'Firma auswählen']) ?>
+            <?= $form->field($modelDatenblatt, 'firma_id')->dropDownList(ArrayHelper::map(Firma::find()->all(), 'id', 'name'), ['prompt' => 'Firma auswählen'])->label('Firma') ?>
+        </div>
+        <div class="col-sm-2">
+            
+            <?php 
+            $firma = $modelDatenblatt->firma ? $modelDatenblatt->firma : new Firma();
+            if($modelDatenblatt->firma) {
+                //echo $modelDatenblatt->firma->nr;
+            }
+            echo $form->field($firma, 'nr')->textInput(['disabled' => 'disabled'])->label('Firmennummer')
+            ?>
         </div>
         <div class="col-sm-2">
             <?php

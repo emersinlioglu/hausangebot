@@ -236,13 +236,18 @@ class DatenblattController extends Controller
         // calculate abschlags
         /* @var $item \app\models\Abschlag */
         foreach ($modelDatenblatt->abschlags as $item) {
+            
+            $zeilenSumme = 0;
             if ($item->kaufvertrag_angefordert) {
-                $item->kaufvertrag_betrag = ((float)$item->kaufvertrag_prozent * $kaufpreisTotal / 100);
+                $zeilenSumme += ((float)$item->kaufvertrag_prozent * $kaufpreisTotal / 100);
             }
             if ($item->sonderwunsch_angefordert) {
-                $item->sonderwunsch_betrag = ((float)$item->sonderwunsch_prozent * $sonderwuenscheTotal / 100);
+                $zeilenSumme += ((float)$item->sonderwunsch_prozent * $sonderwuenscheTotal / 100);
             }
-            $item->summe = $item->kaufvertrag_betrag + $item->sonderwunsch_betrag;
+            $item->kaufvertrag_betrag = ((float)$item->kaufvertrag_prozent * $kaufpreisTotal / 100);
+            $item->sonderwunsch_betrag = ((float)$item->sonderwunsch_prozent * $sonderwuenscheTotal / 100);
+                
+            $item->summe = $zeilenSumme;
         }
 
         return $this->render('update', [

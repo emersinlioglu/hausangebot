@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Firma */
 
-$this->title = 'Create Firma';
-$this->params['breadcrumbs'][] = ['label' => 'Firmas', 'url' => ['index']];
+$this->title = 'Firma erstellen';
+$this->params['breadcrumbs'][] = ['label' => 'Firmen', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="firma-create">

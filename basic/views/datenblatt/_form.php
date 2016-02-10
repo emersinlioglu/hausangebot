@@ -153,14 +153,18 @@ $this->registerJs('
         'form' => $form,
         'modelDatenblatt' => $modelDatenblatt,
     ]) ?>
-
+<div class="form-group" style="text-align: right;">
+    <?= Html::submitButton($modelDatenblatt->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-primary', 'name' => 'submit']) ?>
+</div>
     <?= $this->render('_kaufpreisabrechnung', [
         'form' => $form,
         'modelDatenblatt' => $modelDatenblatt,
         'kaufpreisTotal' => $kaufpreisTotal,
         'sonderwuenscheTotal' => $sonderwuenscheTotal,
     ]) ?>
-
+<div class="form-group" style="text-align: right;">
+    <?= Html::submitButton($modelDatenblatt->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-primary', 'name' => 'submit']) ?>
+</div>
     <div class="row">
         <div class="col-md-12">
 

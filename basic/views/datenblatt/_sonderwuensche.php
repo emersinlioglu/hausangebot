@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use kartik\datecontrol\DateControl;
 
+
 /* @var $modelDatenblatt app\models\Datenblatt */
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
@@ -70,7 +71,18 @@ use kartik\datecontrol\DateControl;
                             ?>
                     </td>
                     <td>
-                        <?= $form->field($modelSonderwunsch, "[$key]angebot_betrag")->textInput([]) ?>
+                        <?= $form->field($modelSonderwunsch, "[$key]angebot_betrag")->textInput([]) 
+                     //               ->widget(MaskMoney::classname(), [
+                     //   'options' => [
+                     //       'id' => $key . '-sow-id'
+                     //   ],    
+                     //   'pluginOptions' => [
+                     //       'suffix' => ' €',
+                     //       'thousands' => '.',
+                     //       'decimal' => ',',
+                     //   ],
+                   // ])
+                                    ?>
                     </td>
                     <td>
                         <?php

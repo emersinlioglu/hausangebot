@@ -36,10 +36,26 @@ $this->params['breadcrumbs'][] = $this->title;
             //'haus_id',
             //'nummer',
             //'kaeufer_id',
-            'haus.reserviert',
+            [
+                'attribute' => 'haus.reserviert',
+                'format' => 'boolean',
+            ],
+            [
+                'attribute' => 'haus.verkauft',
+                'format' => 'boolean',
+            ],
+            [
+                'attribute' => 'haus.rechnung_vertrieb',
+                'format' => 'boolean',
+            ],
             
-            'haus.verkauft',
-            'haus.rechnung_vertrieb',
+            
+            
+            //'haus.te',
+            
+          //  'haus.verkauft',
+          //  'haus.rechnung_vertrieb',
+            
             'kaeufer.debitor_nr',
             'kaeufer.vorname',
             'kaeufer.nachname',

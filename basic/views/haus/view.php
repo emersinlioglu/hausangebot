@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'ort',
             'strasse',
             'hausnr',
-            'reserviert',
+ //           'reserviert',
 //            [
 //                'attribute' => 'reserviert',
 //                'format' => 'raw',
@@ -51,8 +51,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'reserviert',
                 'format' => 'boolean',
             ],
-            'verkauft',
-            'rechnung_vertrieb',
+            [
+                'attribute' => 'verkauft',
+                'format' => 'boolean',
+            ],
+            [
+                'attribute' => 'rechnung_vertrieb',
+                'format' => 'boolean',
+            ],
+        //    'verkauft',
+        //    'rechnung_vertrieb',
         ],
     ]) ?>
 

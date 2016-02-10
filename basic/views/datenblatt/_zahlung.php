@@ -3,6 +3,7 @@ use yii\helpers\Html;
 //use kartik\datetime\DateTimePicker;
 use kartik\datecontrol\DateControl;
 use yii\widgets\Pjax;
+use kartik\money\MaskMoney;
 
 /* @var $modelDatenblatt app\models\Datenblatt */
 /* @var $modelNachlass app\models\Nachlass */
@@ -63,7 +64,17 @@ use yii\widgets\Pjax;
                                     ?>
                                 </td>
                                 <td>
-                                    <?= $form->field($modelZahlung, "[$key]betrag")->textInput() ?>
+                                    <?= $form->field($modelZahlung, "[$key]betrag")->textInput()
+                                            ->widget(MaskMoney::classname(), [
+                        'options' => [
+                            'id' => $key . '-zhb-id'
+                        ],    
+                        'pluginOptions' => [
+                            'suffix' => ' €',
+                            'thousands' => '.',
+                            'decimal' => ',',
+                        ],
+                    ])?>
                                 </td>
                                 <td>
                                     <?= $form->field($modelZahlung, "[$key]bemerkung")->textInput([]) ?>

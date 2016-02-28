@@ -84,9 +84,9 @@ $this->registerJs('
                 <th style="width: 10%;">ME-Anteil</th>
                 <th style="width: 10%;">Wohnfläche</th>
                 <th style="width: 15%;">Kaufpreis</th>
-                <th style="width: 15%;">KP-Einheit</th>
-                <th>
-                    <?php if (!$model->isNewRecord): ?>
+                <th style="width: 5%;">KP-Einheit</th>
+                <th style="width: 10%;">
+                    <?php if ($model->id): ?>
                         <!--?= Html::submitButton('<span class="fa fa-plus"> Teileigentumseinheit hinzufügen</span>', ['class' => 'btn btn-success', 'name' => 'addnew']) ?-->
                         <?= Html::a('<span class="fa fa-plus"> </span>',
                            Yii::$app->urlManager->createUrl(["haus/addteileigentumseinheit", 'hausId' => $model->id]), 
@@ -159,10 +159,10 @@ $this->registerJs('
         <table class="table no-label">
             <tr>
                 <th style="width: 30%;">Medium-Name.</th>
-                <th style="width: 30%;">Medium-Nr.</th>
+                <th style="width: 20%;">Medium-Nr.</th>
                 <th style="width: 20%;">Zählerstand</th>
                 <th style="width: 20%;">Datum</th>
-                <th>
+                <th style="width: 10%;">
                     <?php if (!$model->isNewRecord): ?>
                         <!--?= Html::submitButton('<span class="fa fa-plus"> Teileigentumseinheit hinzufügen</span>', ['class' => 'btn btn-success', 'name' => 'addnew']) ?-->
                         <?= Html::a('<span class="fa fa-plus"> </span>',

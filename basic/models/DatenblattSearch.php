@@ -15,27 +15,28 @@ class DatenblattSearch extends Datenblatt
     /**
      * @inheritdoc
      */
-public $haus;
-public $haus_strasse;
-public $haus_ort;
-public $haus_plz;
-public $haus_hausnr;
-public $kaeufer;
-public $kaeufer_debitornr;
-public $kaeufer_nachname;
-public $kaeufer_vorname;
-public $projekt;
-public $projekt_name;
-public $firma;
-public $firma_name;
-public $firma_nr;
+    public $haus;
+    public $haus_strasse;
+    public $haus_ort;
+    public $haus_plz;
+    public $haus_hausnr;
+    public $kaeufer;
+    public $kaeufer_debitornr;
+    public $kaeufer_nachname;
+    public $kaeufer_vorname;
+    public $projekt;
+    public $projekt_name;
+    public $firma;
+    public $firma_name;
+    public $firma_nr;
+    public $te_nummer;
 
     public function rules()
     {
         return [
             [['id', 'firma_id', 'projekt_id', 'haus_id', 'nummer', 'kaeufer_id'], 'integer'],
             [['besondere_regelungen_kaufvertrag', 'sonstige_anmerkungen'], 'safe'],
-            [['haus','haus_strasse','haus_plz','haus_ort','haus_hausnr'], 'safe'],
+            [['haus','haus_strasse','haus_plz','haus_ort','haus_hausnr', 'te_nummer'], 'safe'],
             [['kaeufer','kaeufer_debitornr','kaeufer_nachname','kaeufer_vorname'], 'safe'],
             [['projekt_name','firma_name','firma_nr'], 'safe'],
         ];
@@ -62,7 +63,7 @@ public $firma_nr;
         $query = Datenblatt::find();
        
 
-        $query->joinWith(['haus','kaeufer','projekt','firma']);
+        $query->joinWith(['haus','kaeufer','projekt','firma', 'haus.teileigentumseinheits']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -130,6 +131,10 @@ $dataProvider->sort->attributes['kaeufer_vorname'] = [
         ];
         
 
+        $dataProvider->sort->attributes['te_nummer'] = [
+            'asc' => ['haus.teileigentumseinheiten.te_nummer' => SORT_ASC],
+            'desc' => ['haus.teileigentumseinheiten.te_nummer' => SORT_DESC],
+        ];
 
           
 
@@ -161,7 +166,8 @@ $dataProvider->sort->attributes['kaeufer_vorname'] = [
         ->andFilterWhere(['like', 'projekt.name', $this->projekt_name])
         ->andFilterWhere(['like', 'firma.name', $this->firma_name])
         ->andFilterWhere(['like', 'firma.nr', $this->firma_nr])
-        ->andFilterWhere(['like', 'sonstige_anmerkungen', $this->sonstige_anmerkungen]);
+        ->andFilterWhere(['like', 'sonstige_anmerkungen', $this->sonstige_anmerkungen])
+        ->andFilterWhere(['like', 'te_nummer', $this->te_nummer]);
 
         return $dataProvider;
     }

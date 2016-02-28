@@ -82,6 +82,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=>'kaeufer.nachname',
                 'label' => 'Käufer Name'
             ],
+
+            [
+                //'filter' => Html::activeTextField($model, 'te_nummer'),
+                'attribute' => 'te_nummer',
+                'value' => function($model) {
+        
+                    $haus = $model->haus;
+                    if ($haus) {
+                        foreach ($haus->teileigentumseinheits as $te) {
+                            if ($te->einheitstyp_id == 1) {
+                                return $te->te_nummer;                                
+                            }
+                        }
+                    }
+                },
+                'label' => 'TE-Nr'
+            ],
             
                 
 

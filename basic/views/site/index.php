@@ -8,7 +8,7 @@ $this->title = 'ABG Projekt Manager';
 
     <div class="jumbotron">
         
-
+ <img src="/images/logo.png" alt="ABG">
         <p class="lead">
        <?php     
          $uhrzeit = date('H');
@@ -29,10 +29,12 @@ $this->title = 'ABG Projekt Manager';
     {
           echo 'Gute Nacht!';  
     }
+    
 ?>
             
         </p>
-        <h1>Wilkommen </h1>
+       
+        <h1>Willkommen </h1>
         <p class="lead">
         bei ABG Projekt Management System
 </p>
@@ -43,7 +45,7 @@ $this->title = 'ABG Projekt Manager';
 
         <div class="box-body">
               <canvas id="pieChart" style="height:250px"></canvas>
-              <?php /*= ChartJs::widget([
+              <?= ChartJs::widget([
     'type' => 'Line',
     'options' => [
         'height' => 400,
@@ -68,7 +70,7 @@ $this->title = 'ABG Projekt Manager';
             ]
         ]
     ]
-]);*/
+]);
 ?>
             </div>
         <!--

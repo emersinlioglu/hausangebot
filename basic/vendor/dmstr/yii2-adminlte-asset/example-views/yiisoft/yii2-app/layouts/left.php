@@ -34,7 +34,7 @@
                         'icon' => 'fa fa-share',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Einheitstypen verwaltung', 'icon' => 'fa fa-file-code-o', 'url' => ['einheitstyp/index'],],
+                            ['label' => 'Einheitstypenverwaltung', 'icon' => 'fa fa-file-code-o', 'url' => ['einheitstyp/index'],],
                             
                             
                         ],

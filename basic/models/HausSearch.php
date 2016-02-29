@@ -17,6 +17,7 @@ class HausSearch extends Haus
     public $firma_name;
     public $firma_nr;
     public $onlyNotAssigned = false;
+    public $te_nummer;
 
     /**
      * @inheritdoc
@@ -25,7 +26,7 @@ class HausSearch extends Haus
     {
         return [
             [['id', 'projekt_id', 'reserviert', 'verkauft', 'rechnung_vertrieb'], 'integer'],
-            [['plz', 'ort', 'strasse', 'hausnr'], 'safe'],
+            [['plz', 'ort', 'strasse', 'hausnr', 'te_nummer'], 'safe'],
             [['projekt_name','firma_name','firma_nr', 'onlyNotAssigned'], 'safe'],
         ];
     }
@@ -49,7 +50,7 @@ class HausSearch extends Haus
     public function search($params)
     {
         $query = Haus::find();
-        $query->joinWith(['projekt','projekt.firma', 'datenblatts']);
+        $query->joinWith(['projekt','projekt.firma', 'datenblatts', 'teileigentumseinheits']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -75,7 +76,11 @@ class HausSearch extends Haus
         'asc' => ['firma.nr' => SORT_ASC],
         'desc' => ['firma.nr' => SORT_DESC],
         ];
-        
+
+        $dataProvider->sort->attributes['te_nummer'] = [
+            'asc' => ['teileigentumseinheiten.te_nummer' => SORT_ASC],
+            'desc' => ['teileigentumseinheiten.te_nummer' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -100,6 +105,7 @@ class HausSearch extends Haus
             ->andFilterWhere(['like', 'projekt.name', $this->projekt_name])
             ->andFilterWhere(['like', 'firma.name', $this->firma_name])
             ->andFilterWhere(['like', 'firma.nr', $this->firma_nr])
+            ->andFilterWhere(['like', 'te_nummer', $this->te_nummer])
             ;
 
         if ($this->onlyNotAssigned) {

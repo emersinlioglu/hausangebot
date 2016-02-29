@@ -82,6 +82,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'strasse',
             'plz',
             'ort',
+            [
+                //'filter' => Html::activeTextField($model, 'te_nummer'),
+                'attribute' => 'te_nummer',
+                'value' => function($model) {
+      
+                    foreach ($model->teileigentumseinheits as $te) {
+                        if ($te->einheitstyp_id == 1) {
+                            return $te->te_nummer;                                
+                        }
+                    }
+                },
+                'label' => 'TE-Nr'
+            ],
 
             [
                 'label' => 'Datenblatt',

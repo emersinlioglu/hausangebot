@@ -37,16 +37,18 @@ $this->registerJs('
 
     <div class="row">
     <div class="col-sm-3">
-			<?= $form->field($model, 'firma_id')->dropDownList(ArrayHelper::map(Firma::find()->all(), 'id', 'name'), ['prompt' => 'Firma auswählen'])->label('Firma') ?>
+			<?= $form->field($model, 'firma_id')->dropDownList(ArrayHelper::map(Firma::find()->all(), 'id', 'name'), ['prompt' => 'Firma auswählen',
+
+            ])->label('Firma') ?>
            <!--?= $form->field($model, 'firma_id')->dropDownList(ArrayHelper::map(Firma::find()->all(), 'id', 'name')) ?-->
         </div>
         <div class="col-sm-3">
             <!--?= $form->field($model, 'projekt_id')->dropDownList(ArrayHelper::map(Projekt::find()->all(), 'id', 'name')) ?-->
             <?php
             $htmlOptions = ['prompt' => 'Projekt auswählen'];
-            if (!$model->firma_id) {
-                $htmlOptions['disabled'] = 'disabled';
-            }
+            //if (!$model->firma_id) {
+            //    $htmlOptions['disabled'] = 'disabled';
+            //}
             $projekte = $model->firma ? $model->firma->projekts : [];
             echo $form->field($model, 'projekt_id')->dropDownList(ArrayHelper::map($projekte, 'id', 'name'), $htmlOptions)->label('Projekt');
             ?>
@@ -214,7 +216,13 @@ $this->registerJs('
     
     
     <div class="form-group" style="text-align: right;">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), 
+            [
+                'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
+                'name' => 'create',
+                'value' => 'aa'
+
+            ]) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

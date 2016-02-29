@@ -10,12 +10,28 @@ var HausForm = function () {
         
         _form.find('[name="Haus[firma_id]"]').change(function() {
             //if (_selectedFirma !== this.value) {
-                _form.find('[name="Haus[projekt_id]"]').val('');
-                _form.find('[type="submit"]').click();
+                //_form.find('[name="Haus[projekt_id]"]').val('');
+                //_form.find('[name="chooseFirma"]').click();
+
+                var url = '?r=haus%2Fprojekte&firmaId=' + $(this).val();
+                var projectSelect = _form.find('[name="Haus[projekt_id]"]');
+                $.ajax({
+                    url: url,
+                    success: function(options) {
+                        projectSelect.empty();
+                        $.each(options, function(index, option) {
+                            $option = $("<option></option>")
+                                .attr("value", option.value)
+                                .text(option.text);
+                            projectSelect.append($option);
+                        });
+                    }
+                });
+
             //}
         });
         _form.find('[name="Haus[projekt_id]"]').change(function() {
-            _form.find('[type="submit"]').click();
+            _form.find('[name="chooseFirma"]').click();
             
         });
     }

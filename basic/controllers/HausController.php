@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Haus;
+use app\models\Firma;
 use app\models\HausSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -65,13 +66,37 @@ class HausController extends Controller
     {
         $model = new Haus();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        print_r(Yii::$app->request->post());
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            if (false && $model->save()) {
+                return $this->redirect(['update', 'id' => $model->id]);                
+            }
         } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionProjekte($firmaId) {
+        
+        $items = array();
+
+        if (($firma = Firma::findOne($firmaId)) !== null) {
+
+            foreach ($firma->projekts as $projekt) {
+                $items[] = array(
+                    'text' => $projekt->name,
+                    'value' => $projekt->id
+                );
+            }
+        }
+
+
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return $items;
     }
 
     /**

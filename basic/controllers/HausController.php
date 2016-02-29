@@ -66,11 +66,9 @@ class HausController extends Controller
     {
         $model = new Haus();
 
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            if (false && $model->save()) {
-                return $this->redirect(['update', 'id' => $model->id]);                
-            }
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,

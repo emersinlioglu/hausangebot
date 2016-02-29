@@ -53,7 +53,7 @@ echo ExportMenu::widget([
 	//'fontAwesome' => true,
 	'columnSelectorOptions'=>[
         'label' => 'Felder auswählen.',
-		//'class' => 'btn btn-default',
+		//'class' => 'btn btn-success',
     ],
 	'exportConfig' => [
 	ExportMenu::FORMAT_HTML => false,
@@ -62,7 +62,7 @@ echo ExportMenu::widget([
 ],
 'dropdownOptions' => [
         'label' => 'Export Typ auswählen',
-		'class' => 'btn btn-default',
+	//	'class' => 'btn btn-success',
       //  
     ],
 ]);

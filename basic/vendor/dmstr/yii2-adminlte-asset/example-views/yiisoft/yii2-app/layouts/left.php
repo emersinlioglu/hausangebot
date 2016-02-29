@@ -26,7 +26,7 @@
                     
                     ['label' => 'Firmen', 'icon' => 'fa fa-building text-red', 'url' => ['firma/index']],
                     ['label' => 'Projekte', 'icon' => 'fa fa-dashboard text-aqua','url' => ['projekt/index']],
-                    ['label' => 'Objekte', 'icon' => 'fa fa-home text-green','url' => ['haus/index']],
+                    ['label' => 'Teileigentumseinheiten', 'icon' => 'fa fa-home text-green','url' => ['haus/index']],
                     ['label' => 'Datenblätter', 'icon' => 'fa fa-file-text text-blue','url' => ['datenblatt/index']],
                     ['label' => 'Käufer', 'icon' => 'fa fa-users text-yellow', 'url' => ['kaeufer/index']],
                     [

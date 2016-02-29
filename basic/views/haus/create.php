@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Haus */
 
-$this->title = 'Objekt erstellen';
-$this->params['breadcrumbs'][] = ['label' => 'Objekte', 'url' => ['index']];
+$this->title = 'Teileigentumseinheit erstellen';
+$this->params['breadcrumbs'][] = ['label' => 'Teileigentumseinheiten', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="haus-create">

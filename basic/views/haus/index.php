@@ -9,7 +9,7 @@ use kartik\grid\GridView;
 /* @var $searchModel app\models\HausSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Objekte';
+$this->title = 'Teileigentumseinheiten';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="haus-index">
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Objekt erstellen', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Teileigentumseinheit erstellen', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -63,6 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
       'vAlign'=>'middle',
 	  'trueLabel'=>'Ja',
 	  'falseLabel'=>'Nein',
+	  
      // 'filterType'=>GridView::FILTER_CHECKBOX,
 ],
  // 'rechnung_vertrieb',
@@ -72,6 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
       'vAlign'=>'middle',
 	  'trueLabel'=>'Ja',
 	  'falseLabel'=>'Nein',
+	  'label'=>'R.Vetrieb',
      // 'filterType'=>GridView::FILTER_CHECKBOX,
 ],
 		

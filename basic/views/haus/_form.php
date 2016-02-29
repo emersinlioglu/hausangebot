@@ -48,7 +48,7 @@ $this->registerJs('
                 $htmlOptions['disabled'] = 'disabled';
             }
             $projekte = $model->firma ? $model->firma->projekts : [];
-            echo $form->field($model, 'projekt_id')->dropDownList(ArrayHelper::map($projekte, 'id', 'name'), $htmlOptions);
+            echo $form->field($model, 'projekt_id')->dropDownList(ArrayHelper::map($projekte, 'id', 'name'), $htmlOptions)->label('Projekt');
             ?>
         </div>
         

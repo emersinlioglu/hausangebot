@@ -7,8 +7,8 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Haus */
 
-$this->title = 'Objekt '.$model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Objekte', 'url' => ['index']];
+$this->title = 'Teileigentumseinheit '.'hier kommt $te nr  nicht $model->id';
+$this->params['breadcrumbs'][] = ['label' => 'Teileigentumseinheiten', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="haus-view">

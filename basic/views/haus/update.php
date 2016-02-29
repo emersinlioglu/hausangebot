@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Haus */
 
-$this->title = 'Objekt Update: ' . ' ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Objekte', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->title = 'Teileigentumseinheit Update: ' . ' ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Teileigentumseinheiten', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'hier auch te nr $model->id', 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="haus-update">

@@ -66,8 +66,6 @@ class HausController extends Controller
     {
         $model = new Haus();
 
-        print_r(Yii::$app->request->post());
-
         if ($model->load(Yii::$app->request->post())) {
 
             if (false && $model->save()) {

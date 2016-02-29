@@ -87,6 +87,11 @@ class Kaeufer extends \yii\db\ActiveRecord
         ];
     }
 
+	public function getAnredeLabel()
+{
+    return $this->anrede ? 'Frau' : 'Herr';
+}
+	
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -94,4 +99,5 @@ class Kaeufer extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Datenblatt::className(), ['kaeufer_id' => 'id']);
     }
+	
 }

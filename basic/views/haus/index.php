@@ -1,7 +1,9 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+//use yii\grid\GridView;
+use kartik\grid\GridView;
+
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\HausSearch */
@@ -44,6 +46,37 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Projekt'
             ],
             
+			
+			// 'reserviert',
+			[
+      'class'=>'kartik\grid\BooleanColumn',
+      'attribute'=>'reserviert', 
+      'vAlign'=>'middle',
+	  'trueLabel'=>'Ja',
+	  'falseLabel'=>'Nein',
+     // 'filterType'=>GridView::FILTER_CHECKBOX,
+],
+ // 'verkauft',
+			[
+      'class'=>'kartik\grid\BooleanColumn',
+      'attribute'=>'verkauft', 
+      'vAlign'=>'middle',
+	  'trueLabel'=>'Ja',
+	  'falseLabel'=>'Nein',
+     // 'filterType'=>GridView::FILTER_CHECKBOX,
+],
+ // 'rechnung_vertrieb',
+			[
+      'class'=>'kartik\grid\BooleanColumn',
+      'attribute'=>'rechnung_vertrieb', 
+      'vAlign'=>'middle',
+	  'trueLabel'=>'Ja',
+	  'falseLabel'=>'Nein',
+     // 'filterType'=>GridView::FILTER_CHECKBOX,
+],
+		
+			
+			
             'strasse',
             'plz',
             'ort',
@@ -64,9 +97,10 @@ $this->params['breadcrumbs'][] = $this->title;
             
            
             // 'hausnr',
-            // 'reserviert',
-            // 'verkauft',
-            // 'rechnung_vertrieb',
+	
+          
+           
+           
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

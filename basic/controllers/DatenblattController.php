@@ -20,6 +20,7 @@ use app\models\Kaeufer;
 use app\models\Sonderwunsch;
 use app\models\Abschlag;
 use yii\widgets\ActiveForm;
+use kartik\mpdf\Pdf;
 
 
 /**
@@ -509,6 +510,29 @@ class DatenblattController extends Controller
         }
         echo Json::encode(['output' => '', 'selected' => '']);
     }
+	public function actionReport($id)
+{
+    //get your html raw content without layouts
+   // $content = $this->renderPartial('view');
+    //set up the kartik\mpdf\Pdf component
+    $pdf = new Pdf([
+        'content'=>$this->renderPartial('view', ['model' => $this->findModel($id),]),
+        'mode'=> Pdf::MODE_CORE,
+        'format'=> Pdf::FORMAT_A4,
+        //'orientation'=>Pdf::ORIENT_POTRAIT,
+        'destination'=> Pdf::DEST_BROWSER,
+        'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+        'cssInline'=> '.kv-heading-1{font-size:18px}',
+        'options'=> ['title'=> 'Datenblatt'],
+        'methods'=> [
+               //'setHeader'=>['Generated on: '.date("r")],
+               'setFooter'=>['|Seite {PAGENO}|'],
+                ]
+        ]);
+    return $pdf->render();
+}
+	
+	
 
 
     /**

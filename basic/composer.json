@@ -25,7 +25,9 @@
         "kartik-v/yii2-widgets": "*",
         "anmaslov/yii2-autocomplete-widget": "*",
         "kartik-v/yii2-money": "dev-master",
-        "2amigos/yii2-chartjs-widget" : "~2.0"
+        "2amigos/yii2-chartjs-widget" : "~2.0",
+		"kartik-v/yii2-mpdf": "*",
+        "kartik-v/mpdf": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

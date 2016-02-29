@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Datenblatt erstellen', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+	
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -122,7 +123,64 @@ $this->params['breadcrumbs'][] = $this->title;
             
             
             
-            ['class' => 'yii\grid\ActionColumn'],
+          //  ['class' => 'yii\grid\ActionColumn'],
+		  
+		  
+		  
+		  
+		[
+		'class' => 'yii\grid\ActionColumn',
+        'contentOptions' => ['style' => 'width:200px;'],
+        'header'=>'Actions',
+        'template' => '{view}{update}{report}{delete} ',
+        'buttons' => [
+
+            'view' => function ($url, $model) {
+                return Html::a('<span class="fa fa-search"></span> Anzeigen ', $url, [
+                            'title' => Yii::t('app', 'View'),
+                            'class'=>'btn btn-primary btn-xs',                                  
+                ]);
+            },
+			
+			'update' => function ($url, $model) {
+                return Html::a('<span class=" glyphicon glyphicon-pencil"></span> Update', $url, [
+                            'title' => Yii::t('app', 'Update'),
+                            'class'=>'btn btn-primary btn-xs',                                  
+                ]);
+            },
+       
+	  
+	   
+			//print button
+            'report' => function ($url, $model) {
+                return Html::a('<span class="fa fa-print"></span> Ausdrucken', $url, [
+                            'title' => Yii::t('app', 'Report'),
+                            'class'=>'btn btn-primary btn-xs',                                  
+                ]);
+            },
+			
+			 
+			 'delete' => function ($url, $model) {
+                return Html::a('<span class="glyphicon glyphicon-trash"></span> Löschen', $url, [
+                            'title' => Yii::t('app', 'Delete'),
+                            'class'=>'btn btn-primary btn-xs',
+							'data-confirm'=>'Wollen Sie diesen Eintrag wirklich löschen?',
+							'data-method'=>'post',
+												
+                ]);
+            },
+			
+        ],
+
+        
+
+       ],
+		  
+		  
+			
+			
+			
+			
         ],
     ]); ?>
 

@@ -4,6 +4,6 @@ return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=hausangebot',
     'username' => 'root',
-    'password' => '',
+    'password' => 'Sri6lanka',
     'charset' => 'utf8',
 ];

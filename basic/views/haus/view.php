@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Haus */
 
-$this->title = 'Teileigentumseinheit '.'hier kommt $te nr  nicht $model->id';
+$this->title = 'Teileigentumseinheit '.'';
 $this->params['breadcrumbs'][] = ['label' => 'Teileigentumseinheiten', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

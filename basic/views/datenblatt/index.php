@@ -143,7 +143,7 @@ $this->params['breadcrumbs'][] = $this->title;
             },
 			
 			'update' => function ($url, $model) {
-                return Html::a('<span class=" glyphicon glyphicon-pencil"></span> Update', $url, [
+                return Html::a('<span class=" glyphicon glyphicon-pencil"></span> Bearbeiten', $url, [
                             'title' => Yii::t('app', 'Update'),
                             'class'=>'btn btn-primary btn-xs',                                  
                 ]);
@@ -153,7 +153,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	   
 			//print button
             'report' => function ($url, $model) {
-                return Html::a('<span class="fa fa-print"></span> Ausdrucken', $url, [
+                return Html::a('<span class="fa fa-print"></span> Drucken', $url, [
                             'title' => Yii::t('app', 'Report'),
                             'class'=>'btn btn-primary btn-xs',                                  
                 ]);

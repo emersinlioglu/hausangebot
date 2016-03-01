@@ -24,7 +24,20 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 
 	
-	 <?php 
+	 
+	<div class="col-md-4 col-sm-6 col-xs-12" style="float: none;">
+<div class="info-box">
+
+            <span class="info-box-icon bg-aqua"><i class="fa fa-envelope-o"></i></span>
+
+            <div class="info-box-content">
+			<span class="info-box-number"><h4>Serienbrief Datenquelle Export</h4></span>
+              
+              
+           
+
+</br>
+	<?php 
 	$gridColumns = [
     //['class' => 'yii\grid\SerialColumn'],
     'debitor_nr',
@@ -68,10 +81,11 @@ echo ExportMenu::widget([
 ]);
 	
 	?>
-	
+	 </div>
+            <!-- /.info-box-content -->
 
-	
-	
+			</div></div>
+
 	
 
     <?= GridView::widget([

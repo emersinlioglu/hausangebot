@@ -13,7 +13,7 @@ use kartik\datecontrol\DateControl;
                 <a data-toggle="collapse" data-parent="#collapse-hausdetails" href="#collapse-hausdetails"
                    aria-expanded="true"
                    class="">
-                    Hause Details:
+                    Teileigentumseinheit Details:
                 </a>
             </h4>
         </div>

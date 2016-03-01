@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
@@ -12,70 +12,12 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="datenblatt-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+  <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Bearbeiten', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-        <?= Html::a('<i class="fa  fa-print text-white"></i>   Drucken', ['report', 'id' => $model->id], [
-            'class' => 'btn btn-info',
-            'data' => [
-                'class' => 'btn btn-info',
-                'target' => '_blank',
-                'data-toggle' => 'tooltip',
-                'title' => 'Generate the pdf'
-            ],
-        ]) ?>
-    </p>
+   
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            //'id',
-            'projekt.name',
-            'projekt.firma.name',
-            'projekt.firma.nr',
-            //'firma_id',
-            //'projekt_id',
-            //'haus_id',
-            //'nummer',
-            //'kaeufer_id',
-            [
-                'attribute' => 'haus.reserviert',
-                'format' => 'boolean',
-            ],
-            [
-                'attribute' => 'haus.verkauft',
-                'format' => 'boolean',
-            ],
-            [
-                'attribute' => 'haus.rechnung_vertrieb',
-                'format' => 'boolean',
-            ],
-
-
-            //'haus.te',
-
-            //  'haus.verkauft',
-            //  'haus.rechnung_vertrieb',
-
-            'kaeufer.debitor_nr',
-            'kaeufer.vorname',
-            'kaeufer.nachname',
-
-            'besondere_regelungen_kaufvertrag:ntext',
-            'sonstige_anmerkungen:ntext',
-        ],
-    ]) ?>
-
-
-    <table width="100%">
+    
+   <table width="100%">
         <tbody>
         <tr>
             <td width="219"><strong>Projekt:</strong></td>

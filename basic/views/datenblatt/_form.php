@@ -88,7 +88,7 @@ $this->registerJs('
                 $htmlOptions['disabled'] = 'disabled';
             }
             $projekte = $modelDatenblatt->firma ? $modelDatenblatt->firma->projekts : [];
-            echo $form->field($modelDatenblatt, 'projekt_id')->dropDownList(ArrayHelper::map($projekte, 'id', 'name'), $htmlOptions);
+            echo $form->field($modelDatenblatt, 'projekt_id')->dropDownList(ArrayHelper::map($projekte, 'id', 'name'), $htmlOptions)->label('Projekt');
             ?>
         </div>
         <div class="col-sm-2">
@@ -116,7 +116,7 @@ $this->registerJs('
                     }
                 }
             }
-            echo $form->field($modelDatenblatt, 'haus_id')->dropDownList($haeuserOptions, $htmlOptions);
+            echo $form->field($modelDatenblatt, 'haus_id')->dropDownList($haeuserOptions, $htmlOptions)->label('Teileigentumseinheit');
             ?>
         </div>
     </div>

@@ -73,6 +73,12 @@ class DatenblattController extends Controller
         ]);
     }
 
+ public function actionPdf($id)
+    {
+        return $this->render('pdf', [
+            'model' => $this->findModel($id),
+        ]);
+    }
     /**
      * Creates a new Datenblatt model.
      * If creation is successful, the browser will be redirected to the 'view' page.

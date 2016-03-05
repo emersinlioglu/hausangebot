@@ -60,6 +60,44 @@ class DatenblattController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+    
+    /**
+     * 
+     */
+    private function _calculatePreises(Datenblatt $modelDatenblatt) {
+        // calculate kaufpreis
+        $kaufpreisTotal = 0;
+        /* @var $teileh app\models\Teileigentumseinheit */
+        if ($modelDatenblatt->haus) {
+            foreach ($modelDatenblatt->haus->teileigentumseinheits as $item) {
+                $kaufpreisTotal += (float)$item->kaufpreis;
+            }
+        }
+        
+        // calculate sonderwünche
+        $sonderwuenscheTotal = 0;
+        /* @var $item app\models\Sonderwunsch */
+        foreach ($modelDatenblatt->sonderwunsches as $item) {
+            $sonderwuenscheTotal += (float)$item->rechnungsstellung_betrag;
+        }
+
+        // calculate abschlags
+        /* @var $item \app\models\Abschlag */
+        foreach ($modelDatenblatt->abschlags as $item) {
+            
+            $zeilenSumme = 0;
+            if ($item->kaufvertrag_angefordert) {
+                $zeilenSumme += ((float)$item->kaufvertrag_prozent * $kaufpreisTotal / 100);
+            }
+            if ($item->sonderwunsch_angefordert) {
+                $zeilenSumme += ((float)$item->sonderwunsch_prozent * $sonderwuenscheTotal / 100);
+            }
+            $item->kaufvertrag_betrag = ((float)$item->kaufvertrag_prozent * $kaufpreisTotal / 100);
+            $item->sonderwunsch_betrag = ((float)$item->sonderwunsch_prozent * $sonderwuenscheTotal / 100);
+                
+            $item->summe = $zeilenSumme;
+        }
+    }
 
     /**
      * Displays a single Datenblatt model.
@@ -68,15 +106,22 @@ class DatenblattController extends Controller
      */
     public function actionView($id)
     {
+        $modelDatenblatt = $this->findModel($id);
+        
+        $this->_calculatePreises($modelDatenblatt);
+        
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $modelDatenblatt,
         ]);
     }
 
- public function actionPdf($id)
+    public function actionPdf($id)
     {
+        $modelDatenblatt = $this->findModel($id);
+        $this->_calculatePreises($modelDatenblatt);
+        
         return $this->render('pdf', [
-            'model' => $this->findModel($id),
+            'model' => $modelDatenblatt,
         ]);
     }
     /**
@@ -518,14 +563,19 @@ class DatenblattController extends Controller
     }
 
 
-	public function actionReport($id) {
+    public function actionReport($id) {
+        
+        $modelDatenblatt = $this->findModel($id);
+        $this->_calculatePreises($modelDatenblatt);
+                
         //get your html raw content without layouts
        // $content = $this->renderPartial('view');
         //set up the kartik\mpdf\Pdf component
         $pdf = new Pdf([
-            'content'=>$this->renderPartial('view', ['model' => $this->findModel($id),]),
+            'content'=>$this->renderPartial('pdf', ['model' => $modelDatenblatt,]),
             'mode'=> Pdf::MODE_CORE,
             'format'=> Pdf::FORMAT_A4,
+            'defaultFontSize' => 10.0,
             //'orientation'=>Pdf::ORIENT_POTRAIT,
             'destination'=> Pdf::DEST_BROWSER,
             'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',

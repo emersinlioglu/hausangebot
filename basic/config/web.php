@@ -10,6 +10,7 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     // other settings
+   
     'modules' => [
        'datecontrol' =>  [
             'class' => 'kartik\datecontrol\Module',
@@ -130,6 +131,7 @@ $config = [
     ],
     'language' => 'de-DE',
     'params' => $params,
+   
 ];
 
 if (YII_ENV_DEV) {

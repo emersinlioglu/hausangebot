@@ -34,45 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            //'id',
-            'projekt.name',
-            'projekt.firma.name',
-            'projekt.firma.nr',
-            //'firma_id',
-            //'projekt_id',
-            //'haus_id',
-            //'nummer',
-            //'kaeufer_id',
-            [
-                'attribute' => 'haus.reserviert',
-                'format' => 'boolean',
-            ],
-            [
-                'attribute' => 'haus.verkauft',
-                'format' => 'boolean',
-            ],
-            [
-                'attribute' => 'haus.rechnung_vertrieb',
-                'format' => 'boolean',
-            ],
-
-
-            //'haus.te',
-
-            //  'haus.verkauft',
-            //  'haus.rechnung_vertrieb',
-
-            'kaeufer.debitor_nr',
-            'kaeufer.vorname',
-            'kaeufer.nachname',
-
-            'besondere_regelungen_kaufvertrag:ntext',
-            'sonstige_anmerkungen:ntext',
-        ],
-    ]) ?>
+   
 
 
     <table width="100%">
@@ -394,7 +356,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <td>
                 <?php
                 if ($model->kaeufer) {
-                    echo $model->kaeufer->anrede;
+                    switch($model->kaeufer->anrede) {
+                        case 0: echo 'Herr'; break;
+                        case 1: echo 'Frau'; break;
+                    }   
                 }
                 ?>
             </td>
@@ -429,7 +394,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <td>
                 <?php
                 if ($model->kaeufer) {
-                    echo $model->kaeufer->anrede2;
+                    switch($model->kaeufer->anrede2) {
+                        case 0: echo 'Herr'; break;
+                        case 1: echo 'Frau'; break;
+                    }
                 }
                 ?>
             </td>
@@ -508,7 +476,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </tr>
         <tr>
             <td><strong>besondere Regelungen Kaufvertrag</strong></td>
-            <td colspan="7"><?php $model->besondere_regelungen_kaufvertrag; ?></td>
+            <td colspan="7"><?= $model->besondere_regelungen_kaufvertrag; ?></td>
           </tr>
         <tr>
             <td></td>
@@ -643,42 +611,69 @@ $this->params['breadcrumbs'][] = $this->title;
             <td>-angefordert</td>
             <td></td>
         </tr>
-         <?php 
-
-                    $kvSummeProzent = 0;
-                    $kvSummeBetrag = 0;
-                    $swSummeProzent = 0;
-                    $swSummeBetrag = 0;
-                    $kaufvertragProzentTotal  = 0;
-                    $kaufvertragBetragTotal   = 0;
-                    $sonderwunschProzentTotal = 0;
-                    $sonderwunschBetragTotal  = 0;
-
-                    ?>
-                    
+        
+        <?php
+        $kvSummeProzent = 0;
+        $kvSummeBetrag = 0;
+        $swSummeProzent = 0;
+        $swSummeBetrag = 0;
+        $kaufvertragProzentTotal  = 0;
+        $kaufvertragBetragTotal   = 0;
+        $sonderwunschProzentTotal = 0;
+        $sonderwunschBetragTotal  = 0;
+        ?>
+        
         <?php foreach($model->abschlags as $key => $abschlag): ?>
         <tr>
             <td><?= $abschlag->name ?></td>
             <td><?= number_format((float)$abschlag->kaufvertrag_prozent, 2) ?> %</td>
             <td><?= number_format((float)$abschlag->kaufvertrag_betrag, 2) ?> €</td>
-            <td><?= Yii::$app->formatter->asDate($abschlag->kaufvertrag_angefordert) ?></td>
+            <td>
+                <?php 
+                    if ($abschlag->kaufvertrag_angefordert) {
+                        echo Yii::$app->formatter->asDate($abschlag->kaufvertrag_angefordert);
+                    }
+                ?>
+            </td>
             <td><?= number_format((float)$abschlag->sonderwunsch_prozent, 2) ?> %</td>
             <td><?= number_format((float)$abschlag->sonderwunsch_betrag, 2) ?> €</td>
-            <td><?= Yii::$app->formatter->asDate($abschlag->sonderwunsch_angefordert) ?></td>
+            <td>
+                <?php 
+                    if ($abschlag->sonderwunsch_angefordert) {
+                        echo Yii::$app->formatter->asDate($abschlag->sonderwunsch_angefordert);
+                    }
+                ?>
+            </td>
             <td><?= number_format((float)$abschlag->summe, 2) ?> €</td>
         </tr>
+        
+        <?php 
+            // berechnung
+            $kaufvertragProzentTotal += $abschlag->kaufvertrag_prozent;
+            if($abschlag->kaufvertrag_angefordert) {
+                $kaufvertragBetragTotal += (float)$abschlag->kaufvertrag_betrag;
+            } 
+            $kvSummeBetrag += (float)$abschlag->kaufvertrag_betrag;
+            $sonderwunschProzentTotal += $abschlag->sonderwunsch_prozent;
+            if($abschlag->sonderwunsch_angefordert) {
+                $sonderwunschBetragTotal += $abschlag->sonderwunsch_betrag;
+            } 
+            $swSummeBetrag += $abschlag->sonderwunsch_betrag;
+        ?>
+        
         <?php endforeach; ?>
         
         <tr>
             <td><strong>Summe</strong></td>
-            <td>100,0%</td>
-            <td>560.000,00 €</td>
+            <td><?= $kaufvertragProzentTotal ?> %</td>
+            <td><?=  $kvSummeBetrag ?> €</td>
             <td></td>
-            <td>100,0%</td>
-            <td>10.000,00 €</td>
+            <td><?= $sonderwunschProzentTotal ?> %</td>
+            <td><?= $swSummeBetrag ?> €</td>
             <td></td>
-            <td>296.800,00 €</td>
+            <td><?= number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal, 2) ?> €</td>
         </tr>
+        
         
         <tr>
             <td><strong>./. Minderungen/Nachlaß</strong></td>
@@ -688,8 +683,31 @@ $this->params['breadcrumbs'][] = $this->title;
             <td></td>
             <td></td>
             <td></td>
-            <td>800,00 €</td>
+            <td>
+                <?php
+                    $totalNachlass = .0;
+                    foreach($model->nachlasses as $nachlass) {
+                        $totalNachlass += (float) $nachlass->betrag;
+                    }
+                    echo number_format($totalNachlass,2);
+                ?>  €
+            </td>
         </tr>
+        <?php foreach($model->nachlasses as $key => $modelNachlass): ?>
+            <tr>
+                <td>
+                    <?php
+                    echo Yii::$app->formatter->asDate($modelNachlass->schreiben_vom);
+                    ?>
+                </td>
+                <td>
+                    <?= number_format($modelNachlass->betrag,2) ?>
+                </td>
+                <td>
+                    <?= $modelNachlass->bemerkung ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
         <tr>
             <td><strong>Zwischensumme</strong></td>
             <td></td>
@@ -698,7 +716,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <td></td>
             <td></td>
             <td></td>
-            <td>296.000,00 €</td>
+            <td><?php
+                    echo number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass, 2);
+                ?> €
+            </td>
         </tr>
         <tr>
             <td></td>
@@ -718,8 +739,39 @@ $this->params['breadcrumbs'][] = $this->title;
             <td></td>
             <td></td>
             <td></td>
-            <td>250.000,00 €</td>
+            <td>
+                <?php
+                    //echo $kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass;
+                    $totalZahlungen = 0;
+                    foreach($model->zahlungs as $zahlung) {
+                        $totalZahlungen += (float) $zahlung->betrag;
+                    }
+                    echo number_format($totalZahlungen,2);
+                ?> €
+            </td>
         </tr>
+        <tr>
+            <th>Datum</th>
+            <th>Betrag</th>
+            <th>Bemerkung</th>
+        </tr>
+        
+        <?php foreach ($model->zahlungs as $key => $modelZahlung): ?>
+            <tr>
+                <td>
+                    <?php
+                    echo Yii::$app->formatter->asDate($modelZahlung->datum);
+                    ?>
+                </td>
+                <td>
+                    <?php echo number_format($modelZahlung->betrag,2); ?>
+                </td>
+                <td>
+                    <?= $modelZahlung->bemerkung ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        
         <tr>
             <td></td>
             <td></td>
@@ -738,7 +790,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <td></td>
             <td></td>
             <td></td>
-            <td>46.000,00 €</td>
+            <td>
+                <?php
+                    echo number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass - $totalZahlungen, 2);
+                ?> €
+            </td>
         </tr>
         <tr>
             <td></td>

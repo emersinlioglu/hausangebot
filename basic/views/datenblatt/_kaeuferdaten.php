@@ -118,9 +118,9 @@ use kartik\datecontrol\DateControl;
 
                 <div class="row">
                     <div class="col-sm-3">
-                        <?= $form->field($modelKaeufer, 'anrede')->dropDownList([0 => 'Herr', 1 => 'Frau']) ?>
+                        <?= $form->field($modelKaeufer, 'anrede')->dropDownList([ 0 => 'Herr', 1 => 'Frau'],['prompt' => 'Auswählen']) ?>
                       
-                         <?= $form->field($modelKaeufer, 'anrede2')->dropDownList([0 => 'Herr', 1 => 'Frau']) ?>
+                         <?= $form->field($modelKaeufer, 'anrede2')->dropDownList([ 0 => 'Herr', 1 => 'Frau'],['prompt' => 'Auswählen']) ?>
                         
                         <?= $form->field($modelKaeufer, 'strasse')->textInput([]) ?>
                         <?= $form->field($modelKaeufer, 'email')->textInput([]) ?>

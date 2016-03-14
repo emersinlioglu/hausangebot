@@ -6,6 +6,7 @@
  */
 
 use yii\base\InvalidConfigException;
+use yii\db\Schema;
 use yii\db\Migration;
 use yii\log\DbTarget;
 
@@ -61,12 +62,12 @@ class m141106_185632_log_init extends Migration
             }
 
             $this->createTable($target->logTable, [
-                'id' => $this->bigPrimaryKey(),
-                'level' => $this->integer(),
-                'category' => $this->string(),
-                'log_time' => $this->double(),
-                'prefix' => $this->text(),
-                'message' => $this->text(),
+                'id' => Schema::TYPE_BIGPK,
+                'level' => Schema::TYPE_INTEGER,
+                'category' => Schema::TYPE_STRING,
+                'log_time' => Schema::TYPE_DOUBLE,
+                'prefix' => Schema::TYPE_TEXT,
+                'message' => Schema::TYPE_TEXT,
             ], $tableOptions);
 
             $this->createIndex('idx_log_level', $target->logTable, 'level');

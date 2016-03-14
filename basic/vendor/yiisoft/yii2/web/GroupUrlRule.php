@@ -77,8 +77,11 @@ class GroupUrlRule extends CompositeUrlRule
      */
     public function init()
     {
+        if ($this->routePrefix === null) {
+            $this->routePrefix = $this->prefix;
+        }
         $this->prefix = trim($this->prefix, '/');
-        $this->routePrefix = $this->routePrefix === null ? $this->prefix : trim($this->routePrefix, '/');
+        $this->routePrefix = trim($this->routePrefix, '/');
         parent::init();
     }
 

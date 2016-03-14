@@ -16,22 +16,6 @@ use yii\helpers\Json;
  *
  * It is used by [[Response]] to format response data.
  *
- * To configure properties like [[encodeOptions]] or [[prettyPrint]], you can configure the `response`
- * application component like the following:
- *
- * ```php
- * 'response' => [
- *     // ...
- *     'formatters' => [
- *         \yii\web\Response::FORMAT_JSON => [
- *              'class' => 'yii\web\JsonResponseFormatter',
- *              'prettyPrint' => YII_DEBUG, // use "pretty" output in debug mode
- *              // ...
- *         ],
- *     ],
- * ],
- * ```
- *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
@@ -43,22 +27,6 @@ class JsonResponseFormatter extends Component implements ResponseFormatterInterf
      * function name while the former will be passed to this function as a parameter.
      */
     public $useJsonp = false;
-    /**
-     * @var integer the encoding options passed to [[Json::encode()]]. For more details please refer to
-     * <http://www.php.net/manual/en/function.json-encode.php>.
-     * Default is `JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE`.
-     * This property has no effect, when [[useJsonp]] is `true`.
-     * @since 2.0.7
-     */
-    public $encodeOptions = 320;
-    /**
-     * @var bool whether to format the output in a readable "pretty" format. This can be useful for debugging purpose.
-     * If this is true, `JSON_PRETTY_PRINT` will be added to [[encodeOptions]].
-     * Defaults to `false`.
-     * This property has no effect, when [[useJsonp]] is `true`.
-     * @since 2.0.7
-     */
-    public $prettyPrint = false;
 
 
     /**
@@ -82,11 +50,7 @@ class JsonResponseFormatter extends Component implements ResponseFormatterInterf
     {
         $response->getHeaders()->set('Content-Type', 'application/json; charset=UTF-8');
         if ($response->data !== null) {
-            $options = $this->encodeOptions;
-            if ($this->prettyPrint) {
-                $options |= JSON_PRETTY_PRINT;
-            }
-            $response->content = Json::encode($response->data, $options);
+            $response->content = Json::encode($response->data);
         }
     }
 

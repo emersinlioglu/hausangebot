@@ -49,7 +49,7 @@
          */
         afterFilter: 'afterFilter'
     };
-
+    
     var methods = {
         init: function (options) {
             return this.each(function () {
@@ -86,28 +86,12 @@
             var settings = gridData[$grid.attr('id')].settings;
             var data = {};
             $.each($(settings.filterSelector).serializeArray(), function () {
-                if (!(this.name in data)) {
-                    data[this.name] = [];
-                }
-                data[this.name].push(this.value);
+                data[this.name] = this.value;
             });
 
-            var namesInFilter = Object.keys(data);
-
             $.each(yii.getQueryParams(settings.filterUrl), function (name, value) {
-                if (namesInFilter.indexOf(name) === -1 && namesInFilter.indexOf(name.replace(/\[\]$/, '')) === -1) {
-                    if (!$.isArray(value)) {
-                        value = [value];
-                    }
-                    if (!(name in data)) {
-                        data[name] = value;
-                    } else {
-                        $.each(value, function (i, val) {
-                            if ($.inArray(val, data[name])) {
-                                data[name].push(val);
-                            }
-                        });
-                    }
+                if (data[name] === undefined) {
+                    data[name] = value;
                 }
             });
 
@@ -115,19 +99,11 @@
             var url = pos < 0 ? settings.filterUrl : settings.filterUrl.substring(0, pos);
 
             $grid.find('form.gridview-filter-form').remove();
-            var $form = $('<form/>', {
-                action: url,
-                method: 'get',
-                class: 'gridview-filter-form',
-                style: 'display:none',
-                'data-pjax': ''
-            }).appendTo($grid);
-            $.each(data, function (name, values) {
-                $.each(values, function (index, value) {
-                    $form.append($('<input/>').attr({type: 'hidden', name: name, value: value}));
-                });
+            var $form = $('<form action="' + url + '" method="get" class="gridview-filter-form" style="display:none" data-pjax></form>').appendTo($grid);
+            $.each(data, function (name, value) {
+                $form.append($('<input type="hidden" name="t" value="" />').attr('name', name).val(value));
             });
-
+            
             event = $.Event(gridEvents.beforeFilter);
             $grid.trigger(event);
             if (event.result === false) {
@@ -135,7 +111,7 @@
             }
 
             $form.submit();
-
+            
             $grid.trigger(gridEvents.afterFilter);
         },
 

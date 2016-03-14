@@ -24,8 +24,8 @@
                         <th>Zimmer</th>
                         <th>ME-Anteil</th>
                         <th>Wohnfläche</th>
-                        <th>Kaufpreis</th>
-                        <th>KP/Einheit</th>
+                        <th class="text-align-right">Kaufpreis</th>
+                        <th class="text-align-right">KP/Einheit</th>
                     </tr>
                     <?php 
                     /* @var $teileigentumseinheit app\models\Teileigentumseinheit */
@@ -39,8 +39,8 @@
                             <td><?= $teileigentumseinheit->zimmer ?></td>
                             <td><?= $teileigentumseinheit->me_anteil ?></td>
                             <td><?= $teileigentumseinheit->wohnflaeche ?> <?= $teileigentumseinheit->einheitstyp->einheit ?></td>
-                            <td>€ <?= number_format ((float)$teileigentumseinheit->kaufpreis, 2); ?></td>
-                            <td>€ <?= number_format ((float)$teileigentumseinheit->kp_einheit, 2); ?></td>
+                            <td class="text-align-right"><?= number_format ((float)$teileigentumseinheit->kaufpreis, 2); ?> €</td>
+                            <td class="text-align-right"><?= number_format ((float)$teileigentumseinheit->kp_einheit, 2); ?> €</td>
                         </tr>
                     <?php 
                     endforeach; 

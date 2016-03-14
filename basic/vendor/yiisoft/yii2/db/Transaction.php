@@ -18,18 +18,17 @@ use yii\base\InvalidConfigException;
  * The following code is a typical example of using transactions (note that some
  * DBMS may not support transactions):
  *
- * ```php
+ * ~~~
  * $transaction = $connection->beginTransaction();
  * try {
  *     $connection->createCommand($sql1)->execute();
  *     $connection->createCommand($sql2)->execute();
  *     //.... other SQL executions
  *     $transaction->commit();
- * } catch (\Exception $e) {
+ * } catch (Exception $e) {
  *     $transaction->rollBack();
- *     throw $e;
  * }
- * ```
+ * ~~~
  *
  * @property boolean $isActive Whether this transaction is active. Only an active transaction can [[commit()]]
  * or [[rollBack()]]. This property is read-only.
@@ -110,7 +109,7 @@ class Transaction extends \yii\base\Object
         }
         $this->db->open();
 
-        if ($this->_level === 0) {
+        if ($this->_level == 0) {
             if ($isolationLevel !== null) {
                 $this->db->getSchema()->setTransactionIsolationLevel($isolationLevel);
             }
@@ -144,7 +143,7 @@ class Transaction extends \yii\base\Object
         }
 
         $this->_level--;
-        if ($this->_level === 0) {
+        if ($this->_level == 0) {
             Yii::trace('Commit transaction', __METHOD__);
             $this->db->pdo->commit();
             $this->db->trigger(Connection::EVENT_COMMIT_TRANSACTION);
@@ -173,7 +172,7 @@ class Transaction extends \yii\base\Object
         }
 
         $this->_level--;
-        if ($this->_level === 0) {
+        if ($this->_level == 0) {
             Yii::trace('Roll back transaction', __METHOD__);
             $this->db->pdo->rollBack();
             $this->db->trigger(Connection::EVENT_ROLLBACK_TRANSACTION);

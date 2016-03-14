@@ -127,12 +127,12 @@ use kartik\datecontrol\DateControl;
                     <tr>
                         <td>Summe</td>
                         <td><?= $kaufvertragProzentTotal ?> %</td>
-                        <td><?=  $kvSummeBetrag ?> EUR</td>
+                        <td class="text-align-right"><?=  number_format($kvSummeBetrag, 2) ?> €</td>
                         <td></td>
                         <td><?= $sonderwunschProzentTotal ?> %</td>
-                        <td><?= $swSummeBetrag ?> EUR</td>
+                        <td class="text-align-right"><?= number_format($swSummeBetrag, 2) ?> €</td>
                         <td></td>
-                        <td><?= $kaufvertragBetragTotal + $sonderwunschBetragTotal ?> EUR</td>
+                        <td class="text-align-right"><?= number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal, 2) ?> €</td>
                         <td></td>
                     </tr>
                     <!--
@@ -144,7 +144,7 @@ use kartik\datecontrol\DateControl;
                         <td><?= 100 - $sonderwunschProzentTotal ?> %</td>
                         <td><?= $sonderwuenscheTotal - $sonderwunschBetragTotal ?> EUR</td>
                         <td></td>
-                        <td><?= ($kaufpreisTotal + $sonderwuenscheTotal) - ($kaufvertragBetragTotal + $sonderwunschBetragTotal) ?> EUR</td>
+                        <td><?= number_format(($kaufpreisTotal + $sonderwuenscheTotal) - ($kaufvertragBetragTotal + $sonderwunschBetragTotal), 2) ?> €</td>
                         <td></td>
                     </tr>
                     -->
@@ -156,14 +156,14 @@ use kartik\datecontrol\DateControl;
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>
+                        <td class="text-align-right">
                         <?php
                             $totalNachlass = .0;
                             foreach($modelDatenblatt->nachlasses as $nachlass) {
                                 $totalNachlass += (float) $nachlass->betrag;
                             }
-                            echo $totalNachlass;
-                        ?> EUR
+                            echo number_format($totalNachlass, 2);
+                        ?> €
                         </td>
                         <td></td>
                     </tr>
@@ -175,10 +175,10 @@ use kartik\datecontrol\DateControl;
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>
+                        <td class="text-align-right">
                         <?php
-                            echo $kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass;
-                        ?> EUR
+                            echo number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass, 2);
+                        ?> €
                         </td>
                         <td></td>
                     </tr>
@@ -190,15 +190,15 @@ use kartik\datecontrol\DateControl;
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>
+                        <td class="text-align-right">
                         <?php
                             //echo $kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass;
                             $totalZahlungen = 0;
                             foreach($modelDatenblatt->zahlungs as $zahlung) {
                                 $totalZahlungen += (float) $zahlung->betrag;
                             }
-                            echo $totalZahlungen;
-                        ?> EUR
+                            echo number_format($totalZahlungen, 2);
+                        ?> €
                         </td>
                         <td></td>
                     </tr>
@@ -210,10 +210,10 @@ use kartik\datecontrol\DateControl;
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>
+                        <td class="text-align-right">
                         <?php
-                            echo $kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass - $totalZahlungen;
-                        ?> EUR
+                            echo number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass - $totalZahlungen, 2);
+                        ?> €
                         </td>
                         <td></td>
                     </tr>

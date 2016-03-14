@@ -8,7 +8,6 @@
 namespace yii\web;
 
 use yii\base\Object;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use Yii;
 
@@ -82,18 +81,15 @@ class AssetBundle extends Object
      * - a relative path representing a local asset (e.g. `js/main.js`). The actual file path of a local
      *   asset can be determined by prefixing [[basePath]] to the relative path, and the actual URL
      *   of the asset can be determined by prefixing [[baseUrl]] to the relative path.
-     * - an array, with the first entry being the URL or relative path as described before, and a list of key => value pairs
-     *   that will be used to overwrite [[jsOptions]] settings for this entry.
-     *   This functionality is available since version 2.0.7.
      *
-     * Note that only a forward slash "/" should be used as directory separator.
+     * Note that only forward slash "/" should be used as directory separators.
      */
     public $js = [];
     /**
      * @var array list of CSS files that this bundle contains. Each CSS file can be specified
      * in one of the three formats as explained in [[js]].
      *
-     * Note that only a forward slash "/" should be used as directory separator.
+     * Note that only forward slash "/" can be used as directory separator.
      */
     public $css = [];
     /**
@@ -148,22 +144,10 @@ class AssetBundle extends Object
     {
         $manager = $view->getAssetManager();
         foreach ($this->js as $js) {
-            if (is_array($js)) {
-                $file = array_shift($js);
-                $options = ArrayHelper::merge($this->jsOptions, $js);
-                $view->registerJsFile($manager->getAssetUrl($this, $file), $options);
-            } else {
-                $view->registerJsFile($manager->getAssetUrl($this, $js), $this->jsOptions);
-            }
+            $view->registerJsFile($manager->getAssetUrl($this, $js), $this->jsOptions);
         }
         foreach ($this->css as $css) {
-            if (is_array($css)) {
-                $file = array_shift($css);
-                $options = ArrayHelper::merge($this->cssOptions, $css);
-                $view->registerCssFile($manager->getAssetUrl($this, $file), $options);
-            } else {
-                $view->registerCssFile($manager->getAssetUrl($this, $css), $this->cssOptions);
-            }
+            $view->registerCssFile($manager->getAssetUrl($this, $css), $this->cssOptions);
         }
     }
 
@@ -181,26 +165,12 @@ class AssetBundle extends Object
 
         if (isset($this->basePath, $this->baseUrl) && ($converter = $am->getConverter()) !== null) {
             foreach ($this->js as $i => $js) {
-                if (is_array($js)) {
-                    $file = array_shift($js);
-                    if (Url::isRelative($file)) {
-                        $js = ArrayHelper::merge($this->jsOptions, $js);
-                        array_unshift($js, $converter->convert($file, $this->basePath));
-                        $this->js[$i] = $js;
-                    }
-                } elseif (Url::isRelative($js)) {
+                if (Url::isRelative($js)) {
                     $this->js[$i] = $converter->convert($js, $this->basePath);
                 }
             }
             foreach ($this->css as $i => $css) {
-                if (is_array($css)) {
-                    $file = array_shift($css);
-                    if (Url::isRelative($file)) {
-                        $css = ArrayHelper::merge($this->cssOptions, $css);
-                        array_unshift($css, $converter->convert($file, $this->basePath));
-                        $this->css[$i] = $css;
-                    }
-                } elseif (Url::isRelative($css)) {
+                if (Url::isRelative($css)) {
                     $this->css[$i] = $converter->convert($css, $this->basePath);
                 }
             }

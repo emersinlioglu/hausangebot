@@ -143,12 +143,6 @@ class ActiveField extends Component
      */
     public $parts = [];
 
-    /**
-     * @var string this property holds a custom input id if it was set using [[inputOptions]] or in one of the
-     * `$options` parameters of the `input*` methods.
-     */
-    private $_inputId;
-
 
     /**
      * PHP magic method that returns the string representation of this object.
@@ -175,11 +169,11 @@ class ActiveField extends Component
      * and use them as the content.
      * If a callable, it will be called to generate the content. The signature of the callable should be:
      *
-     * ```php
+     * ~~~
      * function ($field) {
      *     return $html;
      * }
-     * ```
+     * ~~~
      *
      * @return string the rendering result
      */
@@ -219,7 +213,7 @@ class ActiveField extends Component
             }
         }
 
-        $inputID = $this->getInputId();
+        $inputID = Html::getInputId($this->model, $this->attribute);
         $attribute = Html::getAttributeName($this->attribute);
         $options = $this->options;
         $class = isset($options['class']) ? [$options['class']] : [];
@@ -679,11 +673,7 @@ class ActiveField extends Component
      */
     protected function adjustLabelFor($options)
     {
-        if (!isset($options['id'])) {
-            return;
-        }
-        $this->_inputId = $options['id'];
-        if (!isset($this->labelOptions['for'])) {
+        if (isset($options['id']) && !isset($this->labelOptions['for'])) {
             $this->labelOptions['for'] = $options['id'];
         }
     }
@@ -722,7 +712,7 @@ class ActiveField extends Component
 
         $options = [];
 
-        $inputID = $this->getInputId();
+        $inputID = Html::getInputId($this->model, $this->attribute);
         $options['id'] = $inputID;
         $options['name'] = $this->attribute;
 
@@ -757,15 +747,5 @@ class ActiveField extends Component
             'encodeError' => true,
             'error' => '.help-block',
         ]);
-    }
-
-    /**
-     * Returns the HTML `id` of the input element of this form field.
-     * @return string the input id.
-     * @since 2.0.7
-     */
-    protected function getInputId()
-    {
-        return $this->_inputId ?: Html::getInputId($this->model, $this->attribute);
     }
 }

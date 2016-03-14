@@ -24,7 +24,7 @@ class Assignment extends Object
      */
     public $userId;
     /**
-     * @var string the role name
+     * @return string the role name
      */
     public $roleName;
     /**

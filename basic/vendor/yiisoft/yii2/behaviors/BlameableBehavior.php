@@ -63,9 +63,17 @@ class BlameableBehavior extends AttributeBehavior
      */
     public $updatedByAttribute = 'updated_by';
     /**
-     * @inheritdoc
+     * @var callable the value that will be assigned to the attributes. This should be a valid
+     * PHP callable whose return value will be assigned to the current attribute(s).
+     * The signature of the callable should be:
      *
-     * In case, when the property is `null`, the value of `Yii::$app->user->id` will be used as the value.
+     * ```php
+     * function ($event) {
+     *     // return value will be assigned to the attribute(s)
+     * }
+     * ```
+     *
+     * If this property is not set, the value of `Yii::$app->user->id` will be assigned to the attribute(s).
      */
     public $value;
 
@@ -86,17 +94,18 @@ class BlameableBehavior extends AttributeBehavior
     }
 
     /**
-     * @inheritdoc
-     *
-     * In case, when the [[value]] property is `null`, the value of `Yii::$app->user->id` will be used as the value.
+     * Evaluates the value of the user.
+     * The return result of this method will be assigned to the current attribute(s).
+     * @param Event $event
+     * @return mixed the value of the user.
      */
     protected function getValue($event)
     {
         if ($this->value === null) {
             $user = Yii::$app->get('user', false);
             return $user && !$user->isGuest ? $user->id : null;
+        } else {
+            return call_user_func($this->value, $event);
         }
-
-        return parent::getValue($event);
     }
 }

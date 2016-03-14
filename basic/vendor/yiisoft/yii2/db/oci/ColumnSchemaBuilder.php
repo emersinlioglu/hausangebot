@@ -25,7 +25,6 @@ class ColumnSchemaBuilder extends AbstractColumnSchemaBuilder
         return
             $this->type .
             $this->buildLengthString() .
-            $this->buildUnsignedString() .
             $this->buildDefaultString() .
             $this->buildNotNullString() .
             $this->buildCheckString();

@@ -56,7 +56,7 @@ abstract class BaseActiveRecord extends Model implements ActiveRecordInterface
      */
     const EVENT_BEFORE_INSERT = 'beforeInsert';
     /**
-     * @event AfterSaveEvent an event that is triggered after a record is inserted.
+     * @event Event an event that is triggered after a record is inserted.
      */
     const EVENT_AFTER_INSERT = 'afterInsert';
     /**
@@ -65,7 +65,7 @@ abstract class BaseActiveRecord extends Model implements ActiveRecordInterface
      */
     const EVENT_BEFORE_UPDATE = 'beforeUpdate';
     /**
-     * @event AfterSaveEvent an event that is triggered after a record is updated.
+     * @event Event an event that is triggered after a record is updated.
      */
     const EVENT_AFTER_UPDATE = 'afterUpdate';
     /**
@@ -515,10 +515,10 @@ abstract class BaseActiveRecord extends Model implements ActiveRecordInterface
     /**
      * Returns a value indicating whether the named attribute has been changed.
      * @param string $name the name of the attribute.
-     * @param boolean $identical whether the comparison of new and old value is made for
+     * @param bool $identical whether the comparison of new and old value is made for
      * identical values using `===`, defaults to `true`. Otherwise `==` is used for comparison.
      * This parameter is available since version 2.0.4.
-     * @return boolean whether the attribute has been changed
+     * @return bool whether the attribute has been changed
      */
     public function isAttributeChanged($name, $identical = true)
     {
@@ -1392,7 +1392,7 @@ abstract class BaseActiveRecord extends Model implements ActiveRecordInterface
         } else {
             /* @var $relatedModel ActiveRecordInterface */
             $relatedModel = $relation->modelClass;
-            if (!$delete && count($relation->link) === 1 && is_array($this->{$b = reset($relation->link)})) {
+            if (!$delete && count($relation->link) == 1 && is_array($this->{$b = reset($relation->link)})) {
                 // relation via array valued attribute
                 $this->$b = [];
                 $this->save(false);

@@ -9,7 +9,6 @@ namespace yii\validators;
 
 use Yii;
 use yii\base\InvalidConfigException;
-use yii\helpers\ArrayHelper;
 
 /**
  * RangeValidator validates that the attribute value is among a list of values.
@@ -24,15 +23,7 @@ use yii\helpers\ArrayHelper;
 class RangeValidator extends Validator
 {
     /**
-     * @var array|\Traversable|\Closure a list of valid values that the attribute value should be among or an anonymous function that returns
-     * such a list. The signature of the anonymous function should be as follows,
-     *
-     * ```php
-     * function($model, $attribute) {
-     *     // compute range
-     *     return $range;
-     * }
-     * ```
+     * @var array list of valid values that the attribute value should be among
      */
     public $range;
     /**
@@ -56,10 +47,7 @@ class RangeValidator extends Validator
     public function init()
     {
         parent::init();
-        if (!is_array($this->range)
-            && !($this->range instanceof \Closure)
-            && !($this->range instanceof \Traversable)
-        ) {
+        if (!is_array($this->range)) {
             throw new InvalidConfigException('The "range" property must be set.');
         }
         if ($this->message === null) {
@@ -72,17 +60,17 @@ class RangeValidator extends Validator
      */
     protected function validateValue($value)
     {
-        $in = false;
-
-        if ($this->allowArray
-            && ($value instanceof \Traversable || is_array($value))
-            && ArrayHelper::isSubset($value, $this->range, $this->strict)
-        ) {
-            $in = true;
+        if (!$this->allowArray && is_array($value)) {
+            return [$this->message, []];
         }
 
-        if (!$in && ArrayHelper::isIn($value, $this->range, $this->strict)) {
-            $in = true;
+        $in = true;
+
+        foreach ((is_array($value) ? $value : [$value]) as $v) {
+            if (!in_array($v, $this->range, $this->strict)) {
+                $in = false;
+                break;
+            }
         }
 
         return $this->not !== $in ? null : [$this->message, []];
@@ -91,23 +79,8 @@ class RangeValidator extends Validator
     /**
      * @inheritdoc
      */
-    public function validateAttribute($model, $attribute)
-    {
-        if ($this->range instanceof \Closure) {
-            $this->range = call_user_func($this->range, $model, $attribute);
-        }
-        parent::validateAttribute($model, $attribute);
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function clientValidateAttribute($model, $attribute, $view)
     {
-        if ($this->range instanceof \Closure) {
-            $this->range = call_user_func($this->range, $model, $attribute);
-        }
-
         $range = [];
         foreach ($this->range as $value) {
             $range[] = (string) $value;

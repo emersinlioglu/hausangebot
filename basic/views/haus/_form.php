@@ -131,6 +131,7 @@ $this->registerJs('
                 </td>
                 <td><?= $form->field($modelTeilieigentum, 'kp_einheit')->textInput([
                         'name' => "Teileigentumseinheiten[$key][kp_einheit]",
+                        'disabled' => 'disabled'
                     ])
                   //  ->widget(MaskMoney::classname(), [
                   //      'options' => [

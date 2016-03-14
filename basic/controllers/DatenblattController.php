@@ -133,7 +133,24 @@ class DatenblattController extends Controller
     {
         $model = new Datenblatt;
         $model->save();
-        
+
+        $abschlags = [
+            'Abschlag 1' => 25.0,
+            'Abschlag 2' => 28.0,
+            'Abschlag 3' => 16.8,
+            'Abschlag 4' => 8.4,
+            'Abschlag 5' => 18.3,
+            'Abschlag 6' => 0.0,
+            'Schlussrechnung' => 3.5
+        ];
+        foreach ($abschlags as $name => $percentage) {
+            $abschlag = new Abschlag();
+            $abschlag->datenblatt_id = $model->id;
+            $abschlag->name = $name;
+            $abschlag->kaufvertrag_prozent = $percentage;
+            $abschlag->save();
+        }
+
         $this->redirect(['datenblatt/update', 'id' => $model->id]);
     }
 

@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 //use kartik\datetime\DateTimePicker;
 use kartik\datecontrol\DateControl;
-//use kartik\money\MaskMoney;
+use kartik\money\MaskMoney;
 
 /* @var $modelDatenblatt app\models\Datenblatt */
 /* @var $form yii\bootstrap\ActiveForm */
@@ -69,7 +69,15 @@ use kartik\datecontrol\DateControl;
                             ?>
                         </td>
                         <td>
-                            <?= $form->field($modelAbschlag, "[$key]kaufvertrag_betrag")->textInput(['disabled' => 'disabled']) ?>
+                            <?= $form->field($modelAbschlag, "[$key]kaufvertrag_betrag")
+                                //->textInput(['disabled' => 'disabled'])
+                                ->widget(MaskMoney::classname(), [
+                                    'options' => [
+                                        'id' => $key . '-kaufvertrag_betrag-id',
+                                        'disabled' => 'disabled'
+                                    ],
+                                ])
+                            ?>
                             <?php 
                             if($modelAbschlag->kaufvertrag_angefordert) {
                                 $kaufvertragBetragTotal += (float)$modelAbschlag->kaufvertrag_betrag;
@@ -94,7 +102,15 @@ use kartik\datecontrol\DateControl;
                             <?php $sonderwunschProzentTotal += $modelAbschlag->sonderwunsch_prozent ?>
                         </td>
                         <td>
-                            <?= $form->field($modelAbschlag, "[$key]sonderwunsch_betrag")->textInput(['disabled' => 'disabled']) ?>
+                            <?= $form->field($modelAbschlag, "[$key]sonderwunsch_betrag")
+                                //->textInput(['disabled' => 'disabled'])
+                                ->widget(MaskMoney::classname(), [
+                                    'options' => [
+                                        'id' => $key . '-sonderwunsch_betrag-id',
+                                        'disabled' => 'disabled'
+                                    ],
+                                ])
+                            ?>
                             <?php 
                             if($modelAbschlag->sonderwunsch_angefordert) {
                                 $sonderwunschBetragTotal += $modelAbschlag->sonderwunsch_betrag;
@@ -115,7 +131,15 @@ use kartik\datecontrol\DateControl;
                             ?>
                         </td>
                         <td>
-                            <?= $form->field($modelAbschlag, "[$key]summe")->textInput(['disabled' => 'disabled']) ?>
+                            <?= $form->field($modelAbschlag, "[$key]summe")
+                                //->textInput(['disabled' => 'disabled'])
+                                ->widget(MaskMoney::classname(), [
+                                    'options' => [
+                                        'id' => $key . '-summe-id',
+                                        'disabled' => 'disabled'
+                                    ],
+                                ])
+                            ?>
                         </td>
                         <td>
                             <?= Html::a('<span class="fa fa-minus"></span>', 
@@ -127,12 +151,12 @@ use kartik\datecontrol\DateControl;
                     <tr>
                         <td>Summe</td>
                         <td><?= $kaufvertragProzentTotal ?> %</td>
-                        <td class="text-align-right"><?=  number_format($kvSummeBetrag, 2) ?> €</td>
+                        <td class="text-align-right"><?=  number_format($kvSummeBetrag, 2, '.', ',') ?> €</td>
                         <td></td>
                         <td><?= $sonderwunschProzentTotal ?> %</td>
-                        <td class="text-align-right"><?= number_format($swSummeBetrag, 2) ?> €</td>
+                        <td class="text-align-right"><?= number_format($swSummeBetrag, 2, '.', ',') ?> €</td>
                         <td></td>
-                        <td class="text-align-right"><?= number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal, 2) ?> €</td>
+                        <td class="text-align-right"><?= number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal, 2, '.', ',') ?> €</td>
                         <td></td>
                     </tr>
                     <!--
@@ -144,7 +168,7 @@ use kartik\datecontrol\DateControl;
                         <td><?= 100 - $sonderwunschProzentTotal ?> %</td>
                         <td><?= $sonderwuenscheTotal - $sonderwunschBetragTotal ?> EUR</td>
                         <td></td>
-                        <td><?= number_format(($kaufpreisTotal + $sonderwuenscheTotal) - ($kaufvertragBetragTotal + $sonderwunschBetragTotal), 2) ?> €</td>
+                        <td><?= number_format(($kaufpreisTotal + $sonderwuenscheTotal) - ($kaufvertragBetragTotal + $sonderwunschBetragTotal), 2, '.', ',') ?> €</td>
                         <td></td>
                     </tr>
                     -->
@@ -162,7 +186,7 @@ use kartik\datecontrol\DateControl;
                             foreach($modelDatenblatt->nachlasses as $nachlass) {
                                 $totalNachlass += (float) $nachlass->betrag;
                             }
-                            echo number_format($totalNachlass, 2);
+                            echo number_format($totalNachlass, 2, '.', ',');
                         ?> €
                         </td>
                         <td></td>
@@ -177,7 +201,7 @@ use kartik\datecontrol\DateControl;
                         <td></td>
                         <td class="text-align-right">
                         <?php
-                            echo number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass, 2);
+                            echo number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass, 2, '.', ',');
                         ?> €
                         </td>
                         <td></td>
@@ -197,7 +221,7 @@ use kartik\datecontrol\DateControl;
                             foreach($modelDatenblatt->zahlungs as $zahlung) {
                                 $totalZahlungen += (float) $zahlung->betrag;
                             }
-                            echo number_format($totalZahlungen, 2);
+                            echo number_format($totalZahlungen, 2, '.', ',');
                         ?> €
                         </td>
                         <td></td>
@@ -212,7 +236,7 @@ use kartik\datecontrol\DateControl;
                         <td></td>
                         <td class="text-align-right">
                         <?php
-                            echo number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass - $totalZahlungen, 2);
+                            echo number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass - $totalZahlungen, 2, '.', ',');
                         ?> €
                         </td>
                         <td></td>

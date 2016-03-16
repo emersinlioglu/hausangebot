@@ -2,7 +2,7 @@
 //use kartik\datetime\DateTimePicker;
 use yii\helpers\Html;
 use kartik\datecontrol\DateControl;
-
+use kartik\money\MaskMoney;
 
 /* @var $modelDatenblatt app\models\Datenblatt */
 /* @var $form yii\bootstrap\ActiveForm */
@@ -71,18 +71,14 @@ use kartik\datecontrol\DateControl;
                             ?>
                     </td>
                     <td>
-                        <?= $form->field($modelSonderwunsch, "[$key]angebot_betrag")->textInput([]) 
-                     //               ->widget(MaskMoney::classname(), [
-                     //   'options' => [
-                     //       'id' => $key . '-sow-id'
-                     //   ],    
-                     //   'pluginOptions' => [
-                     //       'suffix' => ' €',
-                     //       'thousands' => '.',
-                     //       'decimal' => ',',
-                     //   ],
-                   // ])
-                                    ?>
+                        <?= $form->field($modelSonderwunsch, "[$key]angebot_betrag")
+                            //->textInput([])
+                            ->widget(MaskMoney::classname(), [
+                                'options' => [
+                                    'id' => $key . '-angebot_betrag-id',
+                                ],
+                            ])
+                        ?>
                     </td>
                     <td>
                         <?php
@@ -97,7 +93,14 @@ use kartik\datecontrol\DateControl;
                         ?>
                     </td>
                     <td>
-                        <?= $form->field($modelSonderwunsch, "[$key]beauftragt_betrag")->textInput([]) ?>
+                        <?= $form->field($modelSonderwunsch, "[$key]beauftragt_betrag")
+                            //->textInput([])
+                            ->widget(MaskMoney::classname(), [
+                                'options' => [
+                                    'id' => $key . '-beauftragt_betrag-id',
+                                ],
+                            ])
+                        ?>
                     </td>
                     <td>
                         <?php
@@ -113,7 +116,14 @@ use kartik\datecontrol\DateControl;
                     </td>
                     <td>
                         <?php $rechnungstellungBetrag += (float)$modelSonderwunsch->rechnungsstellung_betrag; ?>
-                        <?= $form->field($modelSonderwunsch, "[$key]rechnungsstellung_betrag")->textInput([]) ?>
+                        <?= $form->field($modelSonderwunsch, "[$key]rechnungsstellung_betrag")
+                            //->textInput([])
+                            ->widget(MaskMoney::classname(), [
+                                'options' => [
+                                    'id' => $key . '-rechnungsstellung_betrag-id',
+                                ],
+                            ])
+                        ?>
                     </td>
                     <td>
                         <?= $form->field($modelSonderwunsch, "[$key]rechnungsstellung_rg_nr")->textInput([]) ?>
@@ -132,7 +142,7 @@ use kartik\datecontrol\DateControl;
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td class="text-align-right"><?= number_format($rechnungstellungBetrag, 2) ?> €</td>
+                    <td class="text-align-right"><?= number_format($rechnungstellungBetrag, 2, '.', ',') ?> €</td>
                     <td></td>
                     <td></td>    
                 </tr>

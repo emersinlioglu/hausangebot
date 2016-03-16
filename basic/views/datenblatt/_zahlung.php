@@ -66,15 +66,15 @@ use kartik\money\MaskMoney;
                                 <td>
                                     <?= $form->field($modelZahlung, "[$key]betrag")->textInput()
                                             ->widget(MaskMoney::classname(), [
-                        'options' => [
-                            'id' => $key . '-zhb-id'
-                        ],    
-                        'pluginOptions' => [
-                            'suffix' => ' €',
-                            'thousands' => '.',
-                            'decimal' => ',',
-                        ],
-                    ])?>
+                                        'options' => [
+                                            'id' => $key . '-zhb-id'
+                                        ],
+                                        'pluginOptions' => [
+                                            'suffix' => ' €',
+                                            'thousands' => '.',
+                                            'decimal' => ',',
+                                        ],
+                                    ])?>
                                 </td>
                                 <td>
                                     <?= $form->field($modelZahlung, "[$key]bemerkung")->textInput([]) ?>

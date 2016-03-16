@@ -116,34 +116,41 @@ $this->registerJs('
                 <td><?= $form->field($modelTeilieigentum, 'zimmer')->textInput(["maxlength" => true, 'name' => "Teileigentumseinheiten[$key][zimmer]"]) ?></td>
                 <td><?= $form->field($modelTeilieigentum, 'me_anteil')->textInput(["maxlength" => true, 'name' => "Teileigentumseinheiten[$key][me_anteil]"]) ?></td>
                 <td><?= $form->field($modelTeilieigentum, 'wohnflaeche')->textInput(["maxlength" => true, 'name' => "Teileigentumseinheiten[$key][wohnflaeche]"]) ?></td>
-                <td><?= $form->field($modelTeilieigentum, 'kaufpreis')->textInput(['name' => "Teileigentumseinheiten[$key][kaufpreis]"])
-                //    ->widget(MaskMoney::classname(), [
-                //        'options' => [
-                //            'id' => $key . '-teh-id'
-                //        ],    
-                //        'pluginOptions' => [
-                //            'suffix' => ' €',
-                //            'thousands' => '.',
-                //            'decimal' => ',',
-                //        ],
-                //    ])
+                <td><?=
+                    $form->field($modelTeilieigentum, 'kaufpreis')
+//                        ->textInput(['name' => "Teileigentumseinheiten[$key][kaufpreis]"])
+                        ->widget(MaskMoney::classname(), [
+                            'options' => [
+                                'id' => $key . '-kaufpreis-id',
+                                'name' => "Teileigentumseinheiten[$key][kaufpreis]",
+                            ],
+//                            'pluginOptions' => [
+//                                'suffix' => ' €',
+//                                'thousands' => ',',
+//                                'decimal' => '.',
+//                            ],
+                        ])
                 ?>
                 </td>
-                <td><?= $form->field($modelTeilieigentum, 'kp_einheit')->textInput([
-                        'name' => "Teileigentumseinheiten[$key][kp_einheit]",
-                        'disabled' => 'disabled'
-                    ])
-                  //  ->widget(MaskMoney::classname(), [
-                  //      'options' => [
-                  //          'id' => $key . '-teh-kpeinheit-id',
-                  //          'disabled' => "disabled"
-                  //      ],    
-                  //      'pluginOptions' => [
-                  //          'suffix' => ' €',
-                  //          'thousands' => '.',
-                  //          'decimal' => ',',
-                  //      ],
-                 //   ])
+                <td><?=
+
+                    $form->field($modelTeilieigentum, 'kp_einheit')
+//                        ->textInput([
+//                            'name' => "Teileigentumseinheiten[$key][kp_einheit]",
+//                            'disabled' => 'disabled'
+//                        ])
+                        ->widget(MaskMoney::classname(), [
+                            'options' => [
+                                'id' => $key . '-zhb-id',
+                                'disabled' => 'disabled',
+                                'name' => "Teileigentumseinheiten[$key][kp_einheit]",
+                            ],
+                            'pluginOptions' => [
+//                                'suffix' => ' €',
+//                                'thousands' => ',',
+//                                'decimal' => '.',
+                            ],
+                        ])
                 
                 ?>
                 </td>

@@ -202,8 +202,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <td><?= $te->geschoss ?></td>
                 <td><?= $te->zimmer ?></td>
                 <td class="text-align-right"><?= $te->me_anteil ?></td>
-                <td><?= number_format((float)$te->wohnflaeche, 2, '.', ',') ?> <?= $te->einheitstyp->einheit ?></td>
-                <td class="text-align-right"><?= number_format((float)$te->kaufpreis, 2, '.', ',') ?>€</td>
+                <td><?= number_format((float)$te->wohnflaeche, 2, ',', '.') ?> <?= $te->einheitstyp->einheit ?></td>
+                <td class="text-align-right"><?= number_format((float)$te->kaufpreis, 2, ',', '.') ?>€</td>
             </tr>
             <?php $kaufpreisSumme += (float)$te->kaufpreis; ?>
         <?php endforeach; ?>
@@ -216,7 +216,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <td></td>
             <td></td>
             <td></td>
-            <td class="text-align-right"><?= number_format((float)$kaufpreisSumme, 2, '.', ',') ?>€</td>
+            <td class="text-align-right"><?= number_format((float)$kaufpreisSumme, 2, ',', '.') ?>€</td>
         </tr>
         <tr>
             <td><strong>Zählerangaben</strong></td>
@@ -540,11 +540,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <tr>
                 <td><?= $sonderwunsch->name ?></td>
                 <td><?= Yii::$app->formatter->asDate($sonderwunsch->angebot_datum) ?></td>
-                <td><?= number_format((float)$sonderwunsch->angebot_betrag, 2, '.', ',') ?> €</td>
+                <td><?= number_format((float)$sonderwunsch->angebot_betrag, 2, ',', '.') ?> €</td>
                 <td><?= Yii::$app->formatter->asDate($sonderwunsch->beauftragt_datum) ?></td>
-                <td><?= number_format((float)$sonderwunsch->beauftragt_betrag, 2, '.', ',') ?> €</td>
+                <td><?= number_format((float)$sonderwunsch->beauftragt_betrag, 2, ',', '.') ?> €</td>
                 <td><?= Yii::$app->formatter->asDate($sonderwunsch->rechnungsstellung_datum) ?></td>
-                <td><?= number_format((float)$sonderwunsch->rechnungsstellung_betrag, 2, '.', ',') ?> €</td>
+                <td><?= number_format((float)$sonderwunsch->rechnungsstellung_betrag, 2, ',', '.') ?> €</td>
                 <td><?= $sonderwunsch->rechnungsstellung_rg_nr ?></td>
             </tr>
         <?php $rechnungsstellungBetragSumme += (float)$sonderwunsch->rechnungsstellung_betrag; ?>
@@ -557,7 +557,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <td></td>
             <td></td>
             <td></td>
-            <td class="text-align-right"><?= number_format((float)$rechnungsstellungBetragSumme, 2, '.', ',') ?> €</td>
+            <td class="text-align-right"><?= number_format((float)$rechnungsstellungBetragSumme, 2, ',', '.') ?> €</td>
             <td></td>
         </tr>
         <tr>
@@ -626,8 +626,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php foreach($model->abschlags as $key => $abschlag): ?>
         <tr>
             <td><?= $abschlag->name ?></td>
-            <td><?= number_format((float)$abschlag->kaufvertrag_prozent, 2, '.', ',') ?> %</td>
-            <td><?= number_format((float)$abschlag->kaufvertrag_betrag, 2, '.', ',') ?> €</td>
+            <td><?= number_format((float)$abschlag->kaufvertrag_prozent, 2, ',', '.') ?> %</td>
+            <td><?= number_format((float)$abschlag->kaufvertrag_betrag, 2, ',', '.') ?> €</td>
             <td>
                 <?php 
                     if ($abschlag->kaufvertrag_angefordert) {
@@ -635,8 +635,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 ?>
             </td>
-            <td><?= number_format((float)$abschlag->sonderwunsch_prozent, 2, '.', ',') ?> %</td>
-            <td><?= number_format((float)$abschlag->sonderwunsch_betrag, 2, '.', ',') ?> €</td>
+            <td><?= number_format((float)$abschlag->sonderwunsch_prozent, 2, ',', '.') ?> %</td>
+            <td><?= number_format((float)$abschlag->sonderwunsch_betrag, 2, ',', '.') ?> €</td>
             <td>
                 <?php 
                     if ($abschlag->sonderwunsch_angefordert) {
@@ -644,7 +644,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 ?>
             </td>
-            <td class="text-align-right"><?= number_format((float)$abschlag->summe, 2, '.', ',') ?> €</td>
+            <td class="text-align-right"><?= number_format((float)$abschlag->summe, 2, ',', '.') ?> €</td>
         </tr>
         
         <?php 
@@ -671,7 +671,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <td><?= $sonderwunschProzentTotal ?> %</td>
             <td><?= $swSummeBetrag ?> €</td>
             <td></td>
-            <td class="text-align-right"><?= number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal, 2, '.', ',') ?> €</td>
+            <td class="text-align-right"><?= number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal, 2, ',', '.') ?> €</td>
         </tr>
         
         
@@ -689,7 +689,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     foreach($model->nachlasses as $nachlass) {
                         $totalNachlass += (float) $nachlass->betrag;
                     }
-                    echo number_format($totalNachlass, 2, '.', ',');
+                    echo number_format($totalNachlass, 2, ',', '.');
                 ?>  €
             </td>
         </tr>
@@ -701,7 +701,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ?>
                 </td>
                 <td>
-                    <?= number_format($modelNachlass->betrag,2, '.', ',') ?>€
+                    <?= number_format($modelNachlass->betrag,2, ',', '.') ?>€
                 </td>
                 <td>
                     <?= $modelNachlass->bemerkung ?>
@@ -717,7 +717,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <td></td>
             <td></td>
             <td class="text-align-right"><?php
-                    echo number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass, 2, '.', ',');
+                    echo number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass, 2, ',', '.');
                 ?> €
             </td>
         </tr>
@@ -746,7 +746,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     foreach($model->zahlungs as $zahlung) {
                         $totalZahlungen += (float) $zahlung->betrag;
                     }
-                    echo number_format($totalZahlungen, 2, '.', ',');
+                    echo number_format($totalZahlungen, 2, ',', '.');
                 ?> €
             </td>
         </tr>
@@ -764,7 +764,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ?>
                 </td>
                 <td>
-                    <?php echo number_format($modelZahlung->betrag, 2, '.', ','); ?>
+                    <?php echo number_format($modelZahlung->betrag, 2, ',', '.'); ?>
                 </td>
                 <td>
                     <?= $modelZahlung->bemerkung ?>
@@ -792,7 +792,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <td></td>
             <td class="text-align-right">
                 <?php
-                    echo number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass - $totalZahlungen, 2, '.', ',');
+                    echo number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass - $totalZahlungen, 2, ',', '.');
                 ?> €
             </td>
         </tr>

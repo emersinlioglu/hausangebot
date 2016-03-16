@@ -142,7 +142,7 @@ use kartik\money\MaskMoney;
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td class="text-align-right"><?= number_format($rechnungstellungBetrag, 2, '.', ',') ?> €</td>
+                    <td class="text-align-right"><?= number_format($rechnungstellungBetrag, 2, ',', '.') ?> €</td>
                     <td></td>
                     <td></td>    
                 </tr>

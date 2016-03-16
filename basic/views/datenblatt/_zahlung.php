@@ -34,7 +34,7 @@ use kartik\money\MaskMoney;
                     <table class="table table-bordered">
                         <tr>
                             <th>Datum</th>
-                            <th>Betrag</th>
+                            <th>Betrag ( € )</th>
                             <th>Bemerkung</th>
                             <th>
                                 <?= Html::a('<span class="fa fa-plus"> </span>',
@@ -64,17 +64,19 @@ use kartik\money\MaskMoney;
                                     ?>
                                 </td>
                                 <td>
-                                    <?= $form->field($modelZahlung, "[$key]betrag")->textInput()
-                                            ->widget(MaskMoney::classname(), [
-                                        'options' => [
-                                            'id' => $key . '-zhb-id'
-                                        ],
-                                        'pluginOptions' => [
-                                            'suffix' => ' €',
-                                            'thousands' => '.',
-                                            'decimal' => ',',
-                                        ],
-                                    ])?>
+                                    <?= $form->field($modelZahlung, "[$key]betrag")
+                                        //->textInput()
+                                        ->widget(MaskMoney::classname(), [
+                                            'options' => [
+                                                'id' => $key . '-zhb-id'
+                                            ],
+//                                            'pluginOptions' => [
+//                                                'suffix' => ' €',
+//                                                'thousands' => '.',
+//                                                'decimal' => ',',
+//                                            ],
+                                        ])
+                                    ?>
                                 </td>
                                 <td>
                                     <?= $form->field($modelZahlung, "[$key]bemerkung")->textInput([]) ?>

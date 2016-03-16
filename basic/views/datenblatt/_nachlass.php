@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 //use kartik\datetime\DateTimePicker;
 use kartik\datecontrol\DateControl;
-
+use kartik\money\MaskMoney;
 
 /* @var $modelDatenblatt app\models\Datenblatt */
 /* @var $modelNachlass app\models\Nachlass */
@@ -32,7 +32,7 @@ use kartik\datecontrol\DateControl;
                 <table class="table table-bordered">
                     <tr>
                         <th>Schreiben vom</th>
-                        <th>Betrag</th>
+                        <th>Betrag ( € )</th>
                         <th>Bemerkung</th>
                         <th><?= Html::a('<span class="fa fa-plus"> </span>',
                             Yii::$app->urlManager->createUrl(["datenblatt/addnachlass", 'datenblattId' => $modelDatenblatt->id]), 
@@ -60,7 +60,14 @@ use kartik\datecontrol\DateControl;
                         ?>
                     </td>
                     <td>
-                        <?= $form->field($modelNachlass, "[$key]betrag")->textInput([]) ?>
+                        <?= $form->field($modelNachlass, "[$key]betrag")
+                            //->textInput([])
+                            ->widget(MaskMoney::classname(), [
+                                'options' => [
+                                    'id' => $key . '-betrag-id',
+                                ],
+                            ])
+                        ?>
                     </td>
                     <td>
                         <?= $form->field($modelNachlass, "[$key]bemerkung")->textInput([]) ?>

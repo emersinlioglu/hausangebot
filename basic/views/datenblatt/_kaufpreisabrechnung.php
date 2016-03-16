@@ -26,15 +26,15 @@ use kartik\money\MaskMoney;
                         <th>Bezeichnung</th>
                         <th colspan="3" >Kaufvertrag</th>
                         <th colspan="3" >Sonderwünche/Ausstattung</th>
-                        <th >Summe</th>
+                        <th >Summe (€)</th>
                     </tr>
                     <tr>
                         <th></th>
                         <th>- in %</th>
-                        <th>-Betrag</th>
+                        <th>-Betrag ( € )</th>
                         <th>-angefordert</th>
                         <th>- in %</th>
-                        <th>-Betrag</th>
+                        <th>-Betrag ( € )</th>
                         <th>-angefordert</th>
                         <th></th>
                         <th>
@@ -151,12 +151,12 @@ use kartik\money\MaskMoney;
                     <tr>
                         <td>Summe</td>
                         <td><?= $kaufvertragProzentTotal ?> %</td>
-                        <td class="text-align-right"><?=  number_format($kvSummeBetrag, 2, '.', ',') ?> €</td>
+                        <td class="text-align-right"><?=  number_format($kvSummeBetrag, 2, ',', '.') ?> €</td>
                         <td></td>
                         <td><?= $sonderwunschProzentTotal ?> %</td>
-                        <td class="text-align-right"><?= number_format($swSummeBetrag, 2, '.', ',') ?> €</td>
+                        <td class="text-align-right"><?= number_format($swSummeBetrag, 2, ',', '.') ?> €</td>
                         <td></td>
-                        <td class="text-align-right"><?= number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal, 2, '.', ',') ?> €</td>
+                        <td class="text-align-right"><?= number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal, 2, ',', '.') ?> €</td>
                         <td></td>
                     </tr>
                     <!--
@@ -168,7 +168,7 @@ use kartik\money\MaskMoney;
                         <td><?= 100 - $sonderwunschProzentTotal ?> %</td>
                         <td><?= $sonderwuenscheTotal - $sonderwunschBetragTotal ?> EUR</td>
                         <td></td>
-                        <td><?= number_format(($kaufpreisTotal + $sonderwuenscheTotal) - ($kaufvertragBetragTotal + $sonderwunschBetragTotal), 2, '.', ',') ?> €</td>
+                        <td><?= number_format(($kaufpreisTotal + $sonderwuenscheTotal) - ($kaufvertragBetragTotal + $sonderwunschBetragTotal), 2, ',', '.') ?> €</td>
                         <td></td>
                     </tr>
                     -->
@@ -186,7 +186,7 @@ use kartik\money\MaskMoney;
                             foreach($modelDatenblatt->nachlasses as $nachlass) {
                                 $totalNachlass += (float) $nachlass->betrag;
                             }
-                            echo number_format($totalNachlass, 2, '.', ',');
+                            echo number_format($totalNachlass, 2, ',', '.');
                         ?> €
                         </td>
                         <td></td>
@@ -201,7 +201,7 @@ use kartik\money\MaskMoney;
                         <td></td>
                         <td class="text-align-right">
                         <?php
-                            echo number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass, 2, '.', ',');
+                            echo number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass, 2, ',', '.');
                         ?> €
                         </td>
                         <td></td>
@@ -221,7 +221,7 @@ use kartik\money\MaskMoney;
                             foreach($modelDatenblatt->zahlungs as $zahlung) {
                                 $totalZahlungen += (float) $zahlung->betrag;
                             }
-                            echo number_format($totalZahlungen, 2, '.', ',');
+                            echo number_format($totalZahlungen, 2, ',', '.');
                         ?> €
                         </td>
                         <td></td>
@@ -236,7 +236,7 @@ use kartik\money\MaskMoney;
                         <td></td>
                         <td class="text-align-right">
                         <?php
-                            echo number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass - $totalZahlungen, 2, '.', ',');
+                            echo number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass - $totalZahlungen, 2, ',', '.');
                         ?> €
                         </td>
                         <td></td>

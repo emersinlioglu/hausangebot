@@ -139,11 +139,33 @@ var DatenblattForm = function () {
     }
 
     /**
+     * Format mysql date string
+     * @param dateString
+     * @returns {*}
+     */
+    _.formatDate = function(dateString) {
+
+        if (dateString == null || dateString.length == 0) {
+            return '';
+        }
+
+        var date = $.datepicker.parseDate("yy-mm-dd", dateString);
+        var day = date.getDate();
+        day = (day < 10 ? '0' : '') + day;
+        var month = (date.getMonth() + 1);
+        month = (month < 10 ? '0' : '') + month;
+
+        return  day + '.' + month + '.' + date.getFullYear();
+    }
+
+    /**
      * init autocomplete kunden
      */
     _.initAutocompleteKunden = function() {
 
-        $('[name="Kaeufer[debitor_nr]"]')
+        var self = this;
+
+        $('#search-kaufer')
             .keydown(function(e){
                 if(e.which == 13) {
                     e.preventDefault();
@@ -158,35 +180,63 @@ var DatenblattForm = function () {
                     if (ui.item && ui.item.id) {
                         // item selected and has an id
 
-                        console.log(ui.item);
+                        $('[name="Datenblatt[kaeufer_id]"]').val(ui.item.id);
+                        $('#kaeufer-debitor_nr').val(ui.item.debitor_nr);
 
-                        //'anrede' => $kunde->anrede,
-                        //'titel' => $kunde->titel,
-                        //'vorname' => $kunde->vorname,
-                        //'nachname' => $kunde->nachname,
-                        //'email' => $kunde->email,
-                        //'strasse' => $kunde->strasse,
-                        //'hausnr' => $kunde->hausnr,
-                        //'plz' => $kunde->plz,
-                        //'ort' => $kunde->ort,
-                        //'festnetz' => $kunde->festnetz,
-                        //'handy' => $kunde->handy,
+                        //$('#kaeufer-beurkundung_am-disp').val(self.formatDate(ui.item.beurkundung_am));
+                        //$('#kaeufer-verbindliche_fertigstellung-disp').val(self.formatDate(ui.item.verbindliche_fertigstellung));
+                        //$('#kaeufer-abnahme_se-disp').val(self.formatDate(ui.item.abnahme_se));
+                        //$('#kaeufer-uebergang_bnl-disp').val(self.formatDate(ui.item.uebergang_bnl));
+                        //$('#kaeufer-abnahme_ge-disp').val(self.formatDate(ui.item.abnahme_ge));
 
                         $('[name="Kaeufer[anrede]"]').val(ui.item.anrede);
                         $('[name="Kaeufer[titel]"]').val(ui.item.titel);
                         $('[name="Kaeufer[vorname]"]').val(ui.item.vorname);
                         $('[name="Kaeufer[nachname]"]').val(ui.item.nachname);
-                        $('[name="Kaeufer[email]"]').val(ui.item.email);
+
+                        $('[name="Kaeufer[anrede2]"]').val(ui.item.anrede2);
+                        $('[name="Kaeufer[titel2]"]').val(ui.item.titel2);
+                        $('[name="Kaeufer[vorname2]"]').val(ui.item.vorname2);
+                        $('[name="Kaeufer[nachname2]"]').val(ui.item.nachname2);
+
                         $('[name="Kaeufer[strasse]"]').val(ui.item.strasse);
                         $('[name="Kaeufer[hausnr]"]').val(ui.item.hausnr);
                         $('[name="Kaeufer[plz]"]').val(ui.item.plz);
                         $('[name="Kaeufer[ort]"]').val(ui.item.ort);
+
+                        $('[name="Kaeufer[email]"]').val(ui.item.email);
                         $('[name="Kaeufer[festnetz]"]').val(ui.item.festnetz);
                         $('[name="Kaeufer[handy]"]').val(ui.item.handy);
 
                     }
+
+                    $(this).val(' ');
                 }
-            });
+            })
+            .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+
+                var columns = [
+                    'debitor_nr',
+                    'vorname',
+                    'nachname'
+                ];
+
+                var a = $('<a>');
+                for (var i in columns) {
+                    var columnName = columns[i];
+                    a.append(
+                        $('<span>')
+                            .css('width', '100px')
+                            .css('display', 'inline-block')
+                            .text(item[columnName])
+                    );
+                }
+
+                return $( "<li>" )
+                    .data( "item.autocomplete", item )
+                    .append( a )
+                    .appendTo( ul );
+            };
     }
 
     /**

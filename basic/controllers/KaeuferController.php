@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Datenblatt;
 use Yii;
 use app\models\Kaeufer;
 use app\models\KaeuferSearch;
@@ -88,6 +89,37 @@ class KaeuferController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionUpdatedates()
+    {
+        $columns = [
+            'beurkundung_am',
+            'verbindliche_fertigstellung',
+            'uebergang_bnl',
+            'abnahme_se',
+            'abnahme_ge',
+            'auflassung'
+        ];
+
+        $cnt = 0;
+        $datenblatts = Datenblatt::find()->all();
+        foreach ($datenblatts as $datenblatt) {
+            $kaeufer = $datenblatt->kaeufer;
+            if ($kaeufer) {
+                $cnt++;
+                foreach ($columns as $column) {
+                    $datenblatt->{$column} = $kaeufer->{$column};
+                }
+
+                echo "dbid: " . $datenblatt->id . "<br>";
+                $datenblatt->save();
+            }
+
+
+        }
+
+        return 'updated: ' . $cnt;
     }
 
     /**

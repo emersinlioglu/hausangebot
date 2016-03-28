@@ -17,6 +17,14 @@ use Yii;
  * @property string $sonstige_anmerkungen
  * @property integer $aktiv
  *
+ * @property string $beurkundung_am
+ * @property string $verbindliche_fertigstellung
+ * @property string $uebergang_bnl
+ * @property string $abnahme_se
+ * @property string $abnahme_ge
+ * @property integer $auflassung
+ *
+ *
  * @property Abschlag[] $abschlags
  * @property Firma $firma
  * @property Haus $haus
@@ -42,7 +50,8 @@ class Datenblatt extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['firma_id', 'projekt_id', 'haus_id', 'nummer', 'kaeufer_id', 'aktiv'], 'integer'],
+            [['beurkundung_am', 'verbindliche_fertigstellung', 'uebergang_bnl', 'abnahme_se', 'abnahme_ge'], 'safe'],
+            [['firma_id', 'projekt_id', 'haus_id', 'nummer', 'kaeufer_id', 'aktiv', 'auflassung'], 'integer'],
             [['besondere_regelungen_kaufvertrag', 'sonstige_anmerkungen'], 'string']
         ];
     }
@@ -62,6 +71,13 @@ class Datenblatt extends \yii\db\ActiveRecord
             'besondere_regelungen_kaufvertrag' => Yii::t('app', 'Besondere Regelungen Kaufvertrag'),
             'sonstige_anmerkungen' => Yii::t('app', 'Sonstige Anmerkungen'),
             'aktiv' => Yii::t('app', 'Aktiv'),
+
+            'beurkundung_am' => Yii::t('app', 'Beurkundung Am'),
+            'verbindliche_fertigstellung' => Yii::t('app', 'Verbindliche Fertigstellung'),
+            'uebergang_bnl' => Yii::t('app', 'Uebergang Bnl'),
+            'abnahme_se' => Yii::t('app', 'Abnahme Se'),
+            'abnahme_ge' => Yii::t('app', 'Abnahme Ge'),
+            'auflassung' => Yii::t('app', 'Auflassung'),
         ];
     }
 

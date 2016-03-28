@@ -41,9 +41,22 @@ use kartik\datecontrol\DateControl;
 
                 <!--<h3>Käuferdaten</h3>-->
 
+                <div class="">
+                    <?= $form->field($modelDatenblatt, 'kaeufer_id')->textInput() ?>
+                </div>
+
                 <div class="row">
                     <div class="col-sm-3">
-                        <?= $form->field($modelKaeufer, 'debitor_nr')->textInput(['maxlength' => true]) ?>
+                        <div class="form-group field-search-kaufer">
+                            <label class="control-label" for="kaeufer-debitor_nr">Suche</label>
+                            <input type="text" id="search-kaufer" class="form-control ui-autocomplete-input" name="suche" value="" maxlength="255">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <?= $form->field($modelKaeufer, 'debitor_nr')->textInput(['maxlength' => true, 'disabled' => 'disabled']) ?>
                         <?php
 //                            echo $form->field($modelKaeufer, 'debitor_nr')->widget(TypeaheadBasic::classname(), [
 //                                'data' => ['aaaa' => 'aaaaa', 'b' => 'bbbb'],
@@ -56,8 +69,9 @@ use kartik\datecontrol\DateControl;
                 <div class="row">
                     <div class="col-sm-3">
                         <?php
-                            echo $form->field($modelKaeufer, "beurkundung_am")->widget(DateControl::classname(), [
+                            echo $form->field($modelDatenblatt, "beurkundung_am")->widget(DateControl::classname(), [
                                 'type' => DateControl::FORMAT_DATE,
+//                                'disabled' => 'disabled',
                                 'options' => [
                                     'pluginOptions' => [
                                         //'autoclose' => true
@@ -68,8 +82,9 @@ use kartik\datecontrol\DateControl;
                     </div>
                     <div class="col-sm-3">
                         <?php
-                            echo $form->field($modelKaeufer, "verbindliche_fertigstellung")->widget(DateControl::classname(), [
+                            echo $form->field($modelDatenblatt, "verbindliche_fertigstellung")->widget(DateControl::classname(), [
                                 'type' => DateControl::FORMAT_DATE,
+//                                'disabled' => 'disabled',
                                 'options' => [
                                     'pluginOptions' => [
                                         //'autoclose' => true
@@ -78,8 +93,9 @@ use kartik\datecontrol\DateControl;
                             ]);
                         ?>
                         <?php
-                            echo $form->field($modelKaeufer, "uebergang_bnl")->widget(DateControl::classname(), [
+                            echo $form->field($modelDatenblatt, "uebergang_bnl")->widget(DateControl::classname(), [
                                 'type' => DateControl::FORMAT_DATE,
+//                                'disabled' => 'disabled',
                                 'options' => [
                                     'pluginOptions' => [
                                         //'autoclose' => true
@@ -90,8 +106,9 @@ use kartik\datecontrol\DateControl;
                     </div>
                     <div class="col-sm-3">
                         <?php
-                            echo $form->field($modelKaeufer, "abnahme_se")->widget(DateControl::classname(), [
+                            echo $form->field($modelDatenblatt, "abnahme_se")->widget(DateControl::classname(), [
                                 'type' => DateControl::FORMAT_DATE,
+//                                'disabled' => 'disabled',
                                 'options' => [
                                     'pluginOptions' => [
                                         //'autoclose' => true
@@ -100,8 +117,9 @@ use kartik\datecontrol\DateControl;
                             ]);
                         ?>
                         <?php
-                            echo $form->field($modelKaeufer, "abnahme_ge")->widget(DateControl::classname(), [
+                            echo $form->field($modelDatenblatt, "abnahme_ge")->widget(DateControl::classname(), [
                                 'type' => DateControl::FORMAT_DATE,
+//                                'disabled' => 'disabled',
                                 'options' => [
                                     'pluginOptions' => [
                                         //'autoclose' => true
@@ -112,46 +130,45 @@ use kartik\datecontrol\DateControl;
                     </div>
 
                     <div class="col-sm-3">
-                        <?= $form->field($modelKaeufer, 'auflassung')->checkbox([]) ?>
+                        <?= $form->field($modelDatenblatt, 'auflassung')->checkbox([
+//                            'disabled' => 'disabled'
+                        ]) ?>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-3">
-                        <?= $form->field($modelKaeufer, 'anrede')->dropDownList([ 0 => 'Herr', 1 => 'Frau'],['prompt' => 'Auswählen']) ?>
-                      
-                         <?= $form->field($modelKaeufer, 'anrede2')->dropDownList([ 0 => 'Herr', 1 => 'Frau'],['prompt' => 'Auswählen']) ?>
-                        
-                        <?= $form->field($modelKaeufer, 'strasse')->textInput([]) ?>
-                        <?= $form->field($modelKaeufer, 'email')->textInput([]) ?>
-                        
+                        <?= $form->field($modelKaeufer, 'anrede')->dropDownList([ 0 => 'Herr', 1 => 'Frau'],['prompt' => 'Auswählen', 'disabled' => 'disabled']) ?>
+                        <?= $form->field($modelKaeufer, 'anrede2')->dropDownList([ 0 => 'Herr', 1 => 'Frau'],['prompt' => 'Auswählen', 'disabled' => 'disabled']) ?>
+                        <?= $form->field($modelKaeufer, 'strasse')->textInput(['disabled' => 'disabled']) ?>
+                        <?= $form->field($modelKaeufer, 'email')->textInput(['disabled' => 'disabled']) ?>
                     </div>
                     <div class="col-sm-3">
-                          <?= $form->field($modelKaeufer, 'titel')->textInput([]) ?>
-                        <?= $form->field($modelKaeufer, 'titel2')->textInput([]) ?>
+                         <?= $form->field($modelKaeufer, 'titel')->textInput(['disabled' => 'disabled']) ?>
+                         <?= $form->field($modelKaeufer, 'titel2')->textInput(['disabled' => 'disabled']) ?>
                         
-                         <?= $form->field($modelKaeufer, 'hausnr')->textInput([]) ?>
-                        <?= $form->field($modelKaeufer, 'festnetz')->textInput([])->widget(\yii\widgets\MaskedInput::className(), [
-    'mask' => '09999-9[9][9][9][9][9][9][9][9]',
-]) ?>
-                        
+                         <?= $form->field($modelKaeufer, 'hausnr')->textInput(['disabled' => 'disabled']) ?>
+                         <?= $form->field($modelKaeufer, 'festnetz')
+                              //->textInput([])
+                              ->widget(\yii\widgets\MaskedInput::className(), [
+                                'mask' => '09999-9[9][9][9][9][9][9][9][9]',
+                                  'options' => [
+                                      'disabled' => 'disabled',
+                                      'class' => 'form-control'
+                                  ]
+                            ])
+                         ?>
                     </div>
                     <div class="col-sm-3">
-                        <?= $form->field($modelKaeufer, 'vorname')->textInput([]) ?>
-                       
-                        <?= $form->field($modelKaeufer, 'vorname2')->textInput([]) ?>
-                       
-                        <?= $form->field($modelKaeufer, 'plz')->textInput([]) ?>
-                        <?= $form->field($modelKaeufer, 'handy')->textInput([]) ?>
-                       
+                        <?= $form->field($modelKaeufer, 'vorname')->textInput(['disabled' => 'disabled']) ?>
+                        <?= $form->field($modelKaeufer, 'vorname2')->textInput(['disabled' => 'disabled']) ?>
+                        <?= $form->field($modelKaeufer, 'plz')->textInput(['disabled' => 'disabled']) ?>
+                        <?= $form->field($modelKaeufer, 'handy')->textInput(['disabled' => 'disabled']) ?>
                     </div>
                     <div class="col-sm-3">
-                         <?= $form->field($modelKaeufer, 'nachname')->textInput([]) ?>
-                         <?= $form->field($modelKaeufer, 'nachname2')->textInput([]) ?>
-                        <?= $form->field($modelKaeufer, 'ort')->textInput([]) ?>
-                        
-                       
-                        
+                         <?= $form->field($modelKaeufer, 'nachname')->textInput(['disabled' => 'disabled']) ?>
+                         <?= $form->field($modelKaeufer, 'nachname2')->textInput(['disabled' => 'disabled']) ?>
+                         <?= $form->field($modelKaeufer, 'ort')->textInput(['disabled' => 'disabled']) ?>
                     </div>
                 </div>
     

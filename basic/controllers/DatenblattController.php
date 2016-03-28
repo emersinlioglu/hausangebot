@@ -178,67 +178,67 @@ class DatenblattController extends Controller
 
         if (!$preventPost && $modelDatenblatt->load($data) && $modelDatenblatt->save()) {
             
-            // Käufer
-            if ($modelKaeufer->load(Yii::$app->request->post())) {
-
-                $isEmpty = true;
-                foreach ($modelKaeufer->attributes as $attr => $value) {
-                    if (!empty($value)) {
-                        //error_log('not empty: ' . $attr . ' - ' . $value);
-                        $isEmpty = false;
-                        break;
-                    } else {
-                        //error_log('empty: ' . $attr . ' - ' . $value);
-                    }
-                }
-
-                // save
-                if (!$isEmpty) {
-                    $modelKaeufer->save();
-                }
-
-                // assign käufer
-                $modelDatenblatt->kaeufer_id = $modelKaeufer->id;
-                $modelDatenblatt->save();
-
-
-                // add new kunde
-                if (!Kunde::find()
-                    ->where( [ 'debitor_nr' => $modelKaeufer->debitor_nr] )
-                    ->exists()) {
-
-                    $modelKunde = new Kunde();
-//                    * @property string $debitor_nr
-//                    * @property integer $anrede
-//                    * @property string $titel
-//                    * @property string $vorname
-//                    * @property string $nachname
-//                    * @property string $email
-//                    * @property string $strasse
-//                    * @property string $hausnr
-//                    * @property string $plz
-//                    * @property string $ort
-//                    * @property string $festnetz
-//                    * @property string $handy
-
-                    $kundeData = [
-                        'debitor_nr' => $modelKaeufer->debitor_nr,
-                        'anrede' => $modelKaeufer->anrede,
-                        'titel' => $modelKaeufer->titel,
-                        'vorname' => $modelKaeufer->vorname,
-                        'nachname' => $modelKaeufer->nachname,
-                        'email' => $modelKaeufer->email,
-                        'strasse' => $modelKaeufer->strasse,
-                        'hausnr' => $modelKaeufer->hausnr,
-                        'plz' => $modelKaeufer->plz,
-                        'ort' => $modelKaeufer->ort,
-                        'festnetz' => $modelKaeufer->festnetz,
-                        'handy' => $modelKaeufer->handy,
-                    ];
-                    $modelKunde->load(['Kunde' => $kundeData]);
-                    $modelKunde->save();
-                }
-            }
+//            // Käufer
+//            if ($modelKaeufer->load(Yii::$app->request->post())) {
+//
+//                $isEmpty = true;
+//                foreach ($modelKaeufer->attributes as $attr => $value) {
+//                    if (!empty($value)) {
+//                        //error_log('not empty: ' . $attr . ' - ' . $value);
+//                        $isEmpty = false;
+//                        break;
+//                    } else {
+//                        //error_log('empty: ' . $attr . ' - ' . $value);
+//                    }
+//                }
+//
+//                // save
+//                if (!$isEmpty) {
+//                    $modelKaeufer->save();
+//                }
+//
+//                // assign käufer
+//                $modelDatenblatt->kaeufer_id = $modelKaeufer->id;
+//                $modelDatenblatt->save();
+//
+//
+//                // add new kunde
+//                if (!Kunde::find()
+//                    ->where( [ 'debitor_nr' => $modelKaeufer->debitor_nr] )
+//                    ->exists()) {
+//
+//                    $modelKunde = new Kunde();
+////                    * @property string $debitor_nr
+////                    * @property integer $anrede
+////                    * @property string $titel
+////                    * @property string $vorname
+////                    * @property string $nachname
+////                    * @property string $email
+////                    * @property string $strasse
+////                    * @property string $hausnr
+////                    * @property string $plz
+////                    * @property string $ort
+////                    * @property string $festnetz
+////                    * @property string $handy
+//
+//                    $kundeData = [
+//                        'debitor_nr' => $modelKaeufer->debitor_nr,
+//                        'anrede' => $modelKaeufer->anrede,
+//                        'titel' => $modelKaeufer->titel,
+//                        'vorname' => $modelKaeufer->vorname,
+//                        'nachname' => $modelKaeufer->nachname,
+//                        'email' => $modelKaeufer->email,
+//                        'strasse' => $modelKaeufer->strasse,
+//                        'hausnr' => $modelKaeufer->hausnr,
+//                        'plz' => $modelKaeufer->plz,
+//                        'ort' => $modelKaeufer->ort,
+//                        'festnetz' => $modelKaeufer->festnetz,
+//                        'handy' => $modelKaeufer->handy,
+//                    ];
+//                    $modelKunde->load(['Kunde' => $kundeData]);
+//                    $modelKunde->save();
+//                }
+//            }
 
             // Sonderwünsche
             if (Sonderwunsch::loadMultiple($modelDatenblatt->sonderwunsches, $data)) {
@@ -269,7 +269,6 @@ class DatenblattController extends Controller
                     $item->save();
                 }
 
-                error_log('validate zahlung');
 //                $isVal = Zahlung::validateMultiple($modelDatenblatt->zahlungs);
 //                error_log('result: ' . ($isVal ? 'ja' : 'nein'));
             }
@@ -282,9 +281,11 @@ class DatenblattController extends Controller
 //            }
 
 //            $this->redirect(['update', 'id' => $id]);
+
+            // reload datenblatt
+            $modelDatenblatt = $this->findModel($id);
+            $modelKaeufer = $modelDatenblatt->kaeufer;
         }
-
-
 
         // calculate kaufpreis
         $kaufpreisTotal = 0;
@@ -524,7 +525,11 @@ class DatenblattController extends Controller
 
 //        die($_GET['term']);
 //            $kunden = Kunde::findAll(['debitor_nr like "%' . $_GET['term'] . '%"']);
-            $kunden = Kunde::find()->where(['like', 'debitor_nr', $_GET['term']])->all();
+            $kaeufers = Kaeufer::find()
+                ->where(['like', 'debitor_nr', $_GET['term']])
+                ->orWhere(['like', 'vorname', $_GET['term']])
+                ->orWhere(['like', 'nachname', $_GET['term']])
+                ->all();
 //die('bbbb');
 //            $query = new Query;
 //
@@ -542,27 +547,62 @@ class DatenblattController extends Controller
 
 //            var_dump(count($kunden));
 
+
+            $labelColumns = array(
+                'debitor_nr' => array('title' => 'Debitor-Nr.'),
+                'vorname' => array('title' => 'Vorname'),
+                'nachname' => array('title' => 'Nachname'),
+            );
             $results = array();
-            foreach ($kunden as $kunde) {
+
+//            '<span style="width: 100px; display: inline-block;">' . $settings['title'] . '</span>';
+
+            $row = '';
+            foreach ($labelColumns as $columnName => $settings) {
+                $row .= '<span style="width: 100px; display: inline-block;">' . $settings['title'] . '</span>';
+            }
+            $results[] = array(
+                'id' => 0,
+                'value' => '',
+//                'label' => $row
+                'label' => '',
+                'debitor_nr' => 'Debitor-Nr.',
+                'vorname' => 'Vorname',
+                'nachname' => 'Nachname'
+            );
+
+            foreach ($kaeufers as $kaeufer) {
 
 //                $productName = $kunde->getCurrentTranslation()->getName();
 
-                $results[] = array(
-                    'id' => $kunde->debitor_nr,
-                    'label' => $kunde->debitor_nr,
-                    'value' => $kunde->debitor_nr,
-                    'anrede' => $kunde->anrede,
-                    'titel' => $kunde->titel,
-                    'vorname' => $kunde->vorname,
-                    'nachname' => $kunde->nachname,
-                    'email' => $kunde->email,
-                    'strasse' => $kunde->strasse,
-                    'hausnr' => $kunde->hausnr,
-                    'plz' => $kunde->plz,
-                    'ort' => $kunde->ort,
-                    'festnetz' => $kunde->festnetz,
-                    'handy' => $kunde->handy,
-                );
+                $data = $kaeufer->attributes;
+                $data['value'] = '1';
+
+//                $row = '';
+//                foreach ($labelColumns as $columnName => $settings) {
+//                    $row .= '<span style="width: 100px; display: inline-block;">' . $kaeufer->{$columnName} . '</span>';
+//                }
+//                $data['label'] = $row;
+                $data['label'] = '';
+
+                $results[] = $data;
+
+//                $results[] = array(
+//                    'id' => $kaeufer->debitor_nr,
+//                    'label' => $kaeufer->debitor_nr,
+//                    'value' => $kaeufer->debitor_nr,
+//                    'anrede' => $kaeufer->anrede,
+//                    'titel' => $kaeufer->titel,
+//                    'vorname' => $kaeufer->vorname,
+//                    'nachname' => $kaeufer->nachname,
+//                    'email' => $kaeufer->email,
+//                    'strasse' => $kaeufer->strasse,
+//                    'hausnr' => $kaeufer->hausnr,
+//                    'plz' => $kaeufer->plz,
+//                    'ort' => $kaeufer->ort,
+//                    'festnetz' => $kaeufer->festnetz,
+//                    'handy' => $kaeufer->handy,
+//                );
             }
 
 //            if (count($results) == 0) {
@@ -572,6 +612,7 @@ class DatenblattController extends Controller
 //                    "value" => ''
 //                );
 //            }
+
 
             echo Json::encode($results);
             return;

@@ -140,6 +140,7 @@ $this->registerJs('
         <?= $this->render('_kaeuferdaten', [
             'form' => $form,
             'modelKaeufer' => $modelKaeufer,
+            'modelDatenblatt' => $modelDatenblatt
         ]) ?>
     <?php //endif; ?>
 

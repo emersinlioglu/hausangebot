@@ -108,7 +108,7 @@ echo ExportMenu::widget([
     'value'=> 'anredeLabel',
 	'filter' => array(0 => 'Herr', 1 => 'Frau'),
 ],
-             'titel',
+//             'titel',
             'vorname',
             'nachname',
              'strasse',

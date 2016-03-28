@@ -63,14 +63,14 @@ class HausSearch extends Haus
         'desc' => ['projekt.name' => SORT_DESC],
         ];
         
-          $dataProvider->sort->attributes['firma_name'] = [
+        $dataProvider->sort->attributes['firma_name'] = [
         // The tables are the ones our relation are configured to
         // in my case they are prefixed with "tbl_"
         'asc' => ['firma.name' => SORT_ASC],
         'desc' => ['firma.name' => SORT_DESC],
         ];
 
-          $dataProvider->sort->attributes['firma_nr'] = [
+        $dataProvider->sort->attributes['firma_nr'] = [
         // The tables are the ones our relation are configured to
         // in my case they are prefixed with "tbl_"
         'asc' => ['firma.nr' => SORT_ASC],
@@ -78,8 +78,8 @@ class HausSearch extends Haus
         ];
 
         $dataProvider->sort->attributes['te_nummer'] = [
-            'asc' => ['teileigentumseinheiten.te_nummer' => SORT_ASC],
-            'desc' => ['teileigentumseinheiten.te_nummer' => SORT_DESC],
+            'asc' => ['te_nummer' => SORT_ASC],
+            'desc' => ['te_nummer' => SORT_DESC],
         ];
 
         $this->load($params);

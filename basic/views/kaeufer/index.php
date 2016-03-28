@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
     'attribute'=>'anrede',
     'value'=> 'anredeLabel',
 ],
-     'titel',
+//     'titel',
 	'vorname',
     'nachname',
     'strasse',

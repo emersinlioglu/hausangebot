@@ -95,7 +95,7 @@ class DatenblattSearch extends Datenblatt
         'desc' => ['kaeufer.nachname' => SORT_DESC],
         ];
         
-$dataProvider->sort->attributes['kaeufer_vorname'] = [
+        $dataProvider->sort->attributes['kaeufer_vorname'] = [
         // The tables are the ones our relation are configured to
         // in my case they are prefixed with "tbl_"
         'asc' => ['kaeufer.vorname' => SORT_ASC],
@@ -132,11 +132,9 @@ $dataProvider->sort->attributes['kaeufer_vorname'] = [
         
 
         $dataProvider->sort->attributes['te_nummer'] = [
-            'asc' => ['haus.teileigentumseinheiten.te_nummer' => SORT_ASC],
-            'desc' => ['haus.teileigentumseinheiten.te_nummer' => SORT_DESC],
+            'asc' => ['te_nummer' => SORT_ASC],
+            'desc' => ['te_nummer' => SORT_DESC],
         ];
-
-          
 
         $this->load($params);
 

@@ -91,6 +91,10 @@ class Kaeufer extends \yii\db\ActiveRecord
 {
     return $this->anrede ? 'Frau' : 'Herr';
 }
+    public function getAnrede2Label()
+{
+    return $this->anrede2 ? 'Frau' : 'Herr';
+}
 	
     /**
      * @return \yii\db\ActiveQuery

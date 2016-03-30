@@ -18,7 +18,7 @@ class KundeSearch extends Kunde
     public function rules()
     {
         return [
-            [['id', 'anrede'], 'integer'],
+            [['id', 'anrede', 'anrede2'], 'integer'],
             [['debitor_nr', 'titel', 'vorname', 'nachname', 'email', 'strasse', 'hausnr', 'plz', 'ort', 'festnetz', 'handy'], 'safe'],
         ];
     }
@@ -58,6 +58,7 @@ class KundeSearch extends Kunde
         $query->andFilterWhere([
             'id' => $this->id,
             'anrede' => $this->anrede,
+            'anrede2' => $this->anrede2,
         ]);
 
         $query->andFilterWhere(['like', 'debitor_nr', $this->debitor_nr])

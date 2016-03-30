@@ -176,6 +176,13 @@ class DatenblattController extends Controller
 //            return ActiveForm::validateMultiple($modelDatenblatt->zahlungs);
 //        }
 
+if (isset($data['Datenblatt']['kaeufer_id']) && (int)$data['Datenblatt']['kaeufer_id'] == 0) {
+    $data['Datenblatt']['kaeufer_id'] = 0;
+}
+        /*echo "<pre>";
+print_r($data);
+echo "</pre>";
+die;*/
         if (!$preventPost && $modelDatenblatt->load($data) && $modelDatenblatt->save()) {
             
 //            // Käufer

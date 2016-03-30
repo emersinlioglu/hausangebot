@@ -16,22 +16,14 @@ use yii\widgets\ActiveForm;
 
    
 
-    
-    <?= $form->field($model, 'anrede')->dropDownList([ 0 => 'Herr', 1 => 'Frau'],['prompt' => 'Auswählen']) ?>
+    <?= $form->field($model, 'anrede')->dropDownList([0 => 'Herr', 1 => 'Frau']) ?>
+   
 
     <?= $form->field($model, 'titel')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'vorname')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'nachname')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'anrede2')->dropDownList([ 0 => 'Herr', 1 => 'Frau'],['prompt' => 'Auswählen']) ?>
-
-    <?=  $form->field($model, 'titel2')->textInput(['maxlength' => true]) ?>
-
-    <?=  $form->field($model, 'vorname2')->textInput(['maxlength' => true]) ?>
-
-    <?=  $form->field($model, 'nachname2')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'strasse')->textInput(['maxlength' => true]) ?>
 

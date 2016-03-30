@@ -50,8 +50,9 @@ class Datenblatt extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            //[['kaeufer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Kaeufer::className(), 'targetAttribute' => 'id'],
             [['beurkundung_am', 'verbindliche_fertigstellung', 'uebergang_bnl', 'abnahme_se', 'abnahme_ge'], 'safe'],
-            [['firma_id', 'projekt_id', 'haus_id', 'nummer', 'kaeufer_id', 'aktiv', 'auflassung'], 'integer'],
+            [['firma_id', 'projekt_id', 'haus_id', 'nummer', 'kaeufer_id', 'aktiv', 'auflassung'], 'integer'], //'kaeufer_id',
             [['besondere_regelungen_kaufvertrag', 'sonstige_anmerkungen'], 'string']
         ];
     }

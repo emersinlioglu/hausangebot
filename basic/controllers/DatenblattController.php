@@ -165,10 +165,7 @@ class DatenblattController extends Controller
         $modelDatenblatt = $this->findModel($id);
         $modelDatenblatt->aktiv = 1;
 
-        $modelKaeufer = new Kaeufer();
-        if ($modelDatenblatt->kaeufer) {
-            $modelKaeufer = $modelDatenblatt->kaeufer;
-        }
+
         $data = Yii::$app->request->post();
 
 //        if ($preventPost && Yii::$app->request->isAjax) {
@@ -282,7 +279,14 @@ class DatenblattController extends Controller
 
 //            $this->redirect(['update', 'id' => $id]);
 
+//            $modelDatenblatt = $this->findModel($modelDatenblatt->id);
+//            $modelKaeufer = $modelDatenblatt->kaeufer;
         }
+
+         $modelKaeufer = new Kaeufer();
+         if ($modelDatenblatt->kaeufer) {
+             $modelKaeufer = $modelDatenblatt->kaeufer;
+         }
 
         // calculate kaufpreis
         $kaufpreisTotal = 0;

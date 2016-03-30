@@ -165,10 +165,7 @@ class DatenblattController extends Controller
         $modelDatenblatt = $this->findModel($id);
         $modelDatenblatt->aktiv = 1;
 
-        $modelKaeufer = new Kaeufer();
-        if ($modelDatenblatt->kaeufer) {
-            $modelKaeufer = $modelDatenblatt->kaeufer;
-        }
+
         $data = Yii::$app->request->post();
 
 //        if ($preventPost && Yii::$app->request->isAjax) {
@@ -289,10 +286,14 @@ die;*/
 
 //            $this->redirect(['update', 'id' => $id]);
 
-            // reload datenblatt
-            $modelDatenblatt = $this->findModel($id);
-            $modelKaeufer = $modelDatenblatt->kaeufer;
+//            $modelDatenblatt = $this->findModel($modelDatenblatt->id);
+//            $modelKaeufer = $modelDatenblatt->kaeufer;
         }
+
+         $modelKaeufer = new Kaeufer();
+         if ($modelDatenblatt->kaeufer) {
+             $modelKaeufer = $modelDatenblatt->kaeufer;
+         }
 
         // calculate kaufpreis
         $kaufpreisTotal = 0;

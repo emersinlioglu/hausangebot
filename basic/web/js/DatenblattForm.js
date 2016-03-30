@@ -181,6 +181,7 @@ var DatenblattForm = function () {
                         // item selected and has an id
 
                         $('[name="Datenblatt[kaeufer_id]"]').val(ui.item.id);
+                        $('[name="Kaeufer[id]"]').val(ui.item.id);
                         $('#kaeufer-debitor_nr').val(ui.item.debitor_nr);
 
                         //$('#kaeufer-beurkundung_am-disp').val(self.formatDate(ui.item.beurkundung_am));

@@ -41,7 +41,7 @@ use kartik\datecontrol\DateControl;
 
                 <!--<h3>Käuferdaten</h3>-->
 
-                <div class="hide">
+                <div class="">
                     <?= $form->field($modelDatenblatt, 'kaeufer_id')->textInput() ?>
                 </div>
 

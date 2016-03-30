@@ -282,9 +282,6 @@ class DatenblattController extends Controller
 
 //            $this->redirect(['update', 'id' => $id]);
 
-            // reload datenblatt
-            $modelDatenblatt = $this->findModel($id);
-            $modelKaeufer = $modelDatenblatt->kaeufer;
         }
 
         // calculate kaufpreis

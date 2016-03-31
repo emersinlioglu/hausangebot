@@ -87,15 +87,27 @@ class Kaeufer extends \yii\db\ActiveRecord
         ];
     }
 
-	public function getAnredeLabel()
-{
-    return $this->anrede ? 'Frau' : 'Herr';
-}
+    public function getAnredeLabel()
+    {
+        if ($this->anrede === null) {
+            $label = '';
+        } else {
+            $label = $this->anrede ? 'Frau' : 'Herr';
+        }
+
+        return $label;
+    }
+
     public function getAnrede2Label()
-{
-    return $this->anrede2 ? 'Frau' : 'Herr';
-}
-	
+    {
+        if ($this->anrede2 === null) {
+            $label = '';
+        } else {
+            $label = $this->anrede2 ? 'Frau' : 'Herr';
+        }
+        return $label;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -103,5 +115,5 @@ class Kaeufer extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Datenblatt::className(), ['kaeufer_id' => 'id']);
     }
-	
+
 }

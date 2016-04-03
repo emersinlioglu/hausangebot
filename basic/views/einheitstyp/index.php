@@ -29,7 +29,28 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'einheit',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template'=>'{update}{add}{delete}',
+                'buttons' => [
+                    'delete' => function ($url, $model, $key) {
+                        if ($key != 1) {
+                            $options = [
+                                'title' => Yii::t('yii', 'Delete'),
+                                'aria-label' => Yii::t('yii', 'Delete'),
+                                'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                                'data-method' => "post",
+                                'data-pjax' => '0',
+                            ];
+                            $url = \yii\helpers\Url::toRoute(['einheitstyp/delete', 'id' => $key]);
+
+                            return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, $options);
+                        } else {
+                            return '';
+                        }
+                    }
+                ]
+            ]
         ],
     ]); ?>
 

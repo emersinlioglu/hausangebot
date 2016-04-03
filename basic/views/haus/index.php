@@ -29,67 +29,62 @@ $this->params['breadcrumbs'][] = $this->title;
 
             //'id',
             //'projekt_id',
-            
-             [
+
+            [
                 'attribute' => 'firma_name',
-                'value'=>'projekt.firma.name',
+                'value' => 'projekt.firma.name',
                 'label' => 'Firma'
             ],
- [
+            [
                 'attribute' => 'firma_nr',
-                'value'=>'projekt.firma.nr',
+                'value' => 'projekt.firma.nr',
                 'label' => 'Firmen Nr.'
             ],
             [
                 'attribute' => 'projekt_name',
-                'value'=>'projekt.name',
+                'value' => 'projekt.name',
                 'label' => 'Projekt'
             ],
-            
-			
-			// 'reserviert',
-			[
-      'class'=>'kartik\grid\BooleanColumn',
-      'attribute'=>'reserviert', 
-      'vAlign'=>'middle',
-	  'trueLabel'=>'Ja',
-	  'falseLabel'=>'Nein',
-     // 'filterType'=>GridView::FILTER_CHECKBOX,
-],
- // 'verkauft',
-			[
-      'class'=>'kartik\grid\BooleanColumn',
-      'attribute'=>'verkauft', 
-      'vAlign'=>'middle',
-	  'trueLabel'=>'Ja',
-	  'falseLabel'=>'Nein',
-	  
-     // 'filterType'=>GridView::FILTER_CHECKBOX,
-],
- // 'rechnung_vertrieb',
-			[
-      'class'=>'kartik\grid\BooleanColumn',
-      'attribute'=>'rechnung_vertrieb', 
-      'vAlign'=>'middle',
-	  'trueLabel'=>'Ja',
-	  'falseLabel'=>'Nein',
-	  'label'=>'R.Vetrieb',
-     // 'filterType'=>GridView::FILTER_CHECKBOX,
-],
-		
-			
-			
+            // 'reserviert',
+            [
+                'class' => 'kartik\grid\BooleanColumn',
+                'attribute' => 'reserviert',
+                'vAlign' => 'middle',
+                'trueLabel' => 'Ja',
+                'falseLabel' => 'Nein',
+                // 'filterType'=>GridView::FILTER_CHECKBOX,
+            ],
+            // 'verkauft',
+            [
+                'class' => 'kartik\grid\BooleanColumn',
+                'attribute' => 'verkauft',
+                'vAlign' => 'middle',
+                'trueLabel' => 'Ja',
+                'falseLabel' => 'Nein',
+
+                // 'filterType'=>GridView::FILTER_CHECKBOX,
+            ],
+            // 'rechnung_vertrieb',
+            [
+                'class' => 'kartik\grid\BooleanColumn',
+                'attribute' => 'rechnung_vertrieb',
+                'vAlign' => 'middle',
+                'trueLabel' => 'Ja',
+                'falseLabel' => 'Nein',
+                'label' => 'R.Vetrieb',
+                // 'filterType'=>GridView::FILTER_CHECKBOX,
+            ],
             'strasse',
             'plz',
             'ort',
             [
                 //'filter' => Html::activeTextField($model, 'te_nummer'),
                 'attribute' => 'te_nummer',
-                'value' => function($model) {
-      
+                'value' => function ($model) {
+
                     foreach ($model->teileigentumseinheits as $te) {
                         if ($te->einheitstyp_id == 1) {
-                            return $te->te_nummer;                                
+                            return $te->te_nummer;
                         }
                     }
                 },
@@ -106,16 +101,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         $link = Html::a('> Datenblatt', $url);
                     }
 
-                    return $link ;
+                    return $link;
                 },
             ],
-            
-           
+
+
             // 'hausnr',
-	
-          
-           
-           
+
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

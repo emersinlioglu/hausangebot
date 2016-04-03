@@ -27,7 +27,7 @@ class HausSearch extends Haus
         return [
             [['id', 'projekt_id', 'reserviert', 'verkauft', 'rechnung_vertrieb'], 'integer'],
             [['plz', 'ort', 'strasse', 'hausnr', 'te_nummer'], 'safe'],
-            [['projekt_name','firma_name','firma_nr', 'onlyNotAssigned'], 'safe'],
+            [['projekt_name', 'firma_name', 'firma_nr', 'onlyNotAssigned'], 'safe'],
         ];
     }
 
@@ -50,36 +50,36 @@ class HausSearch extends Haus
     public function search($params)
     {
         $query = Haus::find();
-        $query->joinWith(['projekt','projekt.firma', 'datenblatts', 'teileigentumseinheits']);
+        $query->joinWith(['projekt', 'projekt.firma', 'datenblatts', 'teileigentumseinheits', 'teileigentumseinheits.einheitstyp']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
         $dataProvider->sort->attributes['projekt_name'] = [
-        // The tables are the ones our relation are configured to
-        // in my case they are prefixed with "tbl_"
-        'asc' => ['projekt.name' => SORT_ASC],
-        'desc' => ['projekt.name' => SORT_DESC],
+            // The tables are the ones our relation are configured to
+            // in my case they are prefixed with "tbl_"
+            'asc' => ['projekt.name' => SORT_ASC],
+            'desc' => ['projekt.name' => SORT_DESC],
         ];
-        
+
         $dataProvider->sort->attributes['firma_name'] = [
-        // The tables are the ones our relation are configured to
-        // in my case they are prefixed with "tbl_"
-        'asc' => ['firma.name' => SORT_ASC],
-        'desc' => ['firma.name' => SORT_DESC],
+            // The tables are the ones our relation are configured to
+            // in my case they are prefixed with "tbl_"
+            'asc' => ['firma.name' => SORT_ASC],
+            'desc' => ['firma.name' => SORT_DESC],
         ];
 
         $dataProvider->sort->attributes['firma_nr'] = [
-        // The tables are the ones our relation are configured to
-        // in my case they are prefixed with "tbl_"
-        'asc' => ['firma.nr' => SORT_ASC],
-        'desc' => ['firma.nr' => SORT_DESC],
+            // The tables are the ones our relation are configured to
+            // in my case they are prefixed with "tbl_"
+            'asc' => ['firma.nr' => SORT_ASC],
+            'desc' => ['firma.nr' => SORT_DESC],
         ];
 
         $dataProvider->sort->attributes['te_nummer'] = [
-            'asc' => ['te_nummer' => SORT_ASC],
-            'desc' => ['te_nummer' => SORT_DESC],
+            'asc' => ['(te_nummer * 1)' => SORT_ASC],
+            'desc' => ['(te_nummer * 1)' => SORT_DESC],
         ];
 
         $this->load($params);
@@ -105,8 +105,8 @@ class HausSearch extends Haus
             ->andFilterWhere(['like', 'projekt.name', $this->projekt_name])
             ->andFilterWhere(['like', 'firma.name', $this->firma_name])
             ->andFilterWhere(['like', 'firma.nr', $this->firma_nr])
-            ->andFilterWhere(['like', 'te_nummer', $this->te_nummer])
-            ;
+            ->andFilterWhere(['(te_nummer * 1)' => $this->te_nummer])
+            ->andFilterWhere(['einheitstyp.id' => 1]);
 
         if ($this->onlyNotAssigned) {
             $query->andFilterWhere(['datenblatts.id' => null]);

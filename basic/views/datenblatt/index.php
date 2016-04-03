@@ -90,13 +90,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) {
         
                     $haus = $model->haus;
+//                    if ($haus) {
+//                        foreach ($haus->teileigentumseinheits as $te) {
+//                            if ($te->einheitstyp_id == 1) {
+//                                return $te->te_nummer;
+//                            }
+//                        }
+//                    }
+
+                    $teNummers = array();
                     if ($haus) {
                         foreach ($haus->teileigentumseinheits as $te) {
-                            if ($te->einheitstyp_id == 1) {
-                                return $te->te_nummer;                                
-                            }
+                            $teNummers[] = $te->te_nummer;
                         }
+                        arsort($teNummers);
                     }
+                    return implode(', ', $teNummers);
                 },
                 'label' => 'TE-Nr'
             ],

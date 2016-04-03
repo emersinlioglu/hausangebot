@@ -81,12 +81,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'filter' => Html::activeTextField($model, 'te_nummer'),
                 'attribute' => 'te_nummer',
                 'value' => function ($model) {
-
+                    $teNummers = array();
                     foreach ($model->teileigentumseinheits as $te) {
-                        if ($te->einheitstyp_id == 1) {
-                            return $te->te_nummer;
-                        }
+//                        if ($te->einheitstyp_id == 1) {
+//                            return $te->te_nummer;
+//                        }
+                        $teNummers[] = $te->te_nummer;
                     }
+                    arsort($teNummers);
+                    return implode(', ', $teNummers);
                 },
                 'label' => 'TE-Nr'
             ],

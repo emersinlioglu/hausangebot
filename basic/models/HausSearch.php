@@ -77,9 +77,10 @@ class HausSearch extends Haus
             'desc' => ['firma.nr' => SORT_DESC],
         ];
 
+        $teNummercolumn = 'max((te_nummer * 1))';
         $dataProvider->sort->attributes['te_nummer'] = [
-            'asc' => ['(te_nummer * 1)' => SORT_ASC],
-            'desc' => ['(te_nummer * 1)' => SORT_DESC],
+            'asc' => [$teNummercolumn => SORT_ASC],
+            'desc' => [$teNummercolumn => SORT_DESC],
         ];
 
         $this->load($params);
@@ -105,12 +106,16 @@ class HausSearch extends Haus
             ->andFilterWhere(['like', 'projekt.name', $this->projekt_name])
             ->andFilterWhere(['like', 'firma.name', $this->firma_name])
             ->andFilterWhere(['like', 'firma.nr', $this->firma_nr])
-            ->andFilterWhere(['(te_nummer * 1)' => $this->te_nummer])
-            ->andFilterWhere(['einheitstyp.id' => 1]);
+            ->andFilterWhere(['like', 'te_nummer', $this->te_nummer])
+            ;
 
         if ($this->onlyNotAssigned) {
             $query->andFilterWhere(['datenblatts.id' => null]);
         }
+
+        $query->groupBy([
+            'haus.id'
+        ]);
 
         return $dataProvider;
     }

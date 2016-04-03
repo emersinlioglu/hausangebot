@@ -36,9 +36,9 @@ class DatenblattSearch extends Datenblatt
         return [
             [['id', 'firma_id', 'projekt_id', 'haus_id', 'nummer', 'kaeufer_id'], 'integer'],
             [['besondere_regelungen_kaufvertrag', 'sonstige_anmerkungen'], 'safe'],
-            [['haus','haus_strasse','haus_plz','haus_ort','haus_hausnr', 'te_nummer'], 'safe'],
-            [['kaeufer','kaeufer_debitornr','kaeufer_nachname','kaeufer_vorname'], 'safe'],
-            [['projekt_name','firma_name','firma_nr'], 'safe'],
+            [['haus', 'haus_strasse', 'haus_plz', 'haus_ort', 'haus_hausnr', 'te_nummer'], 'safe'],
+            [['kaeufer', 'kaeufer_debitornr', 'kaeufer_nachname', 'kaeufer_vorname'], 'safe'],
+            [['projekt_name', 'firma_name', 'firma_nr'], 'safe'],
         ];
     }
 
@@ -61,79 +61,77 @@ class DatenblattSearch extends Datenblatt
     public function search($params)
     {
         $query = Datenblatt::find();
-       
 
-        $query->joinWith(['haus','kaeufer','projekt','firma', 'haus.teileigentumseinheits']);
+        $query->joinWith(['haus', 'kaeufer', 'projekt', 'firma', 'haus.teileigentumseinheits']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
         $dataProvider->sort->attributes['haus_strasse'] = [
-        // The tables are the ones our relation are configured to
-        // in my case they are prefixed with "tbl_"
-        'asc' => ['haus.strasse' => SORT_ASC],
-        'desc' => ['haus.strasse' => SORT_DESC],
+            // The tables are the ones our relation are configured to
+            // in my case they are prefixed with "tbl_"
+            'asc' => ['haus.strasse' => SORT_ASC],
+            'desc' => ['haus.strasse' => SORT_DESC],
         ];
         $dataProvider->sort->attributes['haus_ort'] = [
-        'asc' => ['haus.ort' => SORT_ASC],
-        'desc' => ['haus.ort' => SORT_DESC],
+            'asc' => ['haus.ort' => SORT_ASC],
+            'desc' => ['haus.ort' => SORT_DESC],
         ];
         $dataProvider->sort->attributes['haus_hausnr'] = [
-        'asc' => ['haus.hausnr' => SORT_ASC],
-        'desc' => ['haus.hausnr' => SORT_DESC],
+            'asc' => ['haus.hausnr' => SORT_ASC],
+            'desc' => ['haus.hausnr' => SORT_DESC],
         ];
         $dataProvider->sort->attributes['haus_plz'] = [
-        'asc' => ['haus.plz' => SORT_ASC],
-        'desc' => ['haus.plz' => SORT_DESC],
+            'asc' => ['haus.plz' => SORT_ASC],
+            'desc' => ['haus.plz' => SORT_DESC],
         ];
-        
+
         $dataProvider->sort->attributes['kaeufer_nachname'] = [
-        // The tables are the ones our relation are configured to
-        // in my case they are prefixed with "tbl_"
-        'asc' => ['kaeufer.nachname' => SORT_ASC],
-        'desc' => ['kaeufer.nachname' => SORT_DESC],
+            // The tables are the ones our relation are configured to
+            // in my case they are prefixed with "tbl_"
+            'asc' => ['kaeufer.nachname' => SORT_ASC],
+            'desc' => ['kaeufer.nachname' => SORT_DESC],
         ];
-        
+
         $dataProvider->sort->attributes['kaeufer_vorname'] = [
-        // The tables are the ones our relation are configured to
-        // in my case they are prefixed with "tbl_"
-        'asc' => ['kaeufer.vorname' => SORT_ASC],
-        'desc' => ['kaeufer.vorname' => SORT_DESC],
+            // The tables are the ones our relation are configured to
+            // in my case they are prefixed with "tbl_"
+            'asc' => ['kaeufer.vorname' => SORT_ASC],
+            'desc' => ['kaeufer.vorname' => SORT_DESC],
         ];
 
         $dataProvider->sort->attributes['kaeufer_debitornr'] = [
-        // The tables are the ones our relation are configured to
-        // in my case they are prefixed with "tbl_"
-        'asc' => ['kaeufer.debitor_nr' => SORT_ASC],
-        'desc' => ['kaeufer.debitor_nr' => SORT_DESC],
+            // The tables are the ones our relation are configured to
+            // in my case they are prefixed with "tbl_"
+            'asc' => ['kaeufer.debitor_nr' => SORT_ASC],
+            'desc' => ['kaeufer.debitor_nr' => SORT_DESC],
         ];
 
         $dataProvider->sort->attributes['projekt_name'] = [
-        // The tables are the ones our relation are configured to
-        // in my case they are prefixed with "tbl_"
-        'asc' => ['projekt.name' => SORT_ASC],
-        'desc' => ['projekt.name' => SORT_DESC],
-        ];
-        
-          $dataProvider->sort->attributes['firma_name'] = [
-        // The tables are the ones our relation are configured to
-        // in my case they are prefixed with "tbl_"
-        'asc' => ['firma.name' => SORT_ASC],
-        'desc' => ['firma.name' => SORT_DESC],
+            // The tables are the ones our relation are configured to
+            // in my case they are prefixed with "tbl_"
+            'asc' => ['projekt.name' => SORT_ASC],
+            'desc' => ['projekt.name' => SORT_DESC],
         ];
 
-          $dataProvider->sort->attributes['firma_nr'] = [
-        // The tables are the ones our relation are configured to
-        // in my case they are prefixed with "tbl_"
-        'asc' => ['firma.nr' => SORT_ASC],
-        'desc' => ['firma.nr' => SORT_DESC],
+        $dataProvider->sort->attributes['firma_name'] = [
+            // The tables are the ones our relation are configured to
+            // in my case they are prefixed with "tbl_"
+            'asc' => ['firma.name' => SORT_ASC],
+            'desc' => ['firma.name' => SORT_DESC],
         ];
-        
+
+        $dataProvider->sort->attributes['firma_nr'] = [
+            // The tables are the ones our relation are configured to
+            // in my case they are prefixed with "tbl_"
+            'asc' => ['firma.nr' => SORT_ASC],
+            'desc' => ['firma.nr' => SORT_DESC],
+        ];
 
         $dataProvider->sort->attributes['te_nummer'] = [
-            'asc' => ['te_nummer' => SORT_ASC],
-            'desc' => ['te_nummer' => SORT_DESC],
+            'asc' => ['(te_nummer *1)' => SORT_ASC],
+            'desc' => ['(te_nummer *1)' => SORT_DESC],
         ];
 
         $this->load($params);
@@ -154,18 +152,22 @@ class DatenblattSearch extends Datenblatt
         ]);
 
         $query->andFilterWhere(['like', 'besondere_regelungen_kaufvertrag', $this->besondere_regelungen_kaufvertrag])
-        ->andFilterWhere(['like', 'haus.strasse', $this->haus_strasse])
-        ->andFilterWhere(['like', 'haus.ort', $this->haus_ort])
-        ->andFilterWhere(['like', 'haus.hausnr', $this->haus_hausnr])
-        ->andFilterWhere(['like', 'haus.plz', $this->haus_plz])
-        ->andFilterWhere(['like', 'kaeufer.debitor_nr', $this->kaeufer_debitornr])
-        ->andFilterWhere(['like', 'kaeufer.nachname', $this->kaeufer_nachname])
-        ->andFilterWhere(['like', 'kaeufer.vorname', $this->kaeufer_vorname])
-        ->andFilterWhere(['like', 'projekt.name', $this->projekt_name])
-        ->andFilterWhere(['like', 'firma.name', $this->firma_name])
-        ->andFilterWhere(['like', 'firma.nr', $this->firma_nr])
-        ->andFilterWhere(['like', 'sonstige_anmerkungen', $this->sonstige_anmerkungen])
-        ->andFilterWhere(['like', 'te_nummer', $this->te_nummer]);
+            ->andFilterWhere(['like', 'haus.strasse', $this->haus_strasse])
+            ->andFilterWhere(['like', 'haus.ort', $this->haus_ort])
+            ->andFilterWhere(['like', 'haus.hausnr', $this->haus_hausnr])
+            ->andFilterWhere(['like', 'haus.plz', $this->haus_plz])
+            ->andFilterWhere(['like', 'kaeufer.debitor_nr', $this->kaeufer_debitornr])
+            ->andFilterWhere(['like', 'kaeufer.nachname', $this->kaeufer_nachname])
+            ->andFilterWhere(['like', 'kaeufer.vorname', $this->kaeufer_vorname])
+            ->andFilterWhere(['like', 'projekt.name', $this->projekt_name])
+            ->andFilterWhere(['like', 'firma.name', $this->firma_name])
+            ->andFilterWhere(['like', 'firma.nr', $this->firma_nr])
+            ->andFilterWhere(['like', 'sonstige_anmerkungen', $this->sonstige_anmerkungen])
+            ->andFilterWhere(['like', 'te_nummer', $this->te_nummer]);
+
+        $query->groupBy([
+            'datenblatt.id'
+        ]);
 
         return $dataProvider;
     }

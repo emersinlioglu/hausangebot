@@ -428,7 +428,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <td>Straße + Hausnummer</td>
             <td></td>
             <td></td>
-            <td><?php $model->kaeufer ? $model->kaeufer->strasse : ''; ?> <?php $model->kaeufer ? $model->kaeufer->hausnr : ''; ?></td>
+            <td><?= $model->kaeufer ? $model->kaeufer->strasse : ''; ?> <?= $model->kaeufer ? $model->kaeufer->hausnr : ''; ?></td>
             <td></td>
             <td></td>
             <td></td>
@@ -438,8 +438,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <td>PLZ/Ort</td>
             <td></td>
             <td></td>
-            <td><?php $model->kaeufer ? $model->kaeufer->plz : ''; ?></td>
-            <td><?php $model->kaeufer ? $model->kaeufer->ort : ''; ?></td>
+            <td><?= $model->kaeufer ? $model->kaeufer->plz : ''; ?></td>
+            <td><?= $model->kaeufer ? $model->kaeufer->ort : ''; ?></td>
             <td></td>
             <td></td>
             <td></td>
@@ -448,9 +448,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <td>Tel. Festnetz/mobil</td>
             <td></td>
             <td></td>
-            <td><?php $model->kaeufer ? $model->kaeufer->festnetz : ''; ?></td>
+            <td><?= $model->kaeufer ? $model->kaeufer->festnetz : ''; ?></td>
             <td></td>
-            <td><?php $model->kaeufer ? $model->kaeufer->handy : ''; ?></td>
+            <td><?= $model->kaeufer ? $model->kaeufer->handy : ''; ?></td>
             <td></td>
             <td></td>
         </tr>
@@ -458,7 +458,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <td>E-Mail</td>
             <td></td>
             <td></td>
-            <td><?php $model->kaeufer ? $model->kaeufer->email : ''; ?></td>
+            <td><?= $model->kaeufer ? $model->kaeufer->email : ''; ?></td>
             <td></td>
             <td></td>
             <td></td>

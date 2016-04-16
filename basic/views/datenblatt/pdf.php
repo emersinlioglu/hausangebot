@@ -10,14 +10,14 @@ $this->title = 'Datenblatt ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Datenblätter', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+
 <div class="datenblatt-view">
 
-  <h1><?= Html::encode($this->title) ?></h1>
+ 
 
-   
-
-<table width="100%">
-        <tbody>
+<table>
+       
         <tr>
             <td width="219"><strong>Projekt:</strong></td>
             <td width="56"><?php echo $model->projekt? $model->projekt->name : ''; ?></td>
@@ -49,8 +49,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <td width="72"></td>
         </tr>
         <tr>
-            <td>Anschrift</td>
-            <td>PLZ/Ort</td>
+            <td><strong>Anschrift</strong></td>
+            <td><strong>PLZ/Ort :</strong></td>
             <td>
                 <?php
                 if ($model->haus) {
@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
                 ?>
             </td>
-            <td>Straße + Hausnr</td>
+            <td><strong>Straße + Hausnr. :</strong></td>
             <td>
                 <?php
                 if ($model->haus) {
@@ -102,7 +102,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <td></td>
         </tr>
         <tr>
-            <td>reserviert</td>
+            <td><strong>reserviert</strong></td>
             <td>
                 <?php
                     if ($model->haus && $model->haus->reserviert) {
@@ -110,7 +110,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 ?>
             </td>
-            <td>verkauft</td>
+            <td><strong>verkauft</strong></td>
             <td>
                 <?php
                 if ($model->haus && $model->haus->verkauft) {
@@ -119,7 +119,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ?>
             </td>
             <td></td>
-            <td>Rechnung Vertrieb</td>
+            <td><strong>Rechnung Vertrieb</strong></td>
             <td colspan="2">
                 <?php
                 if ($model->haus && $model->haus->rechnung_vertrieb) {
@@ -128,16 +128,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 ?>
             </td>
         </tr>
-        <tr>
-            <td><strong></strong></td>
-            <td></td>
-            <td></td>
-            <td>&nbsp;</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>&nbsp;</td>
-        </tr>
+        
+        </table><br>
+        <strong><u>Beschreibung Teileigentumseinheit</u></strong><br>
+        <table>
         <tr>
             <td></td>
             <td></td>
@@ -149,24 +143,14 @@ $this->params['breadcrumbs'][] = $this->title;
             <td></td>
         </tr>
         <tr>
-            <td><strong><u>Beschrieb Teileigentumseinheit</u></strong></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>TE</td>
-            <td>gefördert</td>
-            <td>Geschoss</td>
-            <td>Zimmer</td>
-            <td>ME-Anteil</td>
-            <td>Wohnfläche</td>
-            <td>Kaufpreis KP/Einheit</td>
+            <td><strong>TE</strong></td>
+            <td><strong>gefördert</strong></td>
+            <td><strong>Geschoss</strong></td>
+            <td><strong>Zimmer</strong></td>
+            <td><strong>ME-Anteil</strong></td>
+            <td><strong>Wohnfläche</strong></td>
+            <td><strong>Kaufpreis KP/Einheit</strong></td>
         </tr>
 
         <?php $kaufpreisSumme = 0; ?>
@@ -182,7 +166,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <td><?= $te->zimmer ?></td>
                 <td><?= $te->me_anteil ?></td>
                 <td><?= number_format((float)$te->wohnflaeche, 2, ',', '.') ?> <?= $te->einheitstyp->einheit ?></td>
-                <td><?= number_format((float)$te->kaufpreis, 2, ',', '.') ?>€</td>
+                <td align="right"><?= number_format((float)$te->kaufpreis, 2, ',', '.') ?>€</td>
             </tr>
             <?php $kaufpreisSumme += (float)$te->kaufpreis; ?>
         <?php endforeach; ?>
@@ -195,27 +179,23 @@ $this->params['breadcrumbs'][] = $this->title;
             <td></td>
             <td></td>
             <td></td>
-            <td><?= number_format((float)$kaufpreisSumme, 2, ',', '.') ?>€</td>
+            <td align="right"><?= number_format((float)$kaufpreisSumme, 2, ',', '.') ?>€</td>
         </tr>
-        <tr>
-            <td><strong><u>Zählerangaben</u></strong></td>
-            <td>&nbsp;</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+        </table>
+
+        <br>
+        <strong><u>Zählerangaben</u></strong>
+        <table>
+        
          <tr>
             <td>&nbsp;</td>
-            <td>Medium</td>
+            <td><strong>Medium</strong></td>
             <td></td>
-            <td>-Nr.</td>
+            <td><strong>-Nr.</strong></td>
             <td></td>
-            <td>Zähler -Stand</td>
+            <td><strong>Zähler -Stand</strong></td>
             <td></td>
-            <td>-Datum</td>
+            <td><strong>-Datum</strong></td>
         </tr>
         <?php
         foreach ($model->haus->zaehlerstands as $zaehlerstand): ?>
@@ -230,29 +210,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <td><?= Yii::$app->formatter->asDate($zaehlerstand->datum) ?></td>
           </tr>
            <?php endforeach; ?>
-        
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><strong><u>Käuferdaten</u></strong></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Debitor-Nr.</td>
+        </table>
+        <br>
+       <strong><u>Käuferdaten</u></strong>
+        <table><tr>
+            <td><strong>Debitor-Nr.</strong></td>
             <td></td>
             <td></td>
             <td><?php $model->kaeufer ? $model->kaeufer->debitor_nr : ''; ?></td>
@@ -262,12 +224,12 @@ $this->params['breadcrumbs'][] = $this->title;
             <td></td>
         </tr>
         <tr>
-            <td>Beurkundung am: </td>
+            <td><strong>Beurkundung am: </strong></td>
             <td></td>
             <td></td>
             <td>
                 <?php
-                    if ($model->kaeufer) {
+                    if ($model->kaeufer && $model->kaeufer->beurkundung_am) {
                         echo Yii::$app->formatter->asDate($model->kaeufer->beurkundung_am);
                     }
                 ?>
@@ -278,25 +240,25 @@ $this->params['breadcrumbs'][] = $this->title;
             <td></td>
         </tr>
         <tr>
-            <td>Termine: - verbindliche Fertigstellung</td>
+            <td><strong>Termine: <br>- verbindliche Fertigstellung</strong></td>
             <td></td>
             <td></td>
             <td>
                 <?php
-                if ($model->kaeufer) {
+                if ($model->kaeufer &&$model->kaeufer->verbindliche_fertigstellung) {
                     echo Yii::$app->formatter->asDate($model->kaeufer->verbindliche_fertigstellung);
                 }
                 ?>
             </td>
-            <td> -Abnahme SE</td>
+            <td><strong> -Abnahme SE</strong></td>
             <td>
                 <?php
-                if ($model->kaeufer) {
+                if ($model->kaeufer && $model->kaeufer->abnahme_se) {
                     echo Yii::$app->formatter->asDate($model->kaeufer->abnahme_se);
                 }
                 ?>
             </td>
-            <td> - Auflassung</td>
+            <td><strong> - Auflassung</strong></td>
             <td>
                 <?php
                 if ($model->kaeufer && $model->kaeufer->auflassung) {
@@ -308,18 +270,18 @@ $this->params['breadcrumbs'][] = $this->title;
         <tr>
             <td></td>
             <td></td>
-            <td>-Übergang BNL</td>
+            <td><strong>-Übergang BNL</strong></td>
             <td>
                 <?php
-                if ($model->kaeufer) {
+                if ($model->kaeufer && $model->kaeufer->uebergang_bnl) {
                     echo Yii::$app->formatter->asDate($model->kaeufer->uebergang_bnl);
                 }
                 ?>
             </td>
-            <td> -Abnahme GE</td>
+            <td><strong> -Abnahme GE</strong></td>
             <td>
                 <?php
-                if ($model->kaeufer) {
+                if ($model->kaeufer && $model->kaeufer->abnahme_ge) {
                     echo Yii::$app->formatter->asDate($model->kaeufer->abnahme_ge);
                 }
                 ?>
@@ -328,8 +290,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <td></td>
         </tr>
         <tr>
-            <td>Anrede 1, Titel 1, <br>
-            Vorname 1, Nachname 1</td>
+            <td><strong>Anrede, Titel, <br>
+            Vorname, Nachname</strong></td>
             <td></td>
             <td></td>
             <td>
@@ -366,8 +328,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <td></td>
         </tr>
         <tr>
-            <td>Anrede 2, Titel 2, <br>
-            Vorname 2, Nachname 2</td>
+            <td><strong>Anrede, Titel, <br>
+            Vorname, Nachname</strong></td>
             <td></td>
             <td></td>
             <td>
@@ -404,46 +366,49 @@ $this->params['breadcrumbs'][] = $this->title;
             <td></td>
         </tr>
         <tr>
-            <td>Straße + Hausnummer</td>
+            <td><strong>Straße + Hausnummer</strong></td>
             <td></td>
             <td></td>
-            <td><?php $model->kaeufer ? $model->kaeufer->strasse : ''; ?> <?php $model->kaeufer ? $model->kaeufer->hausnr : ''; ?></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>PLZ/Ort</td>
-            <td></td>
-            <td></td>
-            <td><?php $model->kaeufer ? $model->kaeufer->plz : ''; ?></td>
-            <td><?php $model->kaeufer ? $model->kaeufer->ort : ''; ?></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Tel. Festnetz/mobil</td>
-            <td></td>
-            <td></td>
-            <td><?php $model->kaeufer ? $model->kaeufer->festnetz : ''; ?></td>
-            <td></td>
-            <td><?php $model->kaeufer ? $model->kaeufer->handy : ''; ?></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>E-Mail</td>
-            <td></td>
-            <td></td>
-            <td><?php $model->kaeufer ? $model->kaeufer->email : ''; ?></td>
+            <td><?= $model->kaeufer ? $model->kaeufer->strasse : ''; ?> <?= $model->kaeufer ? $model->kaeufer->hausnr : ''; ?></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
+            <td><strong>PLZ/Ort</strong></td>
+            <td></td>
+            <td></td>
+            <td><?= $model->kaeufer ? $model->kaeufer->plz : ''; ?></td>
+            <td><?= $model->kaeufer ? $model->kaeufer->ort : ''; ?></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><strong>Tel. Festnetz/mobil</strong></td>
+            <td></td>
+            <td></td>
+            <td><?= $model->kaeufer ? $model->kaeufer->festnetz : ''; ?></td>
+            <td></td>
+            <td><?= $model->kaeufer ? $model->kaeufer->handy : ''; ?></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><strong>E-Mail</strong></td>
+            <td></td>
+            <td></td>
+            <td><?= $model->kaeufer ? $model->kaeufer->email : ''; ?></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        </table><p></p><p></p><p></p><p></p><p></p>
+        <strong><u>besondere Regelungen Kaufvertrag</u></strong>
+        <table>
+        tr>
             <td></td>
             <td></td>
             <td></td>
@@ -454,64 +419,29 @@ $this->params['breadcrumbs'][] = $this->title;
             <td></td>
         </tr>
         <tr>
-            <td><strong>besondere Regelungen Kaufvertrag</strong></td>
+            
             <td colspan="7"><?= $model->besondere_regelungen_kaufvertrag; ?></td>
           </tr>
+        </table><br>
+        <strong><u>Sonderwünsche</u></strong>
+
+        <table>
+       <tr></tr>
         <tr>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><strong>Sonderwünsche</strong></td>
             <td colspan="2"><strong>Angebot</strong></td>
             <td colspan="2"><strong>beauftragt</strong></td>
             <td colspan="3" align="center"><strong>Rechnungsstellung </strong></td>
           </tr>
         <tr>
             <td></td>
-            <td> - Datum</td>
-            <td> - Betrag</td>
-            <td> - Datum</td>
-            <td> - Betrag</td>
-            <td> - Datum</td>
-            <td> - Betrag</td>
-            <td> - Rg.-Nr.</td>
+            <td><strong> - Datum</strong></td>
+            <td><strong> - Betrag</strong></td>
+            <td><strong> - Datum</strong></td>
+            <td><strong> - Betrag</strong></td>
+            <td><strong> - Datum</strong></td>
+            <td><strong> - Betrag</strong></td>
+            <td><strong> - Rg.-Nr.</strong></td>
         </tr>
 
         <?php $rechnungsstellungBetragSumme = 0; ?>
@@ -519,11 +449,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <tr>
                 <td><?= $sonderwunsch->name ?></td>
                 <td><?= Yii::$app->formatter->asDate($sonderwunsch->angebot_datum) ?></td>
-                <td><?= number_format((float)$sonderwunsch->angebot_betrag, 2, ',', '.') ?> €</td>
+                <td align="right"><?= number_format((float)$sonderwunsch->angebot_betrag, 2, ',', '.') ?> €</td>
                 <td><?= Yii::$app->formatter->asDate($sonderwunsch->beauftragt_datum) ?></td>
-                <td><?= number_format((float)$sonderwunsch->beauftragt_betrag, 2, ',', '.') ?> €</td>
+                <td align="right"><?= number_format((float)$sonderwunsch->beauftragt_betrag, 2, ',', '.') ?> €</td>
                 <td><?= Yii::$app->formatter->asDate($sonderwunsch->rechnungsstellung_datum) ?></td>
-                <td><?= number_format((float)$sonderwunsch->rechnungsstellung_betrag, 2, ',', '.') ?> €</td>
+                <td align="right"><?= number_format((float)$sonderwunsch->rechnungsstellung_betrag, 2, ',', '.') ?> €</td>
                 <td><?= $sonderwunsch->rechnungsstellung_rg_nr ?></td>
             </tr>
         <?php $rechnungsstellungBetragSumme += (float)$sonderwunsch->rechnungsstellung_betrag; ?>
@@ -553,15 +483,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <td colspan="8">&nbsp;</td>
             
         </tr>
-        </tbody>
+        
         </table>
 
 
         <table width="100%">
-        
-        <tbody>
-        <tr>
-            <td width="20%"><strong>Kaufpreisabrechnung</strong></td>
+                <tr>
+            <td width="20%"><strong><u>Kaufpreisabrechnung</u></strong></td>
             <td width="11%"></td>
             <td width="9%"></td>
             <td width="15%"></td>
@@ -572,18 +500,18 @@ $this->params['breadcrumbs'][] = $this->title;
         </tr>
         <tr>
             <td></td>
-            <td colspan="3">Kaufvertrag</td>
-            <td colspan="3">Sonderwünsche/Ausstattung</td>
-            <td> Summe</td>
+            <td colspan="3"><strong>Kaufvertrag</strong></td>
+            <td colspan="3"><strong>Sonderwünsche/Ausstattung</strong></td>
+            <td><strong> Summe</strong></td>
         </tr>
         <tr>
             <td></td>
-            <td> - in %</td>
-            <td> - Betrag</td>
-            <td>-angefordert</td>
-            <td> - in %</td>
-            <td> - Betrag</td>
-            <td>-angefordert</td>
+            <td><strong> - in %</strong></td>
+            <td><strong> - Betrag</strong></td>
+            <td><strong> -angefordert</strong></td>
+            <td><strong> - in %</strong></td>
+            <td><strong> - Betrag</strong></td>
+            <td><strong>-angefordert</strong></td>
             <td></td>
         </tr>
         
@@ -600,9 +528,9 @@ $this->params['breadcrumbs'][] = $this->title;
         
         <?php foreach($model->abschlags as $key => $abschlag): ?>
         <tr>
-            <td><?= $abschlag->name ?></td>
+            <td><strong><?= $abschlag->name ?></strong></td>
             <td><?= number_format((float)$abschlag->kaufvertrag_prozent, 2, ',', '.') ?> %</td>
-            <td><?= number_format((float)$abschlag->kaufvertrag_betrag, 2, ',', '.') ?> €</td>
+            <td align="right"><?= number_format((float)$abschlag->kaufvertrag_betrag, 2, ',', '.') ?> €</td>
             <td>
                 <?php 
                     if ($abschlag->kaufvertrag_angefordert) {
@@ -611,7 +539,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ?>
             </td>
             <td><?= number_format((float)$abschlag->sonderwunsch_prozent, 2, ',', '.') ?> %</td>
-            <td><?= number_format((float)$abschlag->sonderwunsch_betrag, 2, ',', '.') ?> €</td>
+            <td align="right"><?= number_format((float)$abschlag->sonderwunsch_betrag, 2, ',', '.') ?> €</td>
             <td>
                 <?php 
                     if ($abschlag->sonderwunsch_angefordert) {
@@ -619,7 +547,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 ?>
             </td>
-            <td><?= number_format((float)$abschlag->summe, 2, ',', '.') ?> €</td>
+            <td align="right"><?= number_format((float)$abschlag->summe, 2, ',', '.') ?> €</td>
         </tr>
         
         <?php 
@@ -640,25 +568,27 @@ $this->params['breadcrumbs'][] = $this->title;
         
         <tr>
             <td><strong>Summe</strong></td>
-            <td><?= $kaufvertragProzentTotal ?> %</td>
-            <td><?=  $kvSummeBetrag ?> €</td>
+            <td><?= number_format($kaufvertragProzentTotal, 2, ',', '.')   ?> %</td>
+            <td align="right"><?= number_format($kvSummeBetrag, 2, ',', '.')  ?> €</td>
             <td></td>
-            <td><?= $sonderwunschProzentTotal ?> %</td>
-            <td><?= $swSummeBetrag ?> €</td>
+            <td><?= number_format($sonderwunschProzentTotal, 2, ',', '.') ?> %</td>
+            <td align="right"><?= number_format($swSummeBetrag, 2, ',', '.')  ?> €</td>
             <td></td>
-            <td><?= number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal, 2, ',', '.') ?> €</td>
+            <td align="right"><?= number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal, 2, ',', '.') ?> €</td>
         </tr>
-        
-        
+        </table>
+        <br>
+        <strong><u>./. Minderungen/Nachlaß</u></strong>
+        <table>
         <tr>
-            <td><strong>./. Minderungen/Nachlaß</strong></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
-            <td>
+            <td></td>
+            <td align="right">
                 <?php
                     $totalNachlass = .0;
                     foreach($model->nachlasses as $nachlass) {
@@ -669,9 +599,9 @@ $this->params['breadcrumbs'][] = $this->title;
             </td>
         </tr>
         <tr>
-              <td>Schreiben vom;</td>
-              <td>Betrag</td>
-              <td>Bemerkung</td>
+              <td><strong>Schreiben vom :</strong></td>
+              <td><strong>Betrag</strong></td>
+              <td><strong>Bemerkung</strong></td>
             </tr>
         <?php foreach($model->nachlasses as $key => $modelNachlass): ?>
             
@@ -681,7 +611,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     echo Yii::$app->formatter->asDate($modelNachlass->schreiben_vom);
                     ?>
                 </td>
-                <td>
+                <td align="right">
                     <?= number_format($modelNachlass->betrag,2, ',', '.') ?> €
                 </td>
                 <td>
@@ -689,19 +619,25 @@ $this->params['breadcrumbs'][] = $this->title;
                 </td>
             </tr>
         <?php endforeach; ?>
+        </table><br>
+        <strong><u>Zwischensumme</u></strong>
+        <table>
         <tr>
-            <td><strong>Zwischensumme</strong></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
-            <td><?php
+            <td></td>
+            <td align="right"><?php
                     echo number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass, 2, ',', '.');
                 ?> €
             </td>
         </tr>
+       </table><br>
+       <strong><u>Zahlungen</u></strong>
+       <table>
         <tr>
             <td></td>
             <td></td>
@@ -710,17 +646,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><strong>Zahlungen</strong></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
+            <td align="right">
                 <?php
                     //echo $kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass;
                     $totalZahlungen = 0;
@@ -732,9 +658,9 @@ $this->params['breadcrumbs'][] = $this->title;
             </td>
         </tr>
         <tr>
-            <th>Datum</th>
-            <th>Betrag</th>
-            <th>Bemerkung</th>
+            <td><strong>Datum</strong></td>
+            <td><strong>Betrag</strong></td>
+            <td><strong>Bemerkung</strong></td>
         </tr>
         
         <?php foreach ($model->zahlungs as $key => $modelZahlung): ?>
@@ -744,7 +670,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     echo Yii::$app->formatter->asDate($modelZahlung->datum);
                     ?>
                 </td>
-                <td>
+                <td align="right">
                     <?php echo number_format($modelZahlung->betrag,2, ',', '.'); ?>
                 €</td>
                 <td>
@@ -764,14 +690,14 @@ $this->params['breadcrumbs'][] = $this->title;
             <td></td>
         </tr>
         <tr>
-            <td><strong>offene Posten</strong></td>
+            <td><strong><u>offene Posten</u></strong></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
-            <td>
+            <td align="right">
                 <?php
                     echo number_format($kaufvertragBetragTotal + $sonderwunschBetragTotal - $totalNachlass - $totalZahlungen, 2, ',', '.');
                 ?> €
@@ -821,206 +747,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <td><strong>sonstige Anmerkungen</strong></td>
             <td colspan="7"><?php $model->sonstige_anmerkungen; ?></td>
         </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        </tbody>
+        
+       
   </table>
-</div>

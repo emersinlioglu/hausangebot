@@ -36,7 +36,7 @@ $this->title = 'ABG Projekt Manager';
        
         <h1>Willkommen </h1>
         <p class="lead">
-        bei ABG Projekt Management System
+        bei ABG Wohnungsportal
 </p>
 <!--        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>-->
     </div>

@@ -103,9 +103,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         foreach ($haus->teileigentumseinheits as $te) {
                             $teNummers[] = $te->te_nummer;
                         }
-                        arsort($teNummers);
+                        asort($teNummers);
                     }
-                    return implode(', ', $teNummers);
+                    return implode('/ ', $teNummers);
                 },
                 'label' => 'TE-Nr'
             ],

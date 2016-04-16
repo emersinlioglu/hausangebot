@@ -88,8 +88,8 @@ $this->params['breadcrumbs'][] = $this->title;
 //                        }
                         $teNummers[] = $te->te_nummer;
                     }
-                    arsort($teNummers);
-                    return implode(', ', $teNummers);
+                    asort($teNummers);
+                    return implode('/ ', $teNummers);
                 },
                 'label' => 'TE-Nr'
             ],

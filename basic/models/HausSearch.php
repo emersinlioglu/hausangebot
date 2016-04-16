@@ -77,7 +77,7 @@ class HausSearch extends Haus
             'desc' => ['firma.nr' => SORT_DESC],
         ];
 
-        $teNummercolumn = 'max((te_nummer * 1))';
+        $teNummercolumn = 'min((te_nummer * 1))';
         $dataProvider->sort->attributes['te_nummer'] = [
             'asc' => [$teNummercolumn => SORT_ASC],
             'desc' => [$teNummercolumn => SORT_DESC],

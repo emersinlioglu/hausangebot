@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Erstellungszeit: 30. Mrz 2016 um 20:52
+-- Erstellungszeit: 16. Apr 2016 um 16:29
 -- Server Version: 5.5.47-0+deb8u1
--- PHP-Version: 5.6.17-0+deb8u1
+-- PHP-Version: 5.6.19-0+deb8u1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -37,34 +37,91 @@ CREATE TABLE IF NOT EXISTS `abschlag` (
   `sonderwunsch_betrag` varchar(255) DEFAULT NULL,
   `sonderwunsch_angefordert` date DEFAULT NULL,
   `summe` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=225 DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `abschlag`
 --
 
 INSERT INTO `abschlag` (`id`, `datenblatt_id`, `name`, `kaufvertrag_prozent`, `kaufvertrag_betrag`, `kaufvertrag_angefordert`, `sonderwunsch_prozent`, `sonderwunsch_betrag`, `sonderwunsch_angefordert`, `summe`) VALUES
-(28, 12, 'Abschlag 1', 25, NULL, NULL, NULL, NULL, NULL, NULL),
-(29, 12, 'Abschlag 2', 28, NULL, NULL, NULL, NULL, NULL, NULL),
-(30, 12, 'Abschlag 3', 16.8, NULL, NULL, NULL, NULL, NULL, NULL),
-(31, 12, 'Abschlag 4', 8.4, NULL, NULL, NULL, NULL, NULL, NULL),
-(32, 12, 'Abschlag 5', 18.3, NULL, NULL, NULL, NULL, NULL, NULL),
-(33, 12, 'Abschlag 6', 0, NULL, NULL, NULL, NULL, NULL, NULL),
-(34, 12, 'Schlussrechnung', 3.5, NULL, NULL, NULL, NULL, NULL, NULL),
-(35, 13, 'Abschlag 1', 25, NULL, NULL, NULL, NULL, NULL, NULL),
-(36, 13, 'Abschlag 2', 28, NULL, NULL, NULL, NULL, NULL, NULL),
-(37, 13, 'Abschlag 3', 16.8, NULL, NULL, NULL, NULL, NULL, NULL),
-(38, 13, 'Abschlag 4', 8.4, NULL, NULL, NULL, NULL, NULL, NULL),
-(39, 13, 'Abschlag 5', 18.3, NULL, NULL, NULL, NULL, NULL, NULL),
-(40, 13, 'Abschlag 6', 0, NULL, NULL, NULL, NULL, NULL, NULL),
-(41, 13, 'Schlussrechnung', 3.5, NULL, NULL, NULL, NULL, NULL, NULL),
+(29, 12, 'Abschlag 1', 25, NULL, '2016-04-06', NULL, NULL, NULL, NULL),
+(30, 12, 'Abschlag 2', 28, NULL, '2016-04-08', NULL, NULL, NULL, NULL),
+(31, 12, 'Abschlag 3', 16.8, NULL, '2016-04-08', NULL, NULL, NULL, NULL),
+(32, 12, 'Abschlag 4', 8.4, NULL, '2016-04-18', NULL, NULL, NULL, NULL),
+(33, 12, 'Abschlag 5', 18.3, NULL, '2016-04-19', 96.5, NULL, NULL, NULL),
+(34, 12, 'Schlussrechnung', 3.5, NULL, '2016-04-20', 3.5, NULL, NULL, NULL),
 (98, 22, 'Abschlag 1', 25, NULL, NULL, NULL, NULL, NULL, NULL),
 (99, 22, 'Abschlag 2', 28, NULL, NULL, NULL, NULL, NULL, NULL),
 (100, 22, 'Abschlag 3', 16.8, NULL, NULL, NULL, NULL, NULL, NULL),
 (101, 22, 'Abschlag 4', 8.4, NULL, NULL, NULL, NULL, NULL, NULL),
 (102, 22, 'Abschlag 5', 18.3, NULL, NULL, NULL, NULL, NULL, NULL),
 (103, 22, 'Abschlag 6', 0, NULL, NULL, NULL, NULL, NULL, NULL),
-(104, 22, 'Schlussrechnung', 3.5, NULL, NULL, NULL, NULL, NULL, NULL);
+(104, 22, 'Schlussrechnung', 3.5, NULL, NULL, NULL, NULL, NULL, NULL),
+(126, 26, 'Abschlag 1', 25, NULL, NULL, NULL, NULL, NULL, NULL),
+(127, 26, 'Abschlag 2', 28, NULL, NULL, NULL, NULL, NULL, NULL),
+(128, 26, 'Abschlag 3', 16.8, NULL, NULL, NULL, NULL, NULL, NULL),
+(129, 26, 'Abschlag 4', 8.4, NULL, NULL, NULL, NULL, NULL, NULL),
+(130, 26, 'Abschlag 5', 18.3, NULL, NULL, NULL, NULL, NULL, NULL),
+(132, 26, 'Schlussrechnung', 3.5, NULL, NULL, NULL, NULL, NULL, NULL),
+(133, 27, 'Abschlag 1', 25, NULL, NULL, NULL, NULL, NULL, NULL),
+(134, 27, 'Abschlag 2', 28, NULL, NULL, NULL, NULL, NULL, NULL),
+(135, 27, 'Abschlag 3', 16.8, NULL, NULL, NULL, NULL, NULL, NULL),
+(136, 27, 'Abschlag 4', 8.4, NULL, NULL, NULL, NULL, NULL, NULL),
+(137, 27, 'Abschlag 5', 18.3, NULL, NULL, NULL, NULL, NULL, NULL),
+(138, 27, 'Abschlag 6', 0, NULL, NULL, NULL, NULL, NULL, NULL),
+(139, 27, 'Schlussrechnung', 3.5, NULL, NULL, NULL, NULL, NULL, NULL),
+(140, 28, 'Abschlag 1', 25, NULL, NULL, NULL, NULL, NULL, NULL),
+(141, 28, 'Abschlag 2', 28, NULL, NULL, NULL, NULL, NULL, NULL),
+(142, 28, 'Abschlag 3', 16.8, NULL, NULL, NULL, NULL, NULL, NULL),
+(143, 28, 'Abschlag 4', 8.4, NULL, NULL, NULL, NULL, NULL, NULL),
+(144, 28, 'Abschlag 5', 18.3, NULL, NULL, NULL, NULL, NULL, NULL),
+(145, 28, 'Abschlag 6', 0, NULL, NULL, NULL, NULL, NULL, NULL),
+(146, 28, 'Schlussrechnung', 3.5, NULL, NULL, NULL, NULL, NULL, NULL),
+(147, 29, 'Abschlag 1', 25, NULL, NULL, NULL, NULL, NULL, NULL),
+(148, 29, 'Abschlag 2', 28, NULL, NULL, NULL, NULL, NULL, NULL),
+(149, 29, 'Abschlag 3', 16.8, NULL, NULL, NULL, NULL, NULL, NULL),
+(150, 29, 'Abschlag 4', 8.4, NULL, NULL, NULL, NULL, NULL, NULL),
+(151, 29, 'Abschlag 5', 18.3, NULL, NULL, NULL, NULL, NULL, NULL),
+(152, 29, 'Abschlag 6', 0, NULL, NULL, NULL, NULL, NULL, NULL),
+(153, 29, 'Schlussrechnung', 3.5, NULL, NULL, NULL, NULL, NULL, NULL),
+(154, 30, 'Abschlag 1', 25, NULL, NULL, NULL, NULL, NULL, NULL),
+(155, 30, 'Abschlag 2', 28, NULL, NULL, NULL, NULL, NULL, NULL),
+(156, 30, 'Abschlag 3', 16.8, NULL, NULL, NULL, NULL, NULL, NULL),
+(157, 30, 'Abschlag 4', 8.4, NULL, NULL, NULL, NULL, NULL, NULL),
+(158, 30, 'Abschlag 5', 18.3, NULL, NULL, NULL, NULL, NULL, NULL),
+(159, 30, 'Abschlag 6', 0, NULL, NULL, NULL, NULL, NULL, NULL),
+(160, 30, 'Schlussrechnung', 3.5, NULL, NULL, NULL, NULL, NULL, NULL),
+(161, 31, 'Abschlag 1', 25, NULL, NULL, NULL, NULL, NULL, NULL),
+(162, 31, 'Abschlag 2', 28, NULL, NULL, NULL, NULL, NULL, NULL),
+(163, 31, 'Abschlag 3', 16.8, NULL, NULL, NULL, NULL, NULL, NULL),
+(164, 31, 'Abschlag 4', 8.4, NULL, NULL, NULL, NULL, NULL, NULL),
+(165, 31, 'Abschlag 5', 18.3, NULL, NULL, NULL, NULL, NULL, NULL),
+(166, 31, 'Abschlag 6', 0, NULL, NULL, NULL, NULL, NULL, NULL),
+(167, 31, 'Schlussrechnung', 3.5, NULL, NULL, NULL, NULL, NULL, NULL),
+(177, 33, 'Abschlag 1', 25, NULL, NULL, NULL, NULL, NULL, NULL),
+(178, 33, 'Abschlag 2', 28, NULL, NULL, NULL, NULL, NULL, NULL),
+(179, 33, 'Abschlag 3', 16.8, NULL, NULL, NULL, NULL, NULL, NULL),
+(180, 33, 'Abschlag 4', 8.4, NULL, NULL, NULL, NULL, NULL, NULL),
+(181, 33, 'Abschlag 5', 18.3, NULL, NULL, NULL, NULL, NULL, NULL),
+(183, 33, 'Schlussrechnung', 3.5, NULL, NULL, NULL, NULL, NULL, NULL),
+(184, 34, 'Abschlag 1', 25, NULL, NULL, NULL, NULL, NULL, NULL),
+(185, 34, 'Abschlag 2', 28, NULL, NULL, NULL, NULL, NULL, NULL),
+(186, 34, 'Abschlag 3', 16.8, NULL, NULL, NULL, NULL, NULL, NULL),
+(187, 34, 'Abschlag 4', 8.4, NULL, NULL, NULL, NULL, NULL, NULL),
+(188, 34, 'Abschlag 5', 18.3, NULL, NULL, NULL, NULL, NULL, NULL),
+(190, 34, 'Schlussrechnung', 3.5, NULL, NULL, NULL, NULL, NULL, NULL),
+(191, 35, 'Abschlag 1', 25, NULL, NULL, NULL, NULL, NULL, NULL),
+(192, 35, 'Abschlag 2', 28, NULL, NULL, NULL, NULL, NULL, NULL),
+(193, 35, 'Abschlag 3', 16.8, NULL, NULL, NULL, NULL, NULL, NULL),
+(194, 35, 'Abschlag 4', 8.4, NULL, NULL, NULL, NULL, NULL, NULL),
+(195, 35, 'Abschlag 5', 18.3, NULL, NULL, NULL, NULL, NULL, NULL),
+(197, 35, 'Schlussrechnung', 3.5, NULL, NULL, NULL, NULL, NULL, NULL),
+(198, 36, 'Abschlag 1', 25, NULL, NULL, NULL, NULL, NULL, NULL),
+(199, 36, 'Abschlag 2', 28, NULL, NULL, NULL, NULL, NULL, NULL),
+(200, 36, 'Abschlag 3', 16.8, NULL, NULL, NULL, NULL, NULL, NULL),
+(201, 36, 'Abschlag 4', 8.4, NULL, NULL, NULL, NULL, NULL, NULL),
+(202, 36, 'Abschlag 5', 18.3, NULL, NULL, NULL, NULL, NULL, NULL),
+(204, 36, 'Schlussrechnung', 3.5, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -88,16 +145,25 @@ CREATE TABLE IF NOT EXISTS `datenblatt` (
   `abnahme_se` date DEFAULT NULL,
   `abnahme_ge` date DEFAULT NULL,
   `auflassung` tinyint(1) DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `datenblatt`
 --
 
 INSERT INTO `datenblatt` (`id`, `firma_id`, `projekt_id`, `haus_id`, `nummer`, `kaeufer_id`, `besondere_regelungen_kaufvertrag`, `sonstige_anmerkungen`, `aktiv`, `beurkundung_am`, `verbindliche_fertigstellung`, `uebergang_bnl`, `abnahme_se`, `abnahme_ge`, `auflassung`) VALUES
-(12, 2, 5, 59, NULL, 11, '', '', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(13, 2, 5, 61, NULL, 13, '', '', 1, NULL, NULL, NULL, NULL, NULL, 0),
-(22, 2, 5, 93, NULL, 8, '', '', 1, NULL, NULL, NULL, NULL, NULL, 0);
+(12, 2, 5, 59, NULL, 13, 'Käufer möchte alle Rechnungen vorap per E-Mail erhalten ', '', 1, '2016-03-23', '2018-05-15', '2018-02-06', '2018-06-13', '2018-06-28', 1),
+(22, 2, 5, 93, NULL, 8, '', '', 1, NULL, NULL, NULL, NULL, NULL, 0),
+(26, 2, 5, 48, NULL, 14, '', '', 1, '2016-03-24', NULL, NULL, NULL, NULL, 0),
+(27, 2, 5, 20, NULL, 15, 'Bitte Zahlungensanforderungen vorab per E-Mail versenden!', '', 1, '2016-04-01', NULL, NULL, NULL, NULL, 0),
+(28, 2, 5, 61, NULL, 11, '', '', 1, '2016-04-01', NULL, NULL, NULL, NULL, 0),
+(29, 2, 5, 45, NULL, 16, '', '', 1, '2016-04-01', NULL, NULL, NULL, NULL, 0),
+(30, 2, 5, 60, NULL, 17, '', '', 1, '2016-04-04', NULL, NULL, NULL, NULL, 0),
+(31, 2, 5, 74, NULL, 21, '', '', 1, '2016-04-07', NULL, NULL, NULL, NULL, 0),
+(33, 2, 5, 16, NULL, 18, '', '', 1, '2016-04-07', NULL, NULL, NULL, NULL, 0),
+(34, 2, 5, 82, NULL, 24, '', '', 1, '2016-04-12', NULL, NULL, NULL, NULL, 0),
+(35, 2, 5, 25, NULL, 22, '', '', 1, '2016-04-11', NULL, NULL, NULL, NULL, 0),
+(36, 2, 5, 77, NULL, 23, '', '', 1, '2016-04-11', NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -109,7 +175,7 @@ CREATE TABLE IF NOT EXISTS `einheitstyp` (
 `id` int(10) unsigned NOT NULL,
   `name` varchar(45) DEFAULT NULL,
   `einheit` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `einheitstyp`
@@ -119,8 +185,9 @@ INSERT INTO `einheitstyp` (`id`, `name`, `einheit`) VALUES
 (1, 'Wohnung', 'm2'),
 (2, 'Stellplatz', 'Stck.'),
 (3, 'Lagerraum', 'm2'),
-(4, 'Garage', '㎡'),
-(5, 'Außenstellplatz', 'Stück');
+(4, 'Garage', 'm2'),
+(5, 'Außenstellplatz', 'Stück'),
+(6, 'Keller', 'm2');
 
 -- --------------------------------------------------------
 
@@ -158,7 +225,7 @@ CREATE TABLE IF NOT EXISTS `haus` (
   `reserviert` tinyint(1) DEFAULT '0',
   `verkauft` tinyint(1) DEFAULT '0',
   `rechnung_vertrieb` tinyint(1) DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `haus`
@@ -170,18 +237,18 @@ INSERT INTO `haus` (`id`, `projekt_id`, `firma_id`, `plz`, `ort`, `strasse`, `ha
 (12, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 1, 0, 0),
 (14, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 1, 0, 0),
 (15, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 1, 0, 0),
-(16, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 1, 0, 0),
+(16, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 0, 1, 1),
 (17, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 1, 0, 0),
 (18, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 1, 0, 0),
 (19, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 0, 0, 0),
-(20, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 1, 0, 0),
+(20, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 0, 1, 1),
 (21, 5, 2, '', '', '', '', 1, 0, 0),
 (22, 5, 2, '', '', '', '', 1, 0, 0),
 (23, 5, 2, '', '', '', '', 0, 0, 0),
 (24, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 1, 0, 0),
-(25, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 1, 0, 0),
+(25, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 0, 1, 0),
 (26, 5, 2, '80807', 'München', 'Max-Bill-Straße ', '', 1, 0, 0),
-(27, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 1, 0, 0),
+(27, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 0, 1, 1),
 (28, 5, 2, '', '', '', '', 1, 0, 0),
 (29, 5, 2, '', '', '', '', 0, 0, 0),
 (30, 5, 2, '', '', '', '', 0, 0, 0),
@@ -198,36 +265,36 @@ INSERT INTO `haus` (`id`, `projekt_id`, `firma_id`, `plz`, `ort`, `strasse`, `ha
 (41, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 1, 0, 0),
 (42, 5, 2, '', '', '', '', 1, 0, 0),
 (43, 5, 2, '', '', '', '', 1, 0, 0),
-(45, 5, 2, '', '', '', '', 1, 0, 0),
+(45, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 0, 1, 1),
 (46, 5, 2, '', '', '', '', 0, 0, 0),
 (47, 5, 2, '', '', '', '', 1, 0, 0),
-(48, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 0, 1, 0),
+(48, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 0, 1, 1),
 (50, 5, 2, '', '', '', '', 1, 0, 0),
 (51, 5, 2, '', '', '', '', 1, 0, 0),
 (54, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 1, 0, 0),
 (57, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 1, 0, 0),
 (58, 5, 2, '', '', '', '', 1, 0, 0),
-(59, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 0, 1, 0),
-(60, 5, 2, '80807', 'München', 'Max-Bill-Straße ', '', 1, 0, 0),
-(61, 5, 2, '', '', '', '', 1, 0, 0),
+(59, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 0, 1, 1),
+(60, 5, 2, '80807', 'München', 'Max-Bill-Straße ', '', 0, 1, 1),
+(61, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 0, 1, 1),
 (62, 5, 2, '', '', '', '', 1, 0, 0),
-(63, 5, 2, '80807', 'München', 'Max-Bill-Straße ', '', 1, 0, 0),
+(63, 5, 2, '80807', 'München', 'Max-Bill-Straße ', '', 0, 1, 1),
 (64, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 1, 0, 0),
 (65, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 1, 0, 0),
 (66, 5, 2, '', '', '', '', 0, 0, 0),
 (67, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 1, 0, 0),
-(68, 5, 2, '', '', '', '', 1, 0, 0),
+(68, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 1, 0, 0),
 (70, 5, 2, '', '', '', '', 1, 0, 0),
 (71, 5, 2, '', '', '', '', 0, 0, 0),
 (73, 5, 2, '', '', '', '', 0, 0, 0),
-(74, 5, 2, '', '', '', '', 1, 0, 0),
+(74, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 0, 1, 1),
 (76, 5, 2, '', '', '', '', 0, 0, 0),
-(77, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 1, 0, 0),
-(78, 5, 2, '', '', '', '', 0, 0, 0),
+(77, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 0, 1, 0),
+(78, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 1, 0, 0),
 (79, 5, 2, '', '', '', '', 1, 0, 0),
 (80, 5, 2, '', '', '', '', 0, 0, 0),
 (81, 5, 2, '80807', 'München', 'Max-Bill-Straße ', '', 1, 0, 0),
-(82, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 1, 0, 0),
+(82, 5, 2, '80807', 'München', 'Max-Bill-Straße', '', 0, 1, 0),
 (84, 5, 2, '', '', '', '', 1, 0, 0),
 (85, 5, 2, '', '', '', '', 1, 0, 0),
 (86, 5, 2, '', '', '', '', 1, 0, 0),
@@ -268,17 +335,27 @@ CREATE TABLE IF NOT EXISTS `kaeufer` (
   `titel2` varchar(255) DEFAULT NULL,
   `vorname2` varchar(255) DEFAULT NULL,
   `nachname2` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `kaeufer`
 --
 
 INSERT INTO `kaeufer` (`id`, `debitor_nr`, `beurkundung_am`, `verbindliche_fertigstellung`, `uebergang_bnl`, `abnahme_se`, `abnahme_ge`, `auflassung`, `anrede`, `titel`, `vorname`, `nachname`, `strasse`, `hausnr`, `plz`, `ort`, `festnetz`, `handy`, `email`, `anrede2`, `titel2`, `vorname2`, `nachname2`) VALUES
-(0, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (8, '123456', '2015-01-01', '2018-01-01', '2018-01-01', '2018-01-01', '2018-01-01', 1, 0, 'Dr', 'Karl', 'Mustermann', 'Muster Str.', '7', '80333', 'München', '08924-226', '0123456078', 'karl.muster@tlin.de', NULL, '', '', ''),
 (11, '635045', NULL, NULL, NULL, NULL, NULL, 0, 0, '', 'Giovanni', 'Minniti', 'Rohrer Höhe ', '62', '70565', 'Stuttgart', '', '0151/20577808', 'minniti@t-online.de', NULL, '', '', ''),
-(13, '635043', NULL, NULL, NULL, NULL, NULL, 0, 0, '', 'Guillermo', 'Benedicto', 'Otl-Aicher-Straße ', '44', '80807', 'München', '', '0176/38758050', 'antrueba43@gmail.com', 1, '', 'Ana', 'Trueba');
+(13, '635043', NULL, NULL, NULL, NULL, NULL, 0, 0, '', 'Guillermo', 'Benedicto', 'Otl-Aicher-Straße ', '44', '80807', 'München', '', '0176/38758050', 'antrueba43@gmail.com', 1, '', 'Ana', 'Trueba'),
+(14, '635037', NULL, NULL, NULL, NULL, NULL, 0, 0, '', 'Josef', 'Lechner', 'Fürstbach ', '1', '84416', 'Taufkirchen', '', '01721083883', 'lechner.josef@web.de', 1, '', 'Angela', 'Lechner'),
+(15, '635009', NULL, NULL, NULL, NULL, NULL, 0, 0, '', 'Patrick ', 'Rauschecker', 'Neubrunnenstraße ', '31/43', 'CH-8050', 'Zürich', '', '01722506354', 'patrick.rauschecker@gmail.com', NULL, '', '', ''),
+(16, '635034', NULL, NULL, NULL, NULL, NULL, 0, 0, '', 'Giovanni', 'Minniti', 'Rohrer Höhe ', '62', '70565', 'Stuttgart', '', '015120577808', 'minniti@t-online.de', 1, '', 'Beatrice', 'Minniti'),
+(17, '', NULL, NULL, NULL, NULL, NULL, 0, 0, 'Dr. ', 'Hartmut ', 'Müller', 'Parkweg ', '12', '45768', 'Marl', '', '', 'hm.marl@t-online.de', NULL, '', '', ''),
+(18, '', NULL, NULL, NULL, NULL, NULL, 0, 0, '', 'Florian', 'Fecht', 'Kunigundenstraße ', '63', '80805', 'München', '', '0176/21993953', 'sarah.fecht@gmx.de', 1, '', 'Sarah', 'Fecht'),
+(19, '', NULL, NULL, NULL, NULL, NULL, 0, 0, '', 'Walter', 'Kuffner', 'Heisenbergstraße ', '3', '80937', 'München', '', '0173/2150355', 'wjkuffner@arcor.de', 1, '', 'Rosamunde', 'Pongartz-Kuffner'),
+(20, '', NULL, NULL, NULL, NULL, NULL, 0, 0, '', 'Stefan ', 'Wiedemann', 'Otl-Aicher-Straße ', '52', '80807', 'München', '', '0176/63418353', 'stefan.wiedemann@campusm21.de', 1, '', 'Nicole', 'Wiedemann'),
+(21, '', NULL, NULL, NULL, NULL, NULL, 0, 0, '', 'Martin', 'Straubinger', 'Georg-Elser-Weg ', '5', '85221', 'Dachau ', '', '0170/2432920', 'martin.straubinger@mail.de', 1, '', 'Christiane', 'Straubinger'),
+(22, '', NULL, NULL, NULL, NULL, NULL, 0, 0, '', 'Klaus ', 'Merkel', 'Spitzerstraße ', '22', '80939', 'München', '', '0174/7695743', 'merkel@irt.de', 1, '', 'Elisabeth', 'Merkel'),
+(23, '', NULL, NULL, NULL, NULL, NULL, 0, 0, '', 'Viktor ', 'Willmar', 'Buchäckerstraße ', '1', '80339', 'Chieming', '', '', 'dr.astrid.scheuerer@dr-willmar.de', NULL, '', '', ''),
+(24, '', NULL, NULL, NULL, NULL, NULL, 0, 1, '', 'Petra', 'Romeike', 'Bgm-Weger-Weg ', '9', '82140', 'Olching', '', '08142/2847219', 'petra-romeike@gmx.de', NULL, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -330,7 +407,14 @@ CREATE TABLE IF NOT EXISTS `nachlass` (
   `schreiben_vom` date DEFAULT NULL,
   `betrag` double DEFAULT NULL,
   `bemerkung` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Daten für Tabelle `nachlass`
+--
+
+INSERT INTO `nachlass` (`id`, `datenblatt_id`, `schreiben_vom`, `betrag`, `bemerkung`) VALUES
+(2, 12, '2016-04-12', 850, 'falsche Fliesen');
 
 -- --------------------------------------------------------
 
@@ -368,7 +452,14 @@ CREATE TABLE IF NOT EXISTS `sonderwunsch` (
   `rechnungsstellung_datum` date DEFAULT NULL,
   `rechnungsstellung_betrag` double DEFAULT NULL,
   `rechnungsstellung_rg_nr` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Daten für Tabelle `sonderwunsch`
+--
+
+INSERT INTO `sonderwunsch` (`id`, `datenblatt_id`, `name`, `angebot_datum`, `angebot_betrag`, `beauftragt_datum`, `beauftragt_betrag`, `rechnungsstellung_datum`, `rechnungsstellung_betrag`, `rechnungsstellung_rg_nr`) VALUES
+(2, 12, 'Ausbau', '2016-03-30', 20000, '2016-04-08', 20000, '2016-04-12', 20000, '043');
 
 -- --------------------------------------------------------
 
@@ -388,7 +479,7 @@ CREATE TABLE IF NOT EXISTS `teileigentumseinheit` (
   `wohnflaeche` varchar(45) DEFAULT NULL,
   `kaufpreis` float DEFAULT NULL,
   `kp_einheit` float DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=148 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=160 DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `teileigentumseinheit`
@@ -492,7 +583,14 @@ INSERT INTO `teileigentumseinheit` (`id`, `haus_id`, `einheitstyp_id`, `te_numme
 (144, 24, 2, '123', 0, '', '', '1,5', '', 28000, NULL),
 (145, 87, 2, '104', 0, '', '', '', '', NULL, NULL),
 (146, 26, 2, '121', 0, '', '', '1,5', '', 28000, NULL),
-(147, 26, 2, '122', 0, '', '', '1,5', '', 28000, NULL);
+(147, 26, 2, '122', 0, '', '', '1,5', '', 28000, NULL),
+(148, 78, 2, '68', 0, '', '', '1,5', '', 28000, NULL),
+(149, 78, 2, '69', 0, '', '', '1,5', '', 28800, NULL),
+(150, 78, 3, '132', 0, '', '', '', '', 13000, NULL),
+(155, 68, 2, '68', 0, '', '', '1,5', '', 28000, NULL),
+(156, 68, 2, '69', 0, '', '', '1,5', '', 28000, NULL),
+(158, 68, 3, '132', 0, '', '', '15,40', '', 13000, NULL),
+(159, 8, 2, '124', 0, '', '', '1,5', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -507,7 +605,7 @@ CREATE TABLE IF NOT EXISTS `zaehlerstand` (
   `stand` varchar(45) DEFAULT NULL,
   `datum` date DEFAULT NULL,
   `haus_id` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `zaehlerstand`
@@ -516,7 +614,11 @@ CREATE TABLE IF NOT EXISTS `zaehlerstand` (
 INSERT INTO `zaehlerstand` (`id`, `name`, `nummer`, `stand`, `datum`, `haus_id`) VALUES
 (26, '', '', '', NULL, 8),
 (27, '', '', '', NULL, 12),
-(28, NULL, NULL, NULL, NULL, 63);
+(28, '', '', '', NULL, 63),
+(29, 'Strom ', '06042839', '3,1', '2016-04-07', 59),
+(32, 'Kaltwasser/WC', '56534455', '0,547', '2016-04-07', 59),
+(33, 'Warmwasser/Küche', '57557855', '0,040', '2016-04-07', 59),
+(34, 'Heizung', '52540933', '0,016', '2016-04-07', 59);
 
 -- --------------------------------------------------------
 
@@ -530,7 +632,15 @@ CREATE TABLE IF NOT EXISTS `zahlung` (
   `datum` date DEFAULT NULL,
   `betrag` float DEFAULT '0',
   `bemerkung` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Daten für Tabelle `zahlung`
+--
+
+INSERT INTO `zahlung` (`id`, `datenblatt_id`, `datum`, `betrag`, `bemerkung`) VALUES
+(3, 12, '2016-04-08', 191750, ''),
+(4, 12, '2016-04-12', 214760, '');
 
 --
 -- Indizes der exportierten Tabellen
@@ -622,17 +732,17 @@ ALTER TABLE `zahlung`
 -- AUTO_INCREMENT für Tabelle `abschlag`
 --
 ALTER TABLE `abschlag`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=112;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=225;
 --
 -- AUTO_INCREMENT für Tabelle `datenblatt`
 --
 ALTER TABLE `datenblatt`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=40;
 --
 -- AUTO_INCREMENT für Tabelle `einheitstyp`
 --
 ALTER TABLE `einheitstyp`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT für Tabelle `firma`
 --
@@ -642,12 +752,12 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT für Tabelle `haus`
 --
 ALTER TABLE `haus`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=95;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=94;
 --
 -- AUTO_INCREMENT für Tabelle `kaeufer`
 --
 ALTER TABLE `kaeufer`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT für Tabelle `kunde`
 --
@@ -657,7 +767,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 -- AUTO_INCREMENT für Tabelle `nachlass`
 --
 ALTER TABLE `nachlass`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT für Tabelle `projekt`
 --
@@ -667,22 +777,22 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 -- AUTO_INCREMENT für Tabelle `sonderwunsch`
 --
 ALTER TABLE `sonderwunsch`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT für Tabelle `teileigentumseinheit`
 --
 ALTER TABLE `teileigentumseinheit`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=148;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=160;
 --
 -- AUTO_INCREMENT für Tabelle `zaehlerstand`
 --
 ALTER TABLE `zaehlerstand`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT für Tabelle `zahlung`
 --
 ALTER TABLE `zahlung`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- Constraints der exportierten Tabellen
 --

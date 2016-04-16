@@ -140,7 +140,7 @@ class DatenblattController extends Controller
             'Abschlag 3' => 16.8,
             'Abschlag 4' => 8.4,
             'Abschlag 5' => 18.3,
-            'Abschlag 6' => 0.0,
+        //  'Abschlag 6' => 0.0,
             'Schlussrechnung' => 3.5
         ];
         foreach ($abschlags as $name => $percentage) {
@@ -173,9 +173,9 @@ class DatenblattController extends Controller
 //            return ActiveForm::validateMultiple($modelDatenblatt->zahlungs);
 //        }
 
-if (isset($data['Datenblatt']['kaeufer_id']) && (int)$data['Datenblatt']['kaeufer_id'] == 0) {
-    $data['Datenblatt']['kaeufer_id'] = 0;
-}
+//if (isset($data['Datenblatt']['kaeufer_id']) && (int)$data['Datenblatt']['kaeufer_id'] == 0) {
+//    $data['Datenblatt']['kaeufer_id'] = 0;
+//}
         /*echo "<pre>";
 print_r($data);
 echo "</pre>";
@@ -633,23 +633,26 @@ die;*/
         
         $modelDatenblatt = $this->findModel($id);
         $this->_calculatePreises($modelDatenblatt);
-                
+        
+
         //get your html raw content without layouts
        // $content = $this->renderPartial('view');
         //set up the kartik\mpdf\Pdf component
         $pdf = new Pdf([
-            'content'=>$this->renderPartial('pdf', ['model' => $modelDatenblatt,]),
-            'mode'=> Pdf::MODE_CORE,
+            'content'=> $this->renderPartial('pdf', ['model' => $modelDatenblatt,]),
+
+            //'mode'=> Pdf::MODE_CORE,
+            'mode' => Pdf::MODE_BLANK,
             'format'=> Pdf::FORMAT_A4,
             'defaultFontSize' => 10.0,
-            //'orientation'=>Pdf::ORIENT_POTRAIT,
-            'destination'=> Pdf::DEST_BROWSER,
+            'orientation' => Pdf::ORIENT_LANDSCAPE,
+            'destination' => Pdf::DEST_BROWSER,
             'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
-            'cssInline'=> '.kv-heading-1{font-size:18px}',
-            'options'=> ['title'=> 'Datenblatt'],
+            'cssInline'=> ' tr:nth-child(odd) {background: #fff;} tr:nth-child(even) {background: #eee;} table{width:100%}',
+            //'options'=> ['title'=> 'Datenblatt'],
             'methods'=> [
-               //'setHeader'=>['Generated on: '.date("r")],
-               'setFooter'=>['|Seite {PAGENO}|'],
+             //  'setHeader'=>['Erstellt am: '.date("d.m.Y")],
+             'setFooter'=>['Erstellt am :'. date("d.m.Y") . '| |'. 'Seite {PAGENO} / {nb}'],
             ]
         ]);
         return $pdf->render();

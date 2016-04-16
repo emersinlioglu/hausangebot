@@ -129,11 +129,14 @@ class DatenblattSearch extends Datenblatt
             'desc' => ['firma.nr' => SORT_DESC],
         ];
 
+        $teNummercolumn = 'min((te_nummer * 1))';
         $dataProvider->sort->attributes['te_nummer'] = [
-            'asc' => ['(te_nummer *1)' => SORT_ASC],
-            'desc' => ['(te_nummer *1)' => SORT_DESC],
+            'asc' => [$teNummercolumn => SORT_ASC],
+            'desc' => [$teNummercolumn => SORT_DESC],
         ];
 
+
+       
         $this->load($params);
 
         if (!$this->validate()) {

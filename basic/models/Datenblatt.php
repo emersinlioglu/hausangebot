@@ -145,4 +145,33 @@ class Datenblatt extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Zahlung::className(), ['datenblatt_id' => 'id']);
     }
+
+    /**
+     * @return string
+     */
+    public function getTenummerHtml() {
+
+        $wohnungsTenummer = array();
+        $teNummers = array();
+
+        if ($this->haus) {
+            foreach ($this->haus->teileigentumseinheits as $te) {
+                $teNummers[] = $te->te_nummer;
+                if ($te->einheitstyp_id == 1) {
+                    $wohnungsTenummer[] = $te->te_nummer;
+                }
+            }
+            asort($teNummers);
+
+            foreach($teNummers as $key => $tenummer) {
+                if (in_array($tenummer, $wohnungsTenummer)) {
+                    $teNummers[$key] = '<strong>' . $tenummer . '</strong>';
+                } else {
+                    $teNummers[$key] = '<small>' . $tenummer . '</small>';
+                }
+            }
+        }
+
+        return implode('/ ', $teNummers);
+    }
 }

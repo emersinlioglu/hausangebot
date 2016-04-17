@@ -86,27 +86,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 //'filter' => Html::activeTextField($model, 'te_nummer'),
+                'format' => 'html',
                 'attribute' => 'te_nummer',
-                'value' => function($model) {
-        
-                    $haus = $model->haus;
-//                    if ($haus) {
-//                        foreach ($haus->teileigentumseinheits as $te) {
-//                            if ($te->einheitstyp_id == 1) {
-//                                return $te->te_nummer;
-//                            }
-//                        }
-//                    }
-
-                    $teNummers = array();
-                    if ($haus) {
-                        foreach ($haus->teileigentumseinheits as $te) {
-                            $teNummers[] = $te->te_nummer;
-                        }
-                        asort($teNummers);
-                    }
-                    return implode('/ ', $teNummers);
-                },
+                'value' => 'tenummerHtml',
                 'label' => 'TE-Nr'
             ],
             

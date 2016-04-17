@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "haus".
@@ -102,5 +103,30 @@ class Haus extends \yii\db\ActiveRecord
     public function getZaehlerstands()
     {
         return $this->hasMany(Zaehlerstand::className(), ['haus_id' => 'id']);
+    }
+
+    /**
+     * @return string
+     */
+    public function getTenummerHtml() {
+
+        $wohnungsTenummer = array();
+        $teNummers = array();
+        foreach ($this->teileigentumseinheits as $te) {
+            $teNummers[] = $te->te_nummer;
+            if ($te->einheitstyp_id == 1) {
+                $wohnungsTenummer[] = $te->te_nummer;
+            }
+        }
+        asort($teNummers);
+
+        foreach($teNummers as $key => $tenummer) {
+            if (in_array($tenummer, $wohnungsTenummer)) {
+                $teNummers[$key] = '<strong>' . $tenummer . '</strong>';
+            } else {
+                $teNummers[$key] = '<small>' . $tenummer . '</small>';
+            }
+        }
+        return implode('/ ', $teNummers);
     }
 }

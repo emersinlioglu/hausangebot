@@ -79,19 +79,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'ort',
             [
                 //'filter' => Html::activeTextField($model, 'te_nummer'),
+                'format' => 'html',
                 'attribute' => 'te_nummer',
-                'value' => function ($model) {
-                    $teNummers = array();
-                    foreach ($model->teileigentumseinheits as $te) {
-//                        if ($te->einheitstyp_id == 1) {
-//                            return $te->te_nummer;
-//                        }
-                        $teNummers[] = $te->te_nummer;
-                    }
-                    asort($teNummers);
-                    return implode('/ ', $teNummers);
-                },
-                'label' => 'TE-Nr'
+                'value' => 'tenummerHtml',
+                'label' => 'TE-Nr',
             ],
 
             [

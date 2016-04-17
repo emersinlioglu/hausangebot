@@ -60,11 +60,12 @@ class DatenblattController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-    
+
     /**
-     * 
+     *
      */
-    private function _calculatePreises(Datenblatt $modelDatenblatt) {
+    private function _calculatePreises(Datenblatt $modelDatenblatt)
+    {
         // calculate kaufpreis
         $kaufpreisTotal = 0;
         /* @var $teileh app\models\Teileigentumseinheit */
@@ -73,7 +74,7 @@ class DatenblattController extends Controller
                 $kaufpreisTotal += (float)$item->kaufpreis;
             }
         }
-        
+
         // calculate sonderwünche
         $sonderwuenscheTotal = 0;
         /* @var $item app\models\Sonderwunsch */
@@ -84,7 +85,7 @@ class DatenblattController extends Controller
         // calculate abschlags
         /* @var $item \app\models\Abschlag */
         foreach ($modelDatenblatt->abschlags as $item) {
-            
+
             $zeilenSumme = 0;
             if ($item->kaufvertrag_angefordert) {
                 $zeilenSumme += ((float)$item->kaufvertrag_prozent * $kaufpreisTotal / 100);
@@ -94,7 +95,7 @@ class DatenblattController extends Controller
             }
             $item->kaufvertrag_betrag = ((float)$item->kaufvertrag_prozent * $kaufpreisTotal / 100);
             $item->sonderwunsch_betrag = ((float)$item->sonderwunsch_prozent * $sonderwuenscheTotal / 100);
-                
+
             $item->summe = $zeilenSumme;
         }
     }
@@ -107,9 +108,9 @@ class DatenblattController extends Controller
     public function actionView($id)
     {
         $modelDatenblatt = $this->findModel($id);
-        
+
         $this->_calculatePreises($modelDatenblatt);
-        
+
         return $this->render('view', [
             'model' => $modelDatenblatt,
         ]);
@@ -119,11 +120,12 @@ class DatenblattController extends Controller
     {
         $modelDatenblatt = $this->findModel($id);
         $this->_calculatePreises($modelDatenblatt);
-        
+
         return $this->render('pdf', [
             'model' => $modelDatenblatt,
         ]);
     }
+
     /**
      * Creates a new Datenblatt model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -140,7 +142,7 @@ class DatenblattController extends Controller
             'Abschlag 3' => 16.8,
             'Abschlag 4' => 8.4,
             'Abschlag 5' => 18.3,
-        //  'Abschlag 6' => 0.0,
+            //  'Abschlag 6' => 0.0,
             'Schlussrechnung' => 3.5
         ];
         foreach ($abschlags as $name => $percentage) {
@@ -160,7 +162,7 @@ class DatenblattController extends Controller
      * @param integer $id
      * @return mixed
      */
-     public function actionUpdate($id, $preventPost = false)
+    public function actionUpdate($id, $preventPost = false)
     {
         $modelDatenblatt = $this->findModel($id);
         $modelDatenblatt->aktiv = 1;
@@ -181,7 +183,7 @@ print_r($data);
 echo "</pre>";
 die;*/
         if (!$preventPost && $modelDatenblatt->load($data) && $modelDatenblatt->save()) {
-            
+
 //            // Käufer
 //            if ($modelKaeufer->load(Yii::$app->request->post())) {
 //
@@ -250,14 +252,14 @@ die;*/
                     $item->save();
                 }
             }
-            
+
             // Abschläge
             if ($modelsAbschlag = Abschlag::loadMultiple($modelDatenblatt->abschlags, $data)) {
                 foreach ($modelDatenblatt->abschlags as $item) {
                     $item->save();
                 }
             }
-            
+
             // Nachlass
             if (Nachlass::loadMultiple($modelDatenblatt->nachlasses, $data)) {
                 foreach ($modelDatenblatt->nachlasses as $item) {
@@ -290,10 +292,10 @@ die;*/
 //            $modelKaeufer = $modelDatenblatt->kaeufer;
         }
 
-         $modelKaeufer = new Kaeufer();
-         if ($modelDatenblatt->kaeufer) {
-             $modelKaeufer = $modelDatenblatt->kaeufer;
-         }
+        $modelKaeufer = new Kaeufer();
+        if ($modelDatenblatt->kaeufer) {
+            $modelKaeufer = $modelDatenblatt->kaeufer;
+        }
 
         // calculate kaufpreis
         $kaufpreisTotal = 0;
@@ -303,7 +305,7 @@ die;*/
                 $kaufpreisTotal += (float)$item->kaufpreis;
             }
         }
-        
+
         // calculate sonderwünche
         $sonderwuenscheTotal = 0;
         /* @var $item app\models\Sonderwunsch */
@@ -314,7 +316,7 @@ die;*/
         // calculate abschlags
         /* @var $item \app\models\Abschlag */
         foreach ($modelDatenblatt->abschlags as $item) {
-            
+
             $zeilenSumme = 0;
             if ($item->kaufvertrag_angefordert) {
                 $zeilenSumme += ((float)$item->kaufvertrag_prozent * $kaufpreisTotal / 100);
@@ -324,7 +326,7 @@ die;*/
             }
             $item->kaufvertrag_betrag = ((float)$item->kaufvertrag_prozent * $kaufpreisTotal / 100);
             $item->sonderwunsch_betrag = ((float)$item->sonderwunsch_prozent * $sonderwuenscheTotal / 100);
-                
+
             $item->summe = $zeilenSumme;
         }
 
@@ -337,14 +339,15 @@ die;*/
             'sonderwuenscheTotal' => $sonderwuenscheTotal,
         ]);
     }
-    
+
 
     /**
      * Add new datenblatt
      * @param int $datenblattId
      */
-    public function actionAddsonderwunsch($datenblattId) {
-        
+    public function actionAddsonderwunsch($datenblattId)
+    {
+
         $new = new Sonderwunsch();
         $new->datenblatt_id = $datenblattId;
         $new->save();
@@ -352,13 +355,14 @@ die;*/
         return $this->actionUpdate($datenblattId);
 //        $this->redirect(['update', 'id' => $datenblattId]);
     }
-    
+
     /**
      * Add new abschlag
      * @param int $datenblattId
      */
-    public function actionAddabschlag($datenblattId) {
-        
+    public function actionAddabschlag($datenblattId)
+    {
+
         $new = new Abschlag();
         $new->datenblatt_id = $datenblattId;
         $new->save();
@@ -366,13 +370,14 @@ die;*/
         return $this->actionUpdate($datenblattId);
 //        $this->redirect(['update', 'id' => $datenblattId]);
     }
-    
+
     /**
      * Add new zahlung
      * @param int $datenblattId
      */
-    public function actionAddzahlung($datenblattId) {
-        
+    public function actionAddzahlung($datenblattId)
+    {
+
         $new = new Zahlung();
         $new->datenblatt_id = $datenblattId;
         $new->save();
@@ -395,13 +400,14 @@ die;*/
         return $this->actionUpdate($datenblattId);
 //        $this->redirect(['update', 'id' => $datenblattId]);
     }
-    
+
     /**
      * Add new nachlass
      * @param int $datenblattId
      */
-    public function actionAddnachlass($datenblattId) {
-        
+    public function actionAddnachlass($datenblattId)
+    {
+
         $new = new Nachlass();
         $new->datenblatt_id = $datenblattId;
         $new->save();
@@ -446,7 +452,7 @@ die;*/
 
         return $this->actionUpdate($datenblattId, true);
     }
-    
+
     /**
      * Deletes abschlag
      * @param integer $id
@@ -464,10 +470,10 @@ die;*/
         return $this->actionUpdate($datenblattId, true);
 //        return $this->redirect(['update', 'id' => $datenblattId]);
     }
-    
+
     /**
      * Deletes nachlass
-     * 
+     *
      * @param int $datenblattId
      * @param int $nachlassId
      * @return void
@@ -484,7 +490,7 @@ die;*/
         return $this->actionUpdate($datenblattId, true);
 //        return $this->redirect(['update', 'id' => $datenblattId]);
     }
-    
+
     /**
      * Deletes zahlung
      * @param int $datenblattId
@@ -629,35 +635,39 @@ die;*/
     }
 
 
-    public function actionReport($id) {
-        
+    public function actionReport($id)
+    {
+
         $modelDatenblatt = $this->findModel($id);
         $this->_calculatePreises($modelDatenblatt);
-        
+
+        $headerHtml = $this->renderPartial('_pdf_header', ['model' => $modelDatenblatt,]);
 
         //get your html raw content without layouts
-       // $content = $this->renderPartial('view');
+        // $content = $this->renderPartial('view');
         //set up the kartik\mpdf\Pdf component
         $pdf = new Pdf([
-            'content'=> $this->renderPartial('pdf', ['model' => $modelDatenblatt,]),
+            'content' => $this->renderPartial('pdf', ['model' => $modelDatenblatt,]),
 
             //'mode'=> Pdf::MODE_CORE,
             'mode' => Pdf::MODE_BLANK,
-            'format'=> Pdf::FORMAT_A4,
+            'format' => Pdf::FORMAT_A4,
             'defaultFontSize' => 10.0,
             'orientation' => Pdf::ORIENT_LANDSCAPE,
             'destination' => Pdf::DEST_BROWSER,
             'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
-            'cssInline'=> ' tr:nth-child(odd) {background: #fff;} tr:nth-child(even) {background: #eee;} table{width:100%}',
+            'cssInline' => ' tr:nth-child(odd) {background: #fff;} tr:nth-child(even) {background: #eee;} table{width:100%}',
             //'options'=> ['title'=> 'Datenblatt'],
-            'methods'=> [
-             //  'setHeader'=>['Erstellt am: '.date("d.m.Y")],
-             'setFooter'=>['Erstellt am :'. date("d.m.Y") . '| |'. 'Seite {PAGENO} / {nb}'],
+            'marginTop' => '40',
+            'methods' => [
+                //'setHeader' => ['Erstellt am: ' . date("d.m.Y")],
+                'setHeader' => [$headerHtml],
+                'setFooter' => ['Erstellt am :' . date("d.m.Y") . '| |' . 'Seite {PAGENO} / {nb}'],
             ]
         ]);
         return $pdf->render();
     }
-	
+
     /**
      * Finds the Datenblatt model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

@@ -37,4 +37,9 @@ class AppAsset extends AssetBundle
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
     ];
+
+     public $images = [
+     'images/logo.jpg',
+     'images/logo_pdf.jpg',
+     ];
 }

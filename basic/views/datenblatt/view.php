@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
    
 
-
+   
     <table width="100%">
         <tbody>
         <tr>
@@ -276,7 +276,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <td>Debitor-Nr.</td>
             <td></td>
             <td></td>
-            <td><?php $model->kaeufer ? $model->kaeufer->debitor_nr : ''; ?></td>
+            <td><?= $model->kaeufer ? $model->kaeufer->debitor_nr : ''; ?></td>
             <td></td>
             <td></td>
             <td></td>
@@ -287,9 +287,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <td></td>
             <td></td>
             <td>
+           
                 <?php
                     if ($model->kaeufer) {
-                        echo Yii::$app->formatter->asDate($model->kaeufer->beurkundung_am);
+                        echo Yii::$app->formatter->asDate($model->beurkundung_am);
                     }
                 ?>
             </td>
@@ -305,7 +306,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <td>
                 <?php
                 if ($model->kaeufer) {
-                    echo Yii::$app->formatter->asDate($model->kaeufer->verbindliche_fertigstellung);
+                    echo Yii::$app->formatter->asDate($model->verbindliche_fertigstellung);
                 }
                 ?>
             </td>
@@ -313,14 +314,14 @@ $this->params['breadcrumbs'][] = $this->title;
             <td>
                 <?php
                 if ($model->kaeufer) {
-                    echo Yii::$app->formatter->asDate($model->kaeufer->abnahme_se);
+                    echo Yii::$app->formatter->asDate($model->abnahme_se);
                 }
                 ?>
             </td>
             <td> - Auflassung</td>
             <td>
                 <?php
-                if ($model->kaeufer && $model->kaeufer->auflassung) {
+                if ($model->kaeufer && $model->auflassung) {
                     echo 'X';
                 }
                 ?>
@@ -333,7 +334,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <td>
                 <?php
                 if ($model->kaeufer) {
-                    echo Yii::$app->formatter->asDate($model->kaeufer->uebergang_bnl);
+                    echo Yii::$app->formatter->asDate($model->uebergang_bnl);
                 }
                 ?>
             </td>
@@ -341,7 +342,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <td>
                 <?php
                 if ($model->kaeufer) {
-                    echo Yii::$app->formatter->asDate($model->kaeufer->abnahme_ge);
+                    echo Yii::$app->formatter->asDate($model->abnahme_ge);
                 }
                 ?>
             </td>
@@ -882,5 +883,4 @@ $this->params['breadcrumbs'][] = $this->title;
         </tr>
         </tbody>
   </table>
-
 </div>

@@ -29,7 +29,8 @@
 		"kartik-v/yii2-mpdf": "*",
         "kartik-v/mpdf": "@dev",
         "kartik-v/yii2-export": "@dev",
-        "kartik-v/yii2-grid": "@dev"
+        "kartik-v/yii2-grid": "@dev",
+        "dektrium/yii2-user": "0.9.*@dev"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

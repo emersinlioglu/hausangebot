@@ -12,6 +12,11 @@ return [
     'controllerNamespace' => 'app\commands',
     'modules' => [
         'gii' => 'yii\gii\Module',
+        'auth' => [
+
+            'class' => 'app\modules\auth\Module',
+
+        ],
     ],
     'components' => [
         'cache' => [
@@ -26,6 +31,9 @@ return [
             ],
         ],
         'db' => $db,
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
     ],
     'params' => $params,
 ];

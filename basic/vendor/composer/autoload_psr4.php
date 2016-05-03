@@ -7,12 +7,14 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'yii\\swiftmailer\\' => array($vendorDir . '/yiisoft/yii2-swiftmailer'),
+    'yii\\jui\\' => array($vendorDir . '/yiisoft/yii2-jui'),
     'yii\\gii\\' => array($vendorDir . '/yiisoft/yii2-gii'),
     'yii\\faker\\' => array($vendorDir . '/yiisoft/yii2-faker'),
     'yii\\debug\\' => array($vendorDir . '/yiisoft/yii2-debug'),
     'yii\\composer\\' => array($vendorDir . '/yiisoft/yii2-composer'),
     'yii\\codeception\\' => array($vendorDir . '/yiisoft/yii2-codeception'),
     'yii\\bootstrap\\' => array($vendorDir . '/yiisoft/yii2-bootstrap'),
+    'yii\\authclient\\' => array($vendorDir . '/yiisoft/yii2-authclient'),
     'yii\\' => array($vendorDir . '/yiisoft/yii2'),
     'wbraganca\\dynamicform\\' => array($vendorDir . '/wbraganca/yii2-dynamicform/src'),
     'rmrevin\\yii\\fontawesome\\' => array($vendorDir . '/rmrevin/yii2-fontawesome'),
@@ -47,6 +49,7 @@ return array(
     'kartik\\affix\\' => array($vendorDir . '/kartik-v/yii2-widget-affix'),
     'dosamigos\\chartjs\\' => array($vendorDir . '/2amigos/yii2-chartjs-widget/src'),
     'dmstr\\' => array($vendorDir . '/dmstr/yii2-adminlte-asset'),
+    'dektrium\\user\\' => array($vendorDir . '/dektrium/yii2-user'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
     'anmaslov\\autocomplete\\' => array($vendorDir . '/anmaslov/yii2-autocomplete-widget/src'),
     'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),

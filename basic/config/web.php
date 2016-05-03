@@ -70,7 +70,18 @@ $config = [
         // 'i18n' => []
     ],
 		
-		
+		'auth' => [
+
+            'class' => 'app\modules\auth\Module',
+
+        ],
+        'user' => [
+         'class' => 'dektrium\user\Module',
+        'enableUnconfirmedLogin' => true,
+        'confirmWithin' => 21600,
+        'cost' => 12,
+        'admins' => ['admin']
+    ],
     ],
     'components' => [
         'formatter' => [ 
@@ -127,6 +138,9 @@ $config = [
                     '@app/views' => '@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app'
                  ],
              ],
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
         ],
     ],
     'language' => 'de-DE',

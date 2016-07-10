@@ -1,6 +1,6 @@
 <?php
 
-if (getenv('YII_ENV') == 'development') {
+//if (getenv('YII_ENV') == 'development') {
 
     // development
     return [
@@ -11,14 +11,14 @@ if (getenv('YII_ENV') == 'development') {
         'charset' => 'utf8',
     ];
 
-} else {
-
-    // default
-    return [
-        'class' => 'yii\db\Connection',
-        'dsn' => 'mysql:host=localhost;dbname=hausangebot',
-        'username' => 'root',
-        'password' => 'Sri6lanka',
-        'charset' => 'utf8',
-    ];
-}
+//} else {
+//
+//    // default
+//    return [
+//        'class' => 'yii\db\Connection',
+//        'dsn' => 'mysql:host=localhost;dbname=hausangebot',
+//        'username' => 'root',
+//        'password' => 'Sri6lanka',
+//        'charset' => 'utf8',
+//    ];
+//}

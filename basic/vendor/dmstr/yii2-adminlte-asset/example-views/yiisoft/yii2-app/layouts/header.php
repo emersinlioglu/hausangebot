@@ -32,6 +32,11 @@ use yii\helpers\Html;
                <!-- <li>
                     <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                 </li> -->
+
+                <li>
+                    <?= Html::a('<i class="fa fa-fw fa-sign-out"></i>Logout', ['/user-management/auth/logout'], ['class' => 'btn btn-default btn-primary']) ?>
+                </li>
+
             </ul>
         </div>
     </nav>

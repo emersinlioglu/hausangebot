@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fcfffe526cb265aef1af0127359273ac",
-    "content-hash": "3cfef0a9e790f8ec7ccc7082573202ee",
+    "hash": "0aac8cad19d079a5f29e99093153c168",
+    "content-hash": "8291c24edeb19ee341bddbbbf8f40133",
     "packages": [
         {
             "name": "2amigos/yii2-chartjs-widget",
@@ -753,6 +753,54 @@
             "time": "2013-11-30 08:25:19"
         },
         {
+            "name": "ikimea/browser",
+            "version": "1.12.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Ikimea/Browser.git",
+                "reference": "3fb8a2498ed36d49832d95f1da0c4cc055a64728"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Ikimea/Browser/zipball/3fb8a2498ed36d49832d95f1da0c4cc055a64728",
+                "reference": "3fb8a2498ed36d49832d95f1da0c4cc055a64728",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Ikimea\\Browser\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ikimea",
+                    "homepage": "http://www.ikimea.com"
+                },
+                {
+                    "name": "Gary White",
+                    "homepage": "http://www.apptools.com/phptools/browser/"
+                },
+                {
+                    "name": "Chris Schuld",
+                    "homepage": "http://chrisschuld.com"
+                }
+            ],
+            "description": "Detecting the user’s browser",
+            "homepage": "http://www.ikimea.com",
+            "keywords": [
+                "browser"
+            ],
+            "time": "2015-08-26 20:05:14"
+        },
+        {
             "name": "kartik-v/bootstrap-fileinput",
             "version": "v4.3.0",
             "source": {
@@ -1037,7 +1085,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-export/zipball/c7ccdbbc32fa00247399c3cf82cd914af8c80683",
+                "url": "https://api.github.com/repos/kartik-v/yii2-export/zipball/f4b862a19df1455c13310929e1caf64a14d15d86",
                 "reference": "5c2429fae2bc176fdc7f5edb3965ddf989b46e26",
                 "shasum": ""
             },
@@ -1096,7 +1144,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/0473f04f1af0f8c93c3270c658db9602e97f5f9e",
+                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/acbe6b3e6d3f38c41d5003683690b6d21720cd32",
                 "reference": "574c0e310bda692253c1ba0eac9a94c699b299d5",
                 "shasum": ""
             },
@@ -2543,6 +2591,211 @@
                 "yii2-dynamicform"
             ],
             "time": "2015-05-26 12:06:27"
+        },
+        {
+            "name": "webvimark/bootstrap-switch",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webvimark/bootstrap-switch.git",
+                "reference": "c7493ba37747a83951cd95acf876668cbc0aba7f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webvimark/bootstrap-switch/zipball/c7493ba37747a83951cd95acf876668cbc0aba7f",
+                "reference": "c7493ba37747a83951cd95acf876668cbc0aba7f",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "webvimark\\extensions\\BootstrapSwitch\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "BootstrapSwitch extension for yii 2",
+            "time": "2014-06-23 10:35:32"
+        },
+        {
+            "name": "webvimark/components",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webvimark/components.git",
+                "reference": "805b7ecfaea1654a8c0f47bc007497c97bdc9613"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webvimark/components/zipball/805b7ecfaea1654a8c0f47bc007497c97bdc9613",
+                "reference": "805b7ecfaea1654a8c0f47bc007497c97bdc9613",
+                "shasum": ""
+            },
+            "require": {
+                "webvimark/helpers": "^1.0.0",
+                "webvimark/image": "^1.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "webvimark\\components\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Components for yii 2",
+            "time": "2016-06-28 09:29:18"
+        },
+        {
+            "name": "webvimark/date-range-picker",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webvimark/date-range-picker.git",
+                "reference": "4b93d19534ad956c2ae06be0020601ccf8af99fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webvimark/date-range-picker/zipball/4b93d19534ad956c2ae06be0020601ccf8af99fb",
+                "reference": "4b93d19534ad956c2ae06be0020601ccf8af99fb",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "webvimark\\extensions\\DateRangePicker\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "dangrossman daterangepicker yii 2 gridview",
+            "time": "2015-10-06 12:14:43"
+        },
+        {
+            "name": "webvimark/grid-bulk-actions",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webvimark/grid-bulk-actions.git",
+                "reference": "b1a28927d9d343922375cdb2b9d073b511fbdd49"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webvimark/grid-bulk-actions/zipball/b1a28927d9d343922375cdb2b9d073b511fbdd49",
+                "reference": "b1a28927d9d343922375cdb2b9d073b511fbdd49",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "webvimark\\extensions\\GridBulkActions\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Bulk actions extension for yii 2 gridview",
+            "time": "2015-10-16 07:10:38"
+        },
+        {
+            "name": "webvimark/grid-page-size",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webvimark/grid-page-size.git",
+                "reference": "e0e57a7ecd3858625a97d565b0f9582d83da7e9a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webvimark/grid-page-size/zipball/e0e57a7ecd3858625a97d565b0f9582d83da7e9a",
+                "reference": "e0e57a7ecd3858625a97d565b0f9582d83da7e9a",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "webvimark\\extensions\\GridPageSize\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Grid page size extension for yii 2 gridview",
+            "time": "2015-10-26 16:13:58"
+        },
+        {
+            "name": "webvimark/helpers",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webvimark/helpers.git",
+                "reference": "f3f1d8752a6bd3221b6e9fd9db6948676d3e2e66"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webvimark/helpers/zipball/f3f1d8752a6bd3221b6e9fd9db6948676d3e2e66",
+                "reference": "f3f1d8752a6bd3221b6e9fd9db6948676d3e2e66",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "webvimark\\helpers\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Helpers for yii 2",
+            "time": "2015-09-13 16:37:28"
+        },
+        {
+            "name": "webvimark/image",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webvimark/image.git",
+                "reference": "18a3f257b55d0670086b4ccdac005fe376ad7c21"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webvimark/image/zipball/18a3f257b55d0670086b4ccdac005fe376ad7c21",
+                "reference": "18a3f257b55d0670086b4ccdac005fe376ad7c21",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "webvimark\\image\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Kohana image lib wrapper for yii 2",
+            "time": "2014-07-02 07:33:43"
+        },
+        {
+            "name": "webvimark/module-user-management",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webvimark/user-management.git",
+                "reference": "92f6878b20d4446c9efedeae1188c6be75b7c9cf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webvimark/user-management/zipball/92f6878b20d4446c9efedeae1188c6be75b7c9cf",
+                "reference": "92f6878b20d4446c9efedeae1188c6be75b7c9cf",
+                "shasum": ""
+            },
+            "require": {
+                "ikimea/browser": "1.12.0",
+                "webvimark/bootstrap-switch": "^1.0.0",
+                "webvimark/components": "^1.0.0",
+                "webvimark/date-range-picker": "^1.0.0",
+                "webvimark/grid-bulk-actions": "^1.0.0",
+                "webvimark/grid-page-size": "^1.0.0",
+                "webvimark/helpers": "^1.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "webvimark\\modules\\UserManagement\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "User with improved RBAC",
+            "time": "2016-06-13 11:48:58"
         },
         {
             "name": "yiisoft/yii2",

@@ -13,9 +13,10 @@ return [
     'modules' => [
         'gii' => 'yii\gii\Module',
         'auth' => [
-
             'class' => 'app\modules\auth\Module',
-
+        ],
+        'user-management' => [
+            'class' => 'webvimark\modules\UserManagement\UserManagementModule',
         ],
     ],
     'components' => [

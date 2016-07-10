@@ -10,7 +10,7 @@ use yii\web\Controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-class ErrorController extends CController {
+class ErrorController extends Controller {
 
     public $layout = '//layouts/column1';
     /**

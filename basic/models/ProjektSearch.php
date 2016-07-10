@@ -23,7 +23,7 @@ public $firma_nr;
     {
         return [
             [['id', 'firma_id'], 'integer'],
-            [['name'], 'safe'],
+            [['name', 'role'], 'safe'],
             [['firma', 'firma_name','firma_nr'], 'safe'],
         ];
     }
@@ -48,30 +48,25 @@ public $firma_nr;
     {
         $query = Projekt::find();
 
-
         $query->joinWith(['firma']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
- $dataProvider->sort->attributes['firma_name'] = [
-        // The tables are the ones our relation are configured to
-        // in my case they are prefixed with "tbl_"
-        'asc' => ['firma.name' => SORT_ASC],
-        'desc' => ['firma.name' => SORT_DESC],
+        $dataProvider->sort->attributes['firma_name'] = [
+            // The tables are the ones our relation are configured to
+            // in my case they are prefixed with "tbl_"
+            'asc' => ['firma.name' => SORT_ASC],
+            'desc' => ['firma.name' => SORT_DESC],
         ];
 
-          $dataProvider->sort->attributes['firma_nr'] = [
-        // The tables are the ones our relation are configured to
-        // in my case they are prefixed with "tbl_"
-        'asc' => ['firma.nr' => SORT_ASC],
-        'desc' => ['firma.nr' => SORT_DESC],
-        ];
-        
-
-
-
+        $dataProvider->sort->attributes['firma_nr'] = [
+            // The tables are the ones our relation are configured to
+            // in my case they are prefixed with "tbl_"
+            'asc' => ['firma.nr' => SORT_ASC],
+            'desc' => ['firma.nr' => SORT_DESC],
+        ];        
 
         $this->load($params);
 
@@ -86,9 +81,16 @@ public $firma_nr;
             'firma_id' => $this->firma_id,
         ]);
 
+        if (Yii::$app->user->identity) {
+            $query->andFilterWhere([
+                'role' => Yii::$app->user->identity->getRoles()->select('name')
+            ]);
+        }
+
         $query->andFilterWhere(['like', 'projekt.name', $this->name])
             ->andFilterWhere(['like', 'firma.name', $this->firma_name])
             ->andFilterWhere(['like', 'firma.nr', $this->firma_nr])
+            ->andFilterWhere(['like', 'projekt.role', $this->role])
         ;
 
         return $dataProvider;

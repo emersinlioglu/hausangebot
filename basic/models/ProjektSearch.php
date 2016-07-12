@@ -81,7 +81,7 @@ public $firma_nr;
             'firma_id' => $this->firma_id,
         ]);
 
-        if (Yii::$app->user->identity) {
+        if (!Yii::$app->user->isSuperadmin) {
             $query->andFilterWhere([
                 'role' => Yii::$app->user->identity->getRoles()->select('name')
             ]);

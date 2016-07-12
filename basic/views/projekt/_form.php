@@ -26,7 +26,14 @@ use webvimark\modules\UserManagement\models\rbacDB\Role;
 	
 	<?php 
 		$roles = Role::getAvailableRoles(Yii::$app->user->isSuperAdmin, true);
-		echo $form->field($model, 'role')->dropDownList($roles, []);
+		if (Yii::$app->user->isSuperadmin) {
+			echo $form->field($model, 'role')->dropDownList($roles, []);
+		} else {
+			if (!$model->role) {
+				$model->role = reset($roles);
+			}
+            echo $form->field($model, 'role')->hiddenInput()->label(false);
+		}
 	?>
 	
     <div class="form-group">

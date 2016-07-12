@@ -99,6 +99,12 @@ class HausSearch extends Haus
             'rechnung_vertrieb' => $this->rechnung_vertrieb,
         ]);
 
+        if (!Yii::$app->user->isSuperadmin) {
+            $query->andFilterWhere([
+                'projekt.role' => Yii::$app->user->identity->getRoles()->select('name')
+            ]);
+        }
+
         $query->andFilterWhere(['like', 'plz', $this->plz])
             ->andFilterWhere(['like', 'ort', $this->ort])
             ->andFilterWhere(['like', 'strasse', $this->strasse])

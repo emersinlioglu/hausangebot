@@ -55,9 +55,56 @@ class DatenblattController extends Controller
             $modelToDelete->delete();
         }
 
+        // max count of teileigentumseinheits of filtered datenblatts
+        $models = $dataProvider->getModels();
+        $maxCountTEEinheits = 0;
+        foreach ($models as $datenblatt) {
+            if ($datenblatt->haus) {
+                $count = count($datenblatt->haus->teileigentumseinheits);
+                $maxCountTEEinheits = max($maxCountTEEinheits, $count);
+            }
+        }
+
+        // max count of sonderwuensche of filtered datenblatts
+        $models = $dataProvider->getModels();    
+        $maxCountSonderwunsches = 0;
+        foreach ($models as $datenblatt) {
+            $count = count($datenblatt->sonderwunsches);
+            $maxCountSonderwunsches = max($maxCountSonderwunsches, $count);
+        }
+
+        // max count of abschlags of filtered datenblatts
+        $models = $dataProvider->getModels();    
+        $maxCountAbschlags = 0;
+        foreach ($models as $datenblatt) {
+            $count = count($datenblatt->abschlags);
+            $maxCountAbschlags = max($maxCountAbschlags, $count);
+        }
+
+        // max count of nachlasses of filtered datenblatts
+        $models = $dataProvider->getModels();    
+        $maxCountNachlasses = 0;
+        foreach ($models as $datenblatt) {
+            $count = count($datenblatt->nachlasses);
+            $maxCountNachlasses = max($maxCountNachlasses, $count);
+        }
+
+        // max count of zahlungs of filtered datenblatts
+        $models = $dataProvider->getModels();    
+        $maxCountZahlungs = 0;
+        foreach ($models as $datenblatt) {
+            $count = count($datenblatt->zahlungs);
+            $maxCountZahlungs = max($maxCountZahlungs, $count);
+        }
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'maxCountTEEinheits' => $maxCountTEEinheits,
+            'maxCountSonderwunsches' => $maxCountSonderwunsches,
+            'maxCountAbschlags' => $maxCountAbschlags,
+            'maxCountNachlasses' => $maxCountNachlasses,
+            'maxCountZahlungs' => $maxCountZahlungs,
         ]);
     }
 

@@ -3,6 +3,8 @@ protected/runtime/*
 protected/data/*.db
 themes/classic/views/
 
+data/logs/error.log
+
 
 .idea
 nbproject

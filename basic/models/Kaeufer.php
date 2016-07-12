@@ -108,6 +108,46 @@ class Kaeufer extends \yii\db\ActiveRecord
         return $label;
     }
 
+    public function getUebergangBnlLabel()
+    {
+        if ($this->uebergang_bnl === null) {
+            $label = '';
+        } else {
+            $label = Yii::$app->formatter->asDate($this->uebergang_bnl);
+        }
+        return $label;
+    }
+
+    public function getBeurkundungAmLabel()
+    {
+        if ($this->beurkundung_am === null) {
+            $label = '';
+        } else {
+            $label = Yii::$app->formatter->asDate($this->beurkundung_am);
+        }
+        return $label;
+    }
+
+    public function getAbnahmeSeLabel()
+    {
+        if ($this->abnahme_se === null) {
+            $label = '';
+        } else {
+            $label = Yii::$app->formatter->asDate($this->abnahme_se);
+        }
+        return $label;
+    }
+
+    public function getAbnahmeGeLabel()
+    {
+        if ($this->abnahme_ge === null) {
+            $label = '';
+        } else {
+            $label = Yii::$app->formatter->asDate($this->abnahme_ge);
+        }
+        return $label;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

@@ -95,18 +95,18 @@
 
 
                     
-                    ['label' => 'Firmen', 'icon' => 'fa fa-building text-red', 'url' => ['firma/index']],
-                    ['label' => 'Projekte', 'icon' => 'fa fa-dashboard text-aqua','url' => ['projekt/index']],
-                    ['label' => 'Teileigentumseinheiten', 'icon' => 'fa fa-home text-green','url' => ['haus/index']],
-                    ['label' => 'Käufer', 'icon' => 'fa fa-users text-yellow', 'url' => ['kaeufer/index']],
-                    ['label' => 'Datenblätter', 'icon' => 'fa fa-file-text text-blue','url' => ['datenblatt/index']],
+                    ['label' => 'Firmen', 'icon' => 'fa fa-building text-red', 'url' => ['/firma/index']],
+                    ['label' => 'Projekte', 'icon' => 'fa fa-dashboard text-aqua','url' => ['/projekt/index']],
+                    ['label' => 'Teileigentumseinheiten', 'icon' => 'fa fa-home text-green','url' => ['/haus/index']],
+                    ['label' => 'Käufer', 'icon' => 'fa fa-users text-yellow', 'url' => ['/kaeufer/index']],
+                    ['label' => 'Datenblätter', 'icon' => 'fa fa-file-text text-blue','url' => ['/datenblatt/index']],
                    
                     [
                         'label' => 'Einstellungen',
                         'icon' => 'fa fa-share',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Einheitstypenverwaltung', 'icon' => 'fa fa-file-code-o', 'url' => ['einheitstyp/index'],],
+                            ['label' => 'Einheitstypenverwaltung', 'icon' => 'fa fa-file-code-o', 'url' => ['/einheitstyp/index'],],
                             
                             
                         ],

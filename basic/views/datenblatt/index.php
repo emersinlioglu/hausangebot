@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+//use yii\grid\GridView;
+use kartik\grid\GridView;
 use kartik\export\ExportMenu;
 
 /* @var $this yii\web\View */
@@ -20,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Datenblatt erstellen', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-        <div class="col-md-4 col-sm-6 col-xs-12" style="float: none;">
+        <div class="col-md-5 col-sm-6 col-xs-12" style="float: none;">
         <div class="info-box">
 
             <span class="info-box-icon bg-aqua"><i class="fa fa-envelope-o"></i></span>
@@ -28,8 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="info-box-content">
                 <span class="info-box-number"><h4>Serienbrief Datenquelle Export</h4></span>
 
-
-                </br>
                 <?php
 
 
@@ -231,10 +230,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 echo ExportMenu::widget([
                     'dataProvider' => $dataProvider,
                     'columns' => $gridColumns,
+                    //'batchSize' => 50,
                     //'fontAwesome' => true,
                     'columnSelectorOptions' => [
                         'label' => 'Felder auswählen.',
-                        //'class' => 'btn btn-success',
+                        'class' => 'btn btn-default',
+                        'style'=>'margin-right: 10px;'
                     ],
                     'exportConfig' => [
                         ExportMenu::FORMAT_HTML => false,
@@ -243,8 +244,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     'dropdownOptions' => [
                         'label' => 'Export Typ auswählen',
-                        //  'class' => 'btn btn-success',
-                        //
+                        'class' => 'btn btn-default',
+                        'style'=>'padding: 3px 0 0;'
                     ],
                 ]);
 
@@ -254,13 +255,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
         </div>
     </div>
-	
+
+
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'showPageSummary'=>$pageSummary,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
+            ['class' => 'kartik\grid\SerialColumn'],
 
             //'id',
             //'firma_id',
@@ -354,60 +358,48 @@ $this->params['breadcrumbs'][] = $this->title;
 		  
 		  
 		  
-		[
-		'class' => 'yii\grid\ActionColumn',
-        'contentOptions' => ['style' => 'width:200px;'],
-        'header'=>'Actions',
-        'template' => '{view}{update}{report}{delete} ',
-        'buttons' => [
+    		[
+        		'class' => 'yii\grid\ActionColumn',
+                'contentOptions' => ['style' => 'width:200px;'],
+                'header'=>'Actions',
+                'template' => '{view}{update}{report}{delete} ',
+                'buttons' => [
+                    'view' => function ($url, $model) {
+                        return Html::a('<span class="fa fa-search"></span> Anzeigen ', $url, [
+                                    'title' => Yii::t('app', 'View'),
+                                    'class'=>'btn btn-primary btn-xs',                                  
+                        ]);
+                    },	
+        			'update' => function ($url, $model) {
+                        return Html::a('<span class=" glyphicon glyphicon-pencil"></span> Bearbeiten', $url, [
+                                    'title' => Yii::t('app', 'Update'),
+                                    'class'=>'btn btn-primary btn-xs',                                  
+                        ]);
+                    },
+        			//print button
+                    'report' => function ($url, $model) {
+                        return Html::a('<span class="fa fa-print"></span> Drucken', $url, [
+                                    'title' => Yii::t('app', 'Report'),
+                                    'class'=>'btn btn-primary btn-xs',                                  
+                        ]);
+                    },
+        			'delete' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-trash"></span> Löschen', $url, [
+                                    'title' => Yii::t('app', 'Delete'),
+                                    'class'=>'btn btn-primary btn-xs',
+        							'data-confirm'=>'Wollen Sie diesen Eintrag wirklich löschen?',
+        							'data-method'=>'post',									
+                        ]);
+                    },
+        			
+                ],
 
-            'view' => function ($url, $model) {
-                return Html::a('<span class="fa fa-search"></span> Anzeigen ', $url, [
-                            'title' => Yii::t('app', 'View'),
-                            'class'=>'btn btn-primary btn-xs',                                  
-                ]);
-            },
-			
-			'update' => function ($url, $model) {
-                return Html::a('<span class=" glyphicon glyphicon-pencil"></span> Bearbeiten', $url, [
-                            'title' => Yii::t('app', 'Update'),
-                            'class'=>'btn btn-primary btn-xs',                                  
-                ]);
-            },
-       
-	  
-	   
-			//print button
-            'report' => function ($url, $model) {
-                return Html::a('<span class="fa fa-print"></span> Drucken', $url, [
-                            'title' => Yii::t('app', 'Report'),
-                            'class'=>'btn btn-primary btn-xs',                                  
-                ]);
-            },
-			
-			 
-			 'delete' => function ($url, $model) {
-                return Html::a('<span class="glyphicon glyphicon-trash"></span> Löschen', $url, [
-                            'title' => Yii::t('app', 'Delete'),
-                            'class'=>'btn btn-primary btn-xs',
-							'data-confirm'=>'Wollen Sie diesen Eintrag wirklich löschen?',
-							'data-method'=>'post',
-												
-                ]);
-            },
-			
-        ],
-
-        
-
-       ],
-		  
+          
+            ],
 		  
 			
-			
-			
-			
         ],
-    ]); ?>
+    ]); 
+    ?>
 
 </div>

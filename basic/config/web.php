@@ -61,6 +61,14 @@ $config = [
             ]
             // other settings
         ],
+        'dynagrid'=> [
+            'class'=>'\kartik\dynagrid\Module',
+            //'defaultPageSize' => 0,
+            // other module settings
+            //'defaultPageSize' => 5,
+            //'minPageSize' => 5,
+            //'maxPageSize' => 5,
+        ],
 		'gridview' =>  [
             'class' => '\kartik\grid\Module'
             // enter optional module parameters below - only if you need to  

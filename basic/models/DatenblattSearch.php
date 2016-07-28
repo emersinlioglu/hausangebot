@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Datenblatt;
+use yii\helpers\ArrayHelper;
 
 /**
  * DatenblattSearch represents the model behind the search form about `app\models\Datenblatt`.
@@ -61,12 +62,21 @@ class DatenblattSearch extends Datenblatt
     public function search($params)
     {
         $query = Datenblatt::find();
-
         $query->joinWith(['haus', 'kaeufer', 'projekt', 'firma', 'haus.teileigentumseinheits']);
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 10 // in case you want a default pagesize
+            ]
+
         ]);
+
+        // toggle display all
+        $toggleDataKey = '_tog' . hash('crc32', 'DatenblattSearch');
+        $isShowAll = ArrayHelper::getValue($_GET, $toggleDataKey) === 'all';
+        if ($isShowAll) {
+            $dataProvider->pagination = false;
+        }
 
         $dataProvider->sort->attributes['haus_strasse'] = [
             // The tables are the ones our relation are configured to
@@ -135,8 +145,6 @@ class DatenblattSearch extends Datenblatt
             'desc' => [$teNummercolumn => SORT_DESC],
         ];
 
-
-       
         $this->load($params);
 
         if (!$this->validate()) {

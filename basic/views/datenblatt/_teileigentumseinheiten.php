@@ -7,7 +7,7 @@
     <div class="panel box box-primary">
         <div class="box-header with-border">
             <h4 class="box-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapse-te" aria-expanded="true" class="">
+                <a data-toggle="collapse" data-parent="#collapse-te" href="#collapse-te" aria-expanded="true" class="">
                     Beschreibung Teileigentumseinheit:
                 </a>
             </h4>
@@ -24,8 +24,8 @@
                         <th>Zimmer</th>
                         <th>ME-Anteil</th>
                         <th>Wohnfläche</th>
-                        <th>Kaufpreis</th>
-                        <th>KP/Einheit</th>
+                        <th class="text-align-right">Kaufpreis</th>
+                        <th class="text-align-right">KP/Einheit</th>
                     </tr>
                     <?php 
                     /* @var $teileigentumseinheit app\models\Teileigentumseinheit */
@@ -38,9 +38,9 @@
                             <td><?= $teileigentumseinheit->geschoss ?></td>
                             <td><?= $teileigentumseinheit->zimmer ?></td>
                             <td><?= $teileigentumseinheit->me_anteil ?></td>
-                            <td><?= $teileigentumseinheit->wohnflaeche ?></td>
-                            <td>€ <?= number_format ((float)$teileigentumseinheit->kaufpreis, 2); ?></td>
-                            <td>€ <?= number_format ((float)$teileigentumseinheit->kp_einheit, 2); ?></td>
+                            <td><?= $teileigentumseinheit->wohnflaeche ?> <?= $teileigentumseinheit->einheitstyp->einheit ?></td>
+                            <td class="text-align-right"><?= number_format ((float)$teileigentumseinheit->kaufpreis, 2, ',', '.'); ?> €</td>
+                            <td class="text-align-right"><?= number_format ((float)$teileigentumseinheit->kp_einheit, 2, ',', '.'); ?> €</td>
                         </tr>
                     <?php 
                     endforeach; 

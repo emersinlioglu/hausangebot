@@ -4,11 +4,12 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Teileigentumseinheit;
-use app\models\Haus;
-use yii\data\ActiveDataProvider;
+use app\models\TeileigentumseinheitSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Haus;
+use yii\data\ActiveDataProvider;
 
 /**
  * TeileigentumseinheitController implements the CRUD actions for Teileigentumseinheit model.
@@ -33,11 +34,11 @@ class TeileigentumseinheitController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Teileigentumseinheit::find(),
-        ]);
+        $searchModel = new TeileigentumseinheitSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -62,7 +63,7 @@ class TeileigentumseinheitController extends Controller
     public function actionCreate()
     {
         $model = new Teileigentumseinheit();
-        
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

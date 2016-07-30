@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Abschlag;
+use app\models\AbschlagSearch;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -32,18 +33,18 @@ class AbschlagController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Abschlag::find(),
-        ]);
+        $searchModel = new AbschlagSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
      * Displays a single Abschlag model.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
     public function actionView($id)
@@ -74,7 +75,7 @@ class AbschlagController extends Controller
     /**
      * Updates an existing Abschlag model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
     public function actionUpdate($id)
@@ -93,7 +94,7 @@ class AbschlagController extends Controller
     /**
      * Deletes an existing Abschlag model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -106,7 +107,7 @@ class AbschlagController extends Controller
     /**
      * Finds the Abschlag model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param string $id
      * @return Abschlag the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

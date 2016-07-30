@@ -23,7 +23,7 @@ var initDPRemove = function () {
         var $id = $('#' + id), $el = $id.parent();
         $el.find('.kv-date-remove').on('click.kvdatepicker', function () {
             if (range) {
-                $el.parent().find('input').each(function () {
+                $el.find('input[type="text"]').each(function () {
                     $(this).kvDatepicker('clearDates');
                 });
             } else {

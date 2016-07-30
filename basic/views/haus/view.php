@@ -2,12 +2,13 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Haus */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Hauses'), 'url' => ['index']];
+$this->title = 'Teileigentumseinheit '.'';
+$this->params['breadcrumbs'][] = ['label' => 'Teileigentumseinheiten', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="haus-view">
@@ -15,11 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
+        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -28,9 +29,40 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'projekt_id',
+           // 'id',
+           // 'projekt_id',
+
+            'projekt.name',
+            'projekt.firma.name',
+            'plz',
+            'ort',
+            'strasse',
+            'hausnr',
+ //           'reserviert',
+//            [
+//                'attribute' => 'reserviert',
+//                'format' => 'raw',
+//                'value' => function ($model, $index, $widget) {
+//                    return $model->reserviert ? 'Ja' : 'Nein';
+//                    //return Html::checkbox('foo[]', $model->foo, ['value' => $index, 'disabled' => true]);
+//                },
+//            ],
+            [
+                'attribute' => 'reserviert',
+                'format' => 'boolean',
+            ],
+            [
+                'attribute' => 'verkauft',
+                'format' => 'boolean',
+            ],
+            [
+                'attribute' => 'rechnung_vertrieb',
+                'format' => 'boolean',
+            ],
+        //    'verkauft',
+        //    'rechnung_vertrieb',
         ],
     ]) ?>
 
+  
 </div>

@@ -1,159 +1,198 @@
 <?php
 
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
+use yii\widgets\ActiveForm;
 use app\models\Firma;
+use yii\widgets\Pjax;
+
+/* @var $this \yii\web\View */
+/* @var $modelDatenblatt \app\models\Datenblatt */
+/* @var $form \yii\widgets\ActiveForm */
+?>
+<?php
+//$this->registerJs(
+//    '$("document").ready(function(){
+//        $("#dynamic-form").on("pjax:end", function() {
+//            $.pjax.reload({container:"#datenblatt-form"});  //Reload GridView
+//            console.log("reload form");
+//        });
+//    });'
+//);
+$this->registerJs('
+    $(function(){
+        $("#datenblatt-form").submit();
+
+        // after reload form
+        $(document).on(\'ready pjax:success\', function() {
+            new DatenblattForm();
+        });
+        
+//        // To disable f5
+//        $(document).bind("keydown", function(e){
+//            if ((e.which || e.keyCode) == 116) {
+//                e.preventDefault();
+//
+//                $("#datenblatt-form").attr("action")
+//            }
+//        });
+
+    });
+');
 ?>
 
-<div class="datenblatt-form">
+<!--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>-->
 
-    <?php $form = ActiveForm::begin(['id' => 'dynamic-form', 
-        'options'=>array(
-            'class' => 'datenblatt-form'
-        )
-    ]); ?>
+<?php //yii\widgets\Pjax::begin(['id' => 'datenblatt-form']) ?>
+<?php //$form = ActiveForm::begin(['options' => ['data-pjax' => true ]]); ?>
 
+<?php $form = ActiveForm::begin([
+    //'enableAjaxValidation' => false,
+    'enableClientValidation' => true,
+    //'validateOnSubmit' => true,
+    'options' => array(
+        'data-pjax' => true,
+        //'class' => 'datenblatt-form',
+        'id' => 'datenblatt-form'
+    )
+]); ?>
+
+<!--<div class="row">-->
+<!--    <div class="col-sm-2">-->
+        <!-- ?= $form->field($modelDatenblatt, 'nummer')->textInput(['maxlength' => true]) ?-->
+<!--    </div>-->
+<!--</div>-->
+
+<div class="hide"><?= $form->field($modelDatenblatt, 'aktiv')->hiddenInput() ?></div>
+
+<?php if ($modelDatenblatt->id): ?>
     <div class="row">
         <div class="col-sm-2">
-            <?= $form->field($modelDatenblatt, 'nummer')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($modelDatenblatt, 'firma_id')->dropDownList(ArrayHelper::map(Firma::find()->all(), 'id', 'name'), ['prompt' => 'Firma auswählen'])->label('Firma') ?>
         </div>
-    </div>
-    
-    <?php if ($modelDatenblatt->id): ?>
-    <div class="row">
         <div class="col-sm-2">
-            <?= $form->field($modelDatenblatt, 'firma_id')->dropDownList(ArrayHelper::map(Firma::find()->all(), 'id', 'name'), ['prompt'=>'Firma auswählen']) ?>
+            
+            <?php 
+            $firma = $modelDatenblatt->firma ? $modelDatenblatt->firma : new Firma();
+            if($modelDatenblatt->firma) {
+                //echo $modelDatenblatt->firma->nr;
+            }
+            echo $form->field($firma, 'nr')->textInput(['disabled' => 'disabled'])->label('Firmennummer')
+            ?>
         </div>
         <div class="col-sm-2">
             <?php
-                $projekte = $modelDatenblatt->firma ? $modelDatenblatt->firma->projekts : [];
-                echo $form->field($modelDatenblatt, 'projekt_id')->dropDownList(ArrayHelper::map($projekte, 'id', 'name'), ['prompt'=>'Projekt auswählen']);
+            $htmlOptions = ['prompt' => 'Projekt auswählen'];
+            if (!$modelDatenblatt->firma_id) {
+                $htmlOptions['disabled'] = 'disabled';
+            }
+            $projekte = $modelDatenblatt->firma ? $modelDatenblatt->firma->projekts : [];
+            echo $form->field($modelDatenblatt, 'projekt_id')->dropDownList(ArrayHelper::map($projekte, 'id', 'name'), $htmlOptions)->label('Projekt');
             ?>
         </div>
         <div class="col-sm-2">
-            <?php   
-                $haeuser = $modelDatenblatt->firma && $modelDatenblatt->projekt ? $modelDatenblatt->projekt->hauses : [];
-                echo $form->field($modelDatenblatt, 'haus_id')->dropDownList(ArrayHelper::map($haeuser, 'id', 'id'), ['prompt'=>'Haus auswählen']);
+            <?php
+            $htmlOptions = ['prompt' => 'Object auswählen'];
+            $haeuserOptions = [];
+            if (!$modelDatenblatt->projekt_id) {
+                $htmlOptions['disabled'] = 'disabled';
+            } else {
+                /* @var $haus \app\models\Haus */
+                $haeuserOptions = [];
+                foreach ($modelDatenblatt->projekt->hauses as $haus) {
+                    if ($haus->id == $modelDatenblatt->haus_id || count($haus->datenblatts) == 0) {
+                        /* @var $te \app\models\Teileigentumseinheit */
+                        $teId = '';
+                        $teNr = '';
+                        //echo 'hid: ' . $haus->id . "<br>";
+                        foreach ($haus->teileigentumseinheits as $te) {
+                            //echo 'te-id: ' . $te->id . "<br>";
+                            if ($te->einheitstyp_id == \app\models\Einheitstyp::TYPE_HAUS) {
+                                $haeuserOptions[$haus->id] = ($te->te_nummer ? $te->te_nummer : "Keine TE-Nr (id: $te->id)");
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            echo $form->field($modelDatenblatt, 'haus_id')->dropDownList($haeuserOptions, $htmlOptions)->label('Teileigentumseinheit');
             ?>
         </div>
     </div>
-    
-    <div class="box-group" id="accordion">
-    <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
-    <div class="panel box box-primary">
-        <div class="box-header with-border">
-            <h4 class="box-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapse-hausdetails" aria-expanded="true" class="">
-                    Hause Details:
-                </a>
-            </h4>
-        </div>
-        <div id="collapse-hausdetails" class="panel-collapse collapse in" aria-expanded="false">
-            <div class="box-body">
 
-                <div class="row">
-                    <div class="col-sm-3">
-                        Anschrift:
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-2">
-                        Straße + Hausnummer: 
-                    </div>
-                    <div class="col-sm-3">
-                        <?= $modelDatenblatt->haus ? $modelDatenblatt->haus->strasse : '' ?>
-                        <?= $modelDatenblatt->haus ? $modelDatenblatt->haus->hausnr : '' ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-2">
-                        PLZ/Ort: 
-                    </div>
-                    <div class="col-sm-3">
-                        <?= $modelDatenblatt->haus ? $modelDatenblatt->haus->plz : '' ?>
-                        <?= $modelDatenblatt->haus ? $modelDatenblatt->haus->ort : '' ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-1">
-                        reserviert: 
-                    </div>
-                    <div class="col-sm-1">
-                        <?= $modelDatenblatt->haus ? ($modelDatenblatt->haus->reserviert ? 'ja' : 'nein') : '' ?><br>
-                    </div>
-                    <div class="col-sm-1">
-                        verkauft:
-                    </div>
-                    <div class="col-sm-1">
-                        <?= $modelDatenblatt->haus ? ($modelDatenblatt->haus->verkauft ? 'ja' : 'nein') : '' ?>
-                    </div>
-                    <div class="col-sm-2">
-                        Rechnung/Vertrieb:
-                    </div>
-                    <div class="col-sm-1">
-                        <?= $modelDatenblatt->haus ? ($modelDatenblatt->haus->rechnung_vertrieb ? 'ja' : 'nein') : '' ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
+    <?= $this->render('_hausdetails', [
+        'form' => $form,
+        'modelDatenblatt' => $modelDatenblatt,
+    ]) ?>
+
     <?= $this->render('_teileigentumseinheiten', [
-            'form' => $form,
-            'modelDatenblatt'  => $modelDatenblatt,
-        ]) ?>
-    
+        'form' => $form,
+        'modelDatenblatt' => $modelDatenblatt,
+    ]) ?>
+
     <?= $this->render('_zaehlerangaben', [
+        'form' => $form,
+        'modelDatenblatt' => $modelDatenblatt
+    ]) ?>
+
+    <?php //if ($modelDatenblatt->kaeufer): ?>
+        <?= $this->render('_kaeuferdaten', [
             'form' => $form,
-            'modelDatenblatt'  => $modelDatenblatt,
+            'modelKaeufer' => $modelKaeufer,
+            'modelDatenblatt' => $modelDatenblatt
         ]) ?>
-    
-    <?php if($modelDatenblatt->kaeufer): ?>
-    <?= $this->render('_kaeuferdaten', [
-            'form' => $form,
-            'modelKaeufer'  => $modelDatenblatt->kaeufer,
-        ]) ?>    
-    <?php endif; ?>
-    
+    <?php //endif; ?>
+
     <div class="row">
         <div class="col-sm-10">
-            <?= $form->field($modelDatenblatt, 'besondere_regelungen_kaufvertrag')->textarea(['rows' => '5']) ?>        
+            <?= $form->field($modelDatenblatt, 'besondere_regelungen_kaufvertrag')->textarea(['rows' => '5']) ?>
         </div>
     </div>
-    
-    <?= $this->render('_sonderwuensche', [
-            'form' => $form,
-            'modelDatenblatt' => $modelDatenblatt,
-        ]) ?>
-    
-    <?= $this->render('_kaufpreisabrechnung', [
-            'form' => $form,
-            'modelDatenblatt' => $modelDatenblatt,
-        ]) ?>
-    
-    <?= $this->render('_nachlass', [
-            'form' => $form,
-            'modelDatenblatt' => $modelDatenblatt,
-        ]) ?>
-    
-    <?= $this->render('_zahlung', [
-            'form' => $form,
-            'modelDatenblatt' => $modelDatenblatt,
-        ]) ?>
 
-    
+    <?= $this->render('_sonderwuensche', [
+        'form' => $form,
+        'modelDatenblatt' => $modelDatenblatt,
+    ]) ?>
+<div class="form-group" style="text-align: right;">
+    <?= Html::submitButton($modelDatenblatt->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-primary', 'name' => 'submit']) ?>
+</div>
+    <?= $this->render('_kaufpreisabrechnung', [
+        'form' => $form,
+        'modelDatenblatt' => $modelDatenblatt,
+        'kaufpreisTotal' => $kaufpreisTotal,
+        'sonderwuenscheTotal' => $sonderwuenscheTotal,
+    ]) ?>
+<div class="form-group" style="text-align: right;">
+    <?= Html::submitButton($modelDatenblatt->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-primary', 'name' => 'submit']) ?>
+</div>
     <div class="row">
-        <div class="col-sm-10">
+        <div class="col-md-12">
+
+            <?= $this->render('_nachlass', [
+                'form' => $form,
+                'modelDatenblatt' => $modelDatenblatt,
+            ]) ?>
+
+            <?= $this->render('_zahlung', [
+                'form' => $form,
+                'modelDatenblatt' => $modelDatenblatt,
+            ]) ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-8">
             <?= $form->field($modelDatenblatt, 'sonstige_anmerkungen')->textarea(['rows' => '5']) ?>
         </div>
     </div>
-    <?php endif; ?>
 
-    <div class="form-group" style="text-align: right;">
-        <?= Html::submitButton($modelDatenblatt->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-primary', 'name' => 'submit']) ?>
-    </div>
 
-    <?php ActiveForm::end(); ?>
+<?php endif; ?>
 
+<div class="form-group" style="text-align: right;">
+    <?= Html::submitButton($modelDatenblatt->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-primary', 'name' => 'submit']) ?>
 </div>
+
+<?php ActiveForm::end(); ?>
+<?php //yii\widgets\Pjax::end() ?>

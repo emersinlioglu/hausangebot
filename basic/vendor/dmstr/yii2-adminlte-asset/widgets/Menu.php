@@ -4,6 +4,7 @@ use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\helpers\Html;
+use webvimark\modules\UserManagement\models\User;
 /**
  * Class Menu
  * Theme menu widget.
@@ -93,6 +94,9 @@ class Menu extends \yii\widgets\Menu
      */
     protected function normalizeItems($items, &$active)
     {
+
+        $this->ensureVisibility($items);
+
         foreach ($items as $i => $item) {
             if (isset($item['visible']) && !$item['visible']) {
                 unset($items[$i]);
@@ -127,6 +131,41 @@ class Menu extends \yii\widgets\Menu
         }
         return array_values($items);
     }
+
+    /**
+     * @param array $items
+     *
+     * @return bool
+     */
+    protected function ensureVisibility(&$items)
+    {
+        $allVisible = false;
+
+        foreach ($items as &$item)
+        {
+            if ( isset( $item['url'] ) AND !in_array($item['url'], ['', '#']) AND !isset( $item['visible'] ) )
+            {
+                $item['visible'] = User::canRoute($item['url']);
+            }
+
+            if ( isset( $item['items'] ) )
+            {
+                // If not children are visible - make invisible this node
+                if ( !$this->ensureVisibility($item['items']) AND !isset( $item['visible'] ) )
+                {
+                    $item['visible'] = false;
+                }
+            }
+
+            if ( isset( $item['label'] ) AND ( !isset( $item['visible'] ) OR $item['visible'] === true ) )
+            {
+                $allVisible = true;
+            }
+        }
+
+        return $allVisible;
+    }
+
     /**
      * Checks whether a menu item is active.
      * This is done by checking if [[route]] and [[params]] match that specified in the `url` option of the menu item.

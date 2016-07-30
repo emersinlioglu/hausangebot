@@ -5,12 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Teileigentumseinheit */
 
-$this->title = Yii::t('app', 'Update {modelClass}: ', [
-    'modelClass' => 'Teileigentumseinheit',
-]) . ' ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Teileigentumseinheits'), 'url' => ['index']];
+$this->title = 'Update Teileigentumseinheit: ' . ' ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Teileigentumseinheits', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+$this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="teileigentumseinheit-update">
 

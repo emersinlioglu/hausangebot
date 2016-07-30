@@ -4,13 +4,14 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Haus;
+use app\models\Firma;
 use app\models\HausSearch;
-use app\models\Teileigentumseinheit;
-use app\models\Zaehlerstand;
-use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Teileigentumseinheit;
+use app\models\Zaehlerstand;
+use yii\data\ActiveDataProvider;
 
 /**
  * HausController implements the CRUD actions for Haus model.
@@ -46,7 +47,7 @@ class HausController extends Controller
 
     /**
      * Displays a single Haus model.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
     public function actionView($id)
@@ -66,6 +67,7 @@ class HausController extends Controller
         $model = new Haus();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
             return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -74,90 +76,105 @@ class HausController extends Controller
         }
     }
 
+    public function actionProjekte($firmaId) {
+        
+        $items = array();
+
+        if (($firma = Firma::findOne($firmaId)) !== null) {
+
+            foreach ($firma->projekts as $projekt) {
+                $items[] = array(
+                    'text' => $projekt->name,
+                    'value' => $projekt->id
+                );
+            }
+        }
+
+
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return $items;
+    }
+
     /**
      * Updates an existing Haus model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
-    public function actionUpdate($id)
+     public function actionUpdate($id, $preventPost = false)
     {
         $model = $this->findModel($id);
         
         $modelsTeilieigentum = $model->teileigentumseinheits;
         
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+         if (!$preventPost && $model->load(Yii::$app->request->post()) && $model->save()) {
             
             $data = Yii::$app->request->post();
-            
-            if (isset($data['addnewZaehlerstand'])) {
-                $new = new Zaehlerstand();
-                $new->haus_id = $id;
-                $new->save();
-                
-                $this->redirect(['update', 'id' => $model->id]);
-
-            } else if (isset($data['addnew'])) {
-                
-                $new = new Teileigentumseinheit();
-                $new->haus_id = $id;
-                $new->einheitstyp_id = 1;
-                $new->save();
-                
-                $this->redirect(['update', 'id' => $model->id]);
-            } else {
-                
-                if (isset($data['Teileigentumseinheiten'])) {
-
-                    foreach ($data['Teileigentumseinheiten'] as $objData) {
-                        if (isset($objData['id']) && $objData['id'] > 0) {
-                            $obj = Teileigentumseinheit::findOne($objData['id']);
-                            $obj->load(['Teileigentumseinheit' => $objData]);
-                            $obj->save();
-                        }
-                    }
+ 
+            if (Teileigentumseinheit::loadMultiple($model->teileigentumseinheits, $data, 'Teileigentumseinheiten')) {
+                foreach ($model->teileigentumseinheits as $item) {
+                    $item->save();
                 }
-                
-//                if (isset($data['Zaehlerstaende'])) {
-//                    foreach ($data['Zaehlerstaende'] as $objData) {
-//                        if (isset($objData['id']) && $objData['id'] > 0) {
-//                            $obj = Zaehlerstand::findOne($objData['id']);
-//                            $obj->load(['Zaehlerstand' => $objData]);
-//                            
-//                            $date = \DateTime::createFromFormat('d.m.Y', $objData['datum']); 
-//                            if ($date) {
-//                                $date->setTime(0, 0, 0);
-//                                $obj->datum = $date->format('Y-m-d H:i:s');
-//                            } else {
-//                                $obj->datum = '';
-//                            }
-//                            $obj->save();
-//                        }
-//                    }
-//                }
-                
-                    if (Zaehlerstand::loadMultiple($model->zaehlerstands, $data)) {
-                        foreach ($model->zaehlerstands as $item) {
-                            $item->save();
-                        }
-                    }
-                
-                return $this->redirect(['update', 'id' => $model->id]);
             }
+
+            if (Zaehlerstand::loadMultiple($model->zaehlerstands, $data)) {
+                foreach ($model->zaehlerstands as $item) {
+                    $item->save();
+                }
+            }
+
+//                return $this->redirect(['update', 'id' => $model->id]);
             
-        } else {
-            
-            return $this->render('update', [
-                'model' => $model,
-                'modelsTeilieigentum' => $modelsTeilieigentum
-            ]);
+        } 
+        
+        foreach ($model->teileigentumseinheits as $te) {
+            if ($te->wohnflaeche > 0) {
+                $te->kp_einheit = (float)$te->kaufpreis / (float)$te->wohnflaeche;
+            } else {
+                $te->kp_einheit = 0;
+            }
         }
+        
+            
+        return $this->render('update', [
+            'model' => $model,
+            'modelsTeilieigentum' => $modelsTeilieigentum
+        ]);
+    }
+    
+    /**
+     * Add new 
+     * @param int $datenblattId
+     */
+    public function actionAddteileigentumseinheit($hausId) {
+        
+        $new = new Teileigentumseinheit();
+        $new->haus_id = $hausId;
+        $new->einheitstyp_id = 1;
+        $new->save();
+
+        return $this->actionUpdate($hausId);
+//        $this->redirect(['update', 'id' => $datenblattId]);
+    }
+    
+    /**
+     * Add new 
+     * @param int $datenblattId
+     */
+    public function actionAddzaehlerstand($hausId) {
+        
+        $new = new Zaehlerstand();
+        $new->haus_id = $hausId;
+        $new->save();
+
+        return $this->actionUpdate($hausId);
+//        $this->redirect(['update', 'id' => $datenblattId]);
     }
 
     /**
      * Deletes an existing Haus model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -166,7 +183,7 @@ class HausController extends Controller
 
         return $this->redirect(['index']);
     }
-     
+
     /**
      * Deletes an existing Teileigentumseinheit model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -175,13 +192,18 @@ class HausController extends Controller
      */
     public function actionDeleteteileigentumseinheit($hausId, $teileigentumseinheitId)
     {
+
+        $this->actionUpdate($hausId);
+         
         $teileigentumseinheit = Teileigentumseinheit::findOne($teileigentumseinheitId);
         if ($teileigentumseinheit) {
             $teileigentumseinheit->delete();
         }
         
-        return $this->redirect(['update', 'id' => $hausId]);
+        return $this->actionUpdate($hausId, true);
+        //return $this->redirect(['update', 'id' => $hausId]);
     }
+    
     /**
      * Deletes an existing Teileigentumseinheit model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -190,17 +212,27 @@ class HausController extends Controller
      */
     public function actionDeletezaehlerstand($hausId, $zaehlerstandId)
     {
-        $zaehlerstand = Zaehlerstand::findOne($zaehlerstandId);
-        if ($zaehlerstand) {
+        $this->actionUpdate($hausId);
+        
+        if ($zaehlerstand = Zaehlerstand::findOne($zaehlerstandId)) {
             $zaehlerstand->delete();
         }
         
-        return $this->redirect(['update', 'id' => $hausId]);
+        return $this->actionUpdate($hausId, true);
+        //return $this->redirect(['update', 'id' => $hausId]);
     }
+
+
+
+
+
+
+
+
     /**
      * Finds the Haus model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param string $id
      * @return Haus the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

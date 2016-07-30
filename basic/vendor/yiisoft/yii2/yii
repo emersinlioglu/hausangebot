@@ -14,6 +14,7 @@ $composerAutoload = [
     __DIR__ . '/../vendor/autoload.php', // in yii2-dev repo
     __DIR__ . '/../../autoload.php', // installed as a composer binary
 ];
+
 $vendorPath = null;
 foreach ($composerAutoload as $autoload) {
     if (file_exists($autoload)) {
@@ -23,8 +24,9 @@ foreach ($composerAutoload as $autoload) {
     }
 }
 
-
 require(__DIR__ . '/Yii.php');
+//echo '$vendorPath: ' . $vendorPath . PHP_EOL;
+//die('Aaa');
 
 $application = new yii\console\Application([
     'id' => 'yii-console',

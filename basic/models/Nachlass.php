@@ -60,4 +60,15 @@ class Nachlass extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Datenblatt::className(), ['id' => 'datenblatt_id']);
     }
+
+
+    public function getSchreibenVomLabel()
+    {
+        if ($this->schreiben_vom === null) {
+            $label = '';
+        } else {
+            $label = Yii::$app->formatter->asDate($this->schreiben_vom);
+        }
+        return $label;
+    }
 }

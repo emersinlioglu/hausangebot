@@ -12,6 +12,12 @@ return [
     'controllerNamespace' => 'app\commands',
     'modules' => [
         'gii' => 'yii\gii\Module',
+        'auth' => [
+            'class' => 'app\modules\auth\Module',
+        ],
+        'user-management' => [
+            'class' => 'webvimark\modules\UserManagement\UserManagementModule',
+        ],
     ],
     'components' => [
         'cache' => [
@@ -26,6 +32,9 @@ return [
             ],
         ],
         'db' => $db,
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
     ],
     'params' => $params,
 ];

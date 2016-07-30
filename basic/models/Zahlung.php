@@ -60,4 +60,14 @@ class Zahlung extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Datenblatt::className(), ['id' => 'datenblatt_id']);
     }
+
+    public function getDatumLabel()
+    {
+        if ($this->datum === null) {
+            $label = '';
+        } else {
+            $label = Yii::$app->formatter->asDate($this->datum);
+        }
+        return $label;
+    }
 }

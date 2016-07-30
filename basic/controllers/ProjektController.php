@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Projekt;
-use yii\data\ActiveDataProvider;
+use app\models\ProjektSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -17,6 +17,9 @@ class ProjektController extends Controller
     public function behaviors()
     {
         return [
+            'ghost-access'=> [
+                'class' => 'webvimark\modules\UserManagement\components\GhostAccessControl',
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -32,11 +35,11 @@ class ProjektController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Projekt::find(),
-        ]);
+        $searchModel = new ProjektSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -62,7 +65,9 @@ class ProjektController extends Controller
     {
         $model = new Projekt();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $data = Yii::$app->request->post();
+
+        if ($model->load($data) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

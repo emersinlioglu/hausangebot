@@ -2,3 +2,10 @@ protected/runtime/*
 !protected/runtime/.gitignore
 protected/data/*.db
 themes/classic/views/
+
+data/logs/error.log
+
+
+.idea
+nbproject
+**/nbproject

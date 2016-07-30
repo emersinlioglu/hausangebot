@@ -108,3 +108,7 @@ a.desc:after {
 .fa-minus:before {
     content: "\f068";
 }
+
+.text-align-right {
+    text-align: right;
+}

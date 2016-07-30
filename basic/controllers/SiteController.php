@@ -14,6 +14,7 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
+            /*
             'access' => [
                 'class' => AccessControl::className(),
                 'only' => ['logout'],
@@ -24,6 +25,10 @@ class SiteController extends Controller
                         'roles' => ['@'],
                     ],
                 ],
+            ],
+            */
+            'ghost-access'=> [
+                'class' => 'webvimark\modules\UserManagement\components\GhostAccessControl',
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),

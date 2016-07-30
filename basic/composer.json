@@ -12,7 +12,8 @@
         "irc": "irc://irc.freenode.net/yii",
         "source": "https://github.com/yiisoft/yii2"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": ">=2.0.5",
@@ -20,9 +21,20 @@
         "yiisoft/yii2-swiftmailer": "*",
         "wbraganca/yii2-dynamicform": "dev-master",
         "dmstr/yii2-adminlte-asset": "2.*",
+        "anmaslov/yii2-autocomplete-widget": "*",
+        "2amigos/yii2-chartjs-widget" : "~2.0",
+        "dektrium/yii2-user": "0.9.*@dev",
+        "webvimark/module-user-management": "1.0.5",
         "kartik-v/yii2-widget-datetimepicker": "*",
         "kartik-v/yii2-datecontrol": "dev-master",
-        "kartik-v/yii2-widgets": "*"
+        "kartik-v/yii2-widgets": "*",
+        "kartik-v/yii2-money": "*",
+        "kartik-v/yii2-mpdf": "*",
+        "kartik-v/mpdf": "@dev",
+        "kartik-v/yii2-grid": "@dev",
+        "kartik-v/yii2-dynagrid": "@dev",
+        "kartik-v/yii2-krajee-base": "@dev"
+        
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

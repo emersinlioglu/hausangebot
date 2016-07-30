@@ -9,8 +9,8 @@ use Yii;
  *
  * @property string $id
  * @property string $name
- * @property string $role
  * @property string $firma_id
+ * @property string $creator_user_id
  *
  * @property Haus[] $hauses
  * @property Firma $firma
@@ -31,8 +31,8 @@ class Projekt extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['firma_id', 'role'], 'required'],
-            [['firma_id'], 'integer'],
+            [['firma_id', 'creator_user_id'], 'required'],
+            [['firma_id', 'creator_user_id'], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['role'], 'string', 'max' => 128]
         ];
@@ -46,8 +46,8 @@ class Projekt extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Projektname'),
-            'role' => Yii::t('app', 'Role'),
             'firma_id' => Yii::t('app', 'Firma ID'),
+            'creator_user_id' => Yii::t('app', 'Ersteller ID'),
         ];
     }
 

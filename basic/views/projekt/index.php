@@ -38,7 +38,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=>'firma.nr',
                 'label' => 'Firmen Nr.'
             ],
-            'role',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

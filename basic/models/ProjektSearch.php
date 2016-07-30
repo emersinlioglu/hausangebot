@@ -23,7 +23,7 @@ public $firma_nr;
     {
         return [
             [['id', 'firma_id'], 'integer'],
-            [['name', 'role'], 'safe'],
+            [['name'], 'safe'],
             [['firma', 'firma_name','firma_nr'], 'safe'],
         ];
     }
@@ -81,17 +81,20 @@ public $firma_nr;
             'firma_id' => $this->firma_id,
         ]);
 
+        // filter by creator_user_id or projekt_user assignments
         if (!Yii::$app->user->isSuperadmin) {
-            $query->andFilterWhere([
-                'role' => Yii::$app->user->identity->getRoles()->select('name')
+            $query->leftJoin('projekt_user pu', 'pu.projekt_id = projekt.id');
+            $query->andFilterWhere(['or',
+                ['projekt.creator_user_id' => Yii::$app->user->identity->getId()],
+                ['pu.user_id' => Yii::$app->user->identity->getId()]
             ]);
         }
 
         $query->andFilterWhere(['like', 'projekt.name', $this->name])
             ->andFilterWhere(['like', 'firma.name', $this->firma_name])
-            ->andFilterWhere(['like', 'firma.nr', $this->firma_nr])
-            ->andFilterWhere(['like', 'projekt.role', $this->role])
-        ;
+            ->andFilterWhere(['like', 'firma.nr', $this->firma_nr]);
+
+        //error_log($query->createCommand()->getRawSql());
 
         return $dataProvider;
     }

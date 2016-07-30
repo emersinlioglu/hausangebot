@@ -52,9 +52,11 @@ class Firma extends \yii\db\ActiveRecord
     {
         $query = $this->hasMany(Projekt::className(), ['firma_id' => 'id']);
 
+        /*
         if (!Yii::$app->user->isSuperadmin) {
             $query->andOnCondition(['role' => Yii::$app->user->identity->getRoles()->select('name')]);
         }
+        */
         return $query;
     }
 }

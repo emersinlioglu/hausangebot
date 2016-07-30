@@ -17,6 +17,7 @@ use yii\helpers\Html;
  * @property integer $reserviert
  * @property integer $verkauft
  * @property integer $rechnung_vertrieb
+ * @property integer $creator_user_id
  *
  * @property Datenblatt[] $datenblatts
  * @property Projekt $projekt
@@ -39,8 +40,8 @@ class Haus extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-//            [['projekt_id'], 'required'],
-            [['projekt_id', 'firma_id', 'reserviert', 'verkauft', 'rechnung_vertrieb'], 'integer'],
+            [['creator_user_id'], 'required'],
+            [['projekt_id', 'firma_id', 'reserviert', 'verkauft', 'rechnung_vertrieb', 'creator_user_id'], 'integer'],
             [['plz', 'ort', 'strasse'], 'string', 'max' => 255],
             [['hausnr'], 'string', 'max' => 45]
         ];
@@ -62,6 +63,7 @@ class Haus extends \yii\db\ActiveRecord
             'reserviert' => Yii::t('app', 'Reserviert'),
             'verkauft' => Yii::t('app', 'Verkauft'),
             'rechnung_vertrieb' => Yii::t('app', 'Rechnung Vertrieb'),
+            'creator_user_id' => Yii::t('app', 'Ersteller ID'),
         ];
     }
 

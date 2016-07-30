@@ -31,10 +31,6 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             'name',
             'firma.name',
-            [
-                'attribute' => 'role',
-                'visible' => Yii::$app->user->isSuperadmin            
-            ]
         ],
     ]) ?>
 

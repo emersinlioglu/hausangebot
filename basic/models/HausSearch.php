@@ -56,6 +56,16 @@ class HausSearch extends Haus
             'query' => $query,
         ]);
 
+        // filter by creator_user_id or projekt_user assignments
+        if (!Yii::$app->user->isSuperadmin) {
+            $query->leftJoin('projekt_user pu', 'pu.projekt_id = projekt.id');
+            $query->andFilterWhere(['or',
+                ['projekt.creator_user_id' => Yii::$app->user->identity->getId()],
+                ['pu.user_id' => Yii::$app->user->identity->getId()],
+                ['haus.creator_user_id' => Yii::$app->user->identity->getId()],
+            ]);
+        }
+
         $dataProvider->sort->attributes['projekt_name'] = [
             // The tables are the ones our relation are configured to
             // in my case they are prefixed with "tbl_"
@@ -99,12 +109,14 @@ class HausSearch extends Haus
             'rechnung_vertrieb' => $this->rechnung_vertrieb,
         ]);
 
+/*
         if (!Yii::$app->user->isSuperadmin) {
             $query->andFilterWhere([
                 'projekt.role' => Yii::$app->user->identity->getRoles()->select('name')
             ]);
         }
-
+*/
+        
         $query->andFilterWhere(['like', 'plz', $this->plz])
             ->andFilterWhere(['like', 'ort', $this->ort])
             ->andFilterWhere(['like', 'strasse', $this->strasse])

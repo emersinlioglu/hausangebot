@@ -23,6 +23,7 @@ use Yii;
  * @property string $abnahme_se
  * @property string $abnahme_ge
  * @property integer $auflassung
+ * @property integer $creator_user_id
  *
  *
  * @property Abschlag[] $abschlags
@@ -174,8 +175,9 @@ class Datenblatt extends \yii\db\ActiveRecord
     {
         return [
             //[['kaeufer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Kaeufer::className(), 'targetAttribute' => 'id'],
+            [['creator_user_id'], 'required'],
             [['beurkundung_am', 'verbindliche_fertigstellung', 'uebergang_bnl', 'abnahme_se', 'abnahme_ge'], 'safe'],
-            [['firma_id', 'projekt_id', 'haus_id', 'nummer', 'kaeufer_id', 'aktiv', 'auflassung'], 'integer'], //'kaeufer_id',
+            [['firma_id', 'projekt_id', 'haus_id', 'nummer', 'kaeufer_id', 'aktiv', 'auflassung', 'creator_user_id'], 'integer'], //'kaeufer_id',
             [['besondere_regelungen_kaufvertrag', 'sonstige_anmerkungen'], 'string']
         ];
     }
@@ -202,6 +204,7 @@ class Datenblatt extends \yii\db\ActiveRecord
             'abnahme_se' => Yii::t('app', 'Abnahme Se'),
             'abnahme_ge' => Yii::t('app', 'Abnahme Ge'),
             'auflassung' => Yii::t('app', 'Auflassung'),
+            'creator_user_id' => Yii::t('app', 'Ersteller ID'),
         ];
     }
 

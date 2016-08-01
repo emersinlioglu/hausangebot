@@ -182,6 +182,7 @@ class DatenblattController extends Controller
     public function actionCreate()
     {
         $model = new Datenblatt;
+        $model->creator_user_id = Yii::$app->user->getId();
         $model->save();
 
         $abschlags = [

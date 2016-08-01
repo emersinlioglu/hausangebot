@@ -13,6 +13,16 @@ use webvimark\modules\UserManagement\models\rbacDB\Role;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
+<?php
+$this->registerJs('
+    $(function(){
+
+        new ProjektForm();
+
+    });'
+);
+?>
+
 <div class="projekt-form">
 
 
@@ -43,5 +53,52 @@ use webvimark\modules\UserManagement\models\rbacDB\Role;
     </div>
 
     <?php ActiveForm::end(); ?>
+
+
+    <?php if($model->id): ?>
+	    <div class="col-md-6">
+			<div class="box-group" id="accordion">
+			    <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+			    <div class="panel box box-primary">
+			        <div class="box-header with-border">
+			            <h4 class="box-title">
+			                <a data-toggle="collapse" data-parent="#collapse-nachlass" href="#collapse-nachlass" aria-expanded="true" class="">
+			                    Zugewiesene Benutzer:
+			                </a>
+			            </h4>
+			        </div>
+
+			        <div id="collapse-nachlass" class="panel-collapse collapse in" aria-expanded="false">
+			            <div class="box-body">
+
+			            	<label for="projekt-users">Suche: </label>
+	  						<input id="projekt-users" 
+	  							data-search-url="<?= \yii\helpers\Url::to(['projekt/searchusers', ]);?>"
+	  							data-add-user-assignment="<?= \yii\helpers\Url::to(['projekt/adduserassignment', 'id' => $model->id]);?>"
+	  							>
+			                
+			                <table class="assigned-users">
+			                <?php foreach($model->users as $key => $user): ?>
+			                	<tr>
+			                		<td>
+				                		<?php
+				                			$url = \yii\helpers\Url::to(['projekt/removeuserassignment', 
+				                				'projektId' => $model->id,
+				                				'userId' => $user->id,
+			                				]);
+				                			echo '<span class="glyphicon glyphicon-trash" data-url="' . $url . '"></span>';
+				                		?>
+			                		</td>
+			                		<td><?= $user->username ?></td>
+			                	</tr>	 
+			                <?php endforeach;  ?>
+			                </table>
+
+			            </div>
+			        </div>
+			    </div>
+			</div>
+		</div>
+	<?php endif; ?>
 
 </div>

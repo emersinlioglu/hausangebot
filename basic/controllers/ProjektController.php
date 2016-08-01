@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Projekt;
 use app\models\ProjektSearch;
+use webvimark\modules\UserManagement\models\search\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -64,11 +65,11 @@ class ProjektController extends Controller
     public function actionCreate()
     {
         $model = new Projekt();
-
+        $model->creator_user_id = Yii::$app->user->getId();
         $data = Yii::$app->request->post();
 
         if ($model->load($data) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -108,6 +109,72 @@ class ProjektController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionSearchusers() {
+
+        $searchTerm = Yii::$app->request->get('term');
+
+        //$userSearchModel = new UserSearch();
+        $users = UserSearch::find()
+            ->where('superadmin = 0 AND status = 1 AND username like :searchTerm', [
+                'searchTerm' => "%$searchTerm%"
+            ])
+            ->all();
+
+        $data = array();
+        foreach ($users as $user) {
+            
+            $data[] = array(
+                'id' => $user->id,
+                'label' => $user->username,
+                'value' => $user->username
+            );
+        }
+
+        return json_encode($data);
+    }
+
+    public function actionAdduserassignment($id) {
+
+        $model = $this->findModel($id);
+
+        $userId = Yii::$app->request->post('userId');
+        $user = UserSearch::findOne($userId);
+
+        if ($user) {
+
+            
+            $command = Yii::$app->db->createCommand('SELECT COUNT(*) FROM projekt_user WHERE projekt_id=:projektId and user_id=:userId');
+            $cnt = $command
+                ->bindValue(':projektId', $model->id)
+                ->bindValue(':userId', $user->id)
+                ->queryScalar();
+            
+            if (!$cnt) {
+                //add
+                Yii::$app->db->createCommand()->insert('projekt_user', [
+                    'projekt_id' => $model->id,
+                    'user_id' => $user->id,
+                ])->execute();
+            }
+
+        }
+
+        return '';
+    }
+
+    public function actionRemoveuserassignment($projektId, $userId) {
+
+        $model = $this->findModel($projektId);
+        $user = UserSearch::findOne($userId);
+
+        if ($user) {
+            //remove
+            Yii::$app->db->createCommand()->delete('projekt_user', "projekt_id={$model->id} and user_id={$user->id}")->execute();
+        }
+
+        return '';
+    }
+
     /**
      * Finds the Projekt model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -124,3 +191,4 @@ class ProjektController extends Controller
         }
     }
 }
+

@@ -34,4 +34,33 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+     <div class="col-md-6">
+        <div class="box-group" id="accordion">
+            <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+            <div class="panel box box-primary">
+                <div class="box-header with-border">
+                    <h4 class="box-title">
+                        <a data-toggle="collapse" data-parent="#collapse-nachlass" href="#collapse-nachlass" aria-expanded="true" class="">
+                            Zugewiesene Benutzer:
+                        </a>
+                    </h4>
+                </div>
+
+                <div id="collapse-nachlass" class="panel-collapse collapse in" aria-expanded="false">
+                    <div class="box-body">
+                        
+                        <table class="assigned-users">
+                        <?php foreach($model->users as $key => $user): ?>
+                            <tr>
+                                <td><?= $user->username ?></td>
+                            </tr>    
+                        <?php endforeach;  ?>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

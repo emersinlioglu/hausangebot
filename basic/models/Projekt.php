@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+use webvimark\modules\UserManagement\models\User;
 
 use Yii;
 
@@ -34,7 +35,6 @@ class Projekt extends \yii\db\ActiveRecord
             [['firma_id', 'creator_user_id'], 'required'],
             [['firma_id', 'creator_user_id'], 'integer'],
             [['name'], 'string', 'max' => 255],
-            [['role'], 'string', 'max' => 128]
         ];
     }
 
@@ -65,5 +65,13 @@ class Projekt extends \yii\db\ActiveRecord
     public function getFirma()
     {
         return $this->hasOne(Firma::className(), ['id' => 'firma_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsers() {
+        return $this->hasMany(User::className(), ['id' => 'user_id'])
+          ->viaTable('projekt_user', ['projekt_id' => 'id']);
     }
 }

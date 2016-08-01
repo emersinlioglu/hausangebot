@@ -66,6 +66,8 @@ class HausController extends Controller
     {
         $model = new Haus();
 
+        $model->creator_user_id = Yii::$app->user->getId();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             return $this->redirect(['update', 'id' => $model->id]);

@@ -10,3 +10,13 @@
 .sonderwunsch .input-group.date {
     width: 200px;
 }
+
+.assigned-users td:nth-child(2) {
+	min-width: 300px;
+}
+.assigned-users td:first-child {
+	width: 40px;
+}
+.assigned-users .glyphicon-trash {
+	cursor: pointer;
+}

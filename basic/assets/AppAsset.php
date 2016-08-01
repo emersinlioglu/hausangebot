@@ -29,9 +29,10 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/Chart.min.js',
+        'js/jquery-ui-1.11.4.custom/jquery-ui.min.js',
         'js/DatenblattForm.js',
         'js/HausForm.js',
-        'js/jquery-ui-1.11.4.custom/jquery-ui.min.js',
+        'js/ProjektForm.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

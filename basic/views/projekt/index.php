@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use webvimark\modules\UserManagement\models\User;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ProjektSearch */
@@ -15,9 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Projekt erstellen', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <?php if (User::hasPermission('write_projects')): ?>
+        <p>
+            <?= Html::a('Projekt erstellen', ['create'], ['class' => 'btn btn-success']) ?>
+        </p>
+    <?php endif; ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -39,7 +42,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Firmen Nr.'
             ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                    'update' => function ($url, $model, $key) {
+                        return User::hasPermission('write_projects') ? Html::a('Update', $url) : '';
+                    },
+                    'delete' => function ($url, $model, $key) {
+                        return User::hasPermission('write_projects') ? Html::a('Delete', $url) : '';
+                    }
+                ]
+
+            ],
         ],
     ]); ?>
 

@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use webvimark\modules\UserManagement\models\User;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Datenblatt */
@@ -14,27 +16,27 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Bearbeiten', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-        <?= Html::a('<i class="fa  fa-print text-white"></i>   Drucken', ['report', 'id' => $model->id], [
-            'class' => 'btn btn-info',
-            'data' => [
+    <?php if (User::hasPermission('write_datasheets')): ?>
+        <p>
+            <?= Html::a('Bearbeiten', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => 'Are you sure you want to delete this item?',
+                    'method' => 'post',
+                ],
+            ]) ?>
+            <?= Html::a('<i class="fa  fa-print text-white"></i>   Drucken', ['report', 'id' => $model->id], [
                 'class' => 'btn btn-info',
-                'target' => '_blank',
-                'data-toggle' => 'tooltip',
-                'title' => 'Generate the pdf'
-            ],
-        ]) ?>
-    </p>
-
-   
+                'data' => [
+                    'class' => 'btn btn-info',
+                    'target' => '_blank',
+                    'data-toggle' => 'tooltip',
+                    'title' => 'Generate the pdf'
+                ],
+            ]) ?>
+        </p>
+    <?php endif; ?>   
 
    
     <table width="100%">

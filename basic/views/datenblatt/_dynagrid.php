@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use kartik\dynagrid\DynaGrid;
 use kartik\grid\GridView;
+use webvimark\modules\UserManagement\models\User;
+
 
 $columns = [
 	['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
@@ -80,31 +82,48 @@ $columns = [
 		'template' => '{view}{update}{report}{delete} ',
 		'buttons' => [
 			'view' => function ($url, $model) {
-				return Html::a('<span class="fa fa-search"></span> Anzeigen ', $url, [
-							'title' => Yii::t('app', 'View'),
-							'class'=>'btn btn-primary btn-xs',                                  
-				]);
+
+                if (User::hasPermission('read_datasheets')) {
+    				return Html::a('<span class="fa fa-search"></span> Anzeigen ', $url, [
+    							'title' => Yii::t('app', 'View'),
+    							'class'=>'btn btn-primary btn-xs',                                  
+    				]);
+                } else {
+                    return '';
+                }
 			},	
 			'update' => function ($url, $model) {
-				return Html::a('<span class=" glyphicon glyphicon-pencil"></span> Bearbeiten', $url, [
-							'title' => Yii::t('app', 'Update'),
-							'class'=>'btn btn-primary btn-xs',                                  
-				]);
+                if (User::hasPermission('write_datasheets')) {
+    				return Html::a('<span class=" glyphicon glyphicon-pencil"></span> Bearbeiten', $url, [
+    							'title' => Yii::t('app', 'Update'),
+    							'class'=>'btn btn-primary btn-xs',                                  
+    				]);
+                } else {
+                    return '';
+                }
 			},
 			//print button
 			'report' => function ($url, $model) {
-				return Html::a('<span class="fa fa-print"></span> Drucken', $url, [
-							'title' => Yii::t('app', 'Report'),
-							'class'=>'btn btn-primary btn-xs',                                  
-				]);
+                if (User::hasPermission('report')) {
+    				return Html::a('<span class="fa fa-print"></span> Drucken', $url, [
+    							'title' => Yii::t('app', 'Report'),
+    							'class'=>'btn btn-primary btn-xs',                                  
+    				]);
+                } else {
+                    return '';
+                }
 			},
 			'delete' => function ($url, $model) {
-				return Html::a('<span class="glyphicon glyphicon-trash"></span> Löschen', $url, [
-							'title' => Yii::t('app', 'Delete'),
-							'class'=>'btn btn-primary btn-xs',
-							'data-confirm'=>'Wollen Sie diesen Eintrag wirklich löschen?',
-							'data-method'=>'post',									
-				]);
+                if (User::hasPermission('write_datasheets')) {
+    				return Html::a('<span class="glyphicon glyphicon-trash"></span> Löschen', $url, [
+    							'title' => Yii::t('app', 'Delete'),
+    							'class'=>'btn btn-primary btn-xs',
+    							'data-confirm'=>'Wollen Sie diesen Eintrag wirklich löschen?',
+    							'data-method'=>'post',									
+    				]);
+                } else {
+                    return '';
+                }
 			},
 			
 		],  
@@ -116,6 +135,13 @@ echo DynaGrid::widget([
     'columns'=>$columns,
     //'storage'=>DynaGrid::TYPE_COOKIE,
     'theme'=>'panel-default',
+    /*
+        'themeConfig' => [
+            'themeSettings' => [
+                'aass' => ['panel'=>false,'bordered'=>false,'striped'=>false,'hover'=>true,]
+            ]
+        ],
+    */
     'gridOptions'=>[
         'dataProvider'=>$dataProvider,
         'filterModel'=>$searchModel,
@@ -125,7 +151,9 @@ echo DynaGrid::widget([
         //'allowPageSettings' => true,
     ],
     'options'=>[
-        'id' => 'dynagrid-datenblatt'
+        'id' => 'dynagrid-datenblatt',
+        'class' => User::hasPermission('export') ? '' : 'no-export'
+
         //'defaultPageSize' => 0,
 	] // a unique identifier is important
 ]);

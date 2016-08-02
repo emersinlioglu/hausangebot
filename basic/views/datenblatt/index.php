@@ -1,5 +1,7 @@
 <?php
 
+use webvimark\modules\UserManagement\models\User;
+
 use yii\helpers\Html;
 //use yii\grid\GridView;
 
@@ -16,9 +18,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Datenblatt erstellen', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <?php if (User::hasPermission('write_datasheets')): ?>
+        <p>
+            <?= Html::a('Datenblatt erstellen', ['create'], ['class' => 'btn btn-success']) ?>
+        </p>
+    <?php endif; ?>
 
 <!--
         <div class="col-md-5 col-sm-6 col-xs-12" style="float: none;">

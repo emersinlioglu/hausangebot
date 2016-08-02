@@ -20,3 +20,7 @@
 .assigned-users .glyphicon-trash {
 	cursor: pointer;
 }
+
+#dynagrid-datenblatt.no-export .btn-group + .btn-group {
+	display: none;
+}

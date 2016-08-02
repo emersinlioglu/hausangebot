@@ -4,6 +4,9 @@ use yii\helpers\Html;
 //use yii\grid\GridView;
 use kartik\grid\GridView;
 use kartik\export\ExportMenu;
+use webvimark\modules\UserManagement\models\User;
+
+
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\KaeuferSearch */
@@ -18,78 +21,82 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Käufer erstellen', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <?php if (User::hasPermission('write_customer')): ?>
+        <p>
+            <?= Html::a('Käufer erstellen', ['create'], ['class' => 'btn btn-success']) ?>
+        </p>
+    <?php endif; ?>
+
+    <?php if (User::hasPermission('export')): ?>
+        <div class="col-md-4 col-sm-6 col-xs-12" style="float: none;">
+            <div class="info-box">
+
+                <span class="info-box-icon bg-aqua"><i class="fa fa-envelope-o"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-number"><h4>Serienbrief Datenquelle Export</h4></span>
 
 
-    <div class="col-md-4 col-sm-6 col-xs-12" style="float: none;">
-        <div class="info-box">
+                    </br>
+                    <?php
 
-            <span class="info-box-icon bg-aqua"><i class="fa fa-envelope-o"></i></span>
+                        $gridColumns = [
+                            //['class' => 'yii\grid\SerialColumn'],
+                            'debitor_nr',
+                            [
+                                'attribute' => 'anrede',
+                                'value' => 'anredeLabel',
+                            ],
+                            'titel',
+                            'vorname',
+                            'nachname',
+                            [
+                                'attribute' => 'anrede2',
+                                'value' => 'anrede2Label',
+                            ],
+                            'titel2',
+                            'vorname2',
+                            'nachname2',
+                            'strasse',
+                            'hausnr',
+                            'plz',
+                            'ort',
+                            'festnetz',
+                            'handy',
+                            'email:email',
+                            //'publish_date',
+                            //'status',
+                            //['class' => 'yii\grid\ActionColumn'],
+                        ];
 
-            <div class="info-box-content">
-                <span class="info-box-number"><h4>Serienbrief Datenquelle Export</h4></span>
+                        echo ExportMenu::widget([
+                            'dataProvider' => $dataProvider,
+                            'columns' => $gridColumns,
+                            //'fontAwesome' => true,
+                            'columnSelectorOptions' => [
+                                'label' => 'Felder auswählen.',
+                                //'class' => 'btn btn-success',
+                            ],
+                            'exportConfig' => [
+                                ExportMenu::FORMAT_HTML => false,
+                                ExportMenu::FORMAT_TEXT => false,
+                                ExportMenu::FORMAT_PDF => false
+                            ],
+                            'dropdownOptions' => [
+                                'label' => 'Export Typ auswählen',
+                                //	'class' => 'btn btn-success',
+                                //
+                            ],
+                        ]);
+                    
+                    ?>
+                </div>
+                <!-- /.info-box-content -->
 
-
-                </br>
-                <?php
-                $gridColumns = [
-                    //['class' => 'yii\grid\SerialColumn'],
-                    'debitor_nr',
-                    [
-                        'attribute' => 'anrede',
-                        'value' => 'anredeLabel',
-                    ],
-                    'titel',
-                    'vorname',
-                    'nachname',
-                    [
-                        'attribute' => 'anrede2',
-                        'value' => 'anrede2Label',
-                    ],
-                    'titel2',
-                    'vorname2',
-                    'nachname2',
-                    'strasse',
-                    'hausnr',
-                    'plz',
-                    'ort',
-                    'festnetz',
-                    'handy',
-                    'email:email',
-                    //'publish_date',
-                    //'status',
-                    //['class' => 'yii\grid\ActionColumn'],
-                ];
-
-                echo ExportMenu::widget([
-                    'dataProvider' => $dataProvider,
-                    'columns' => $gridColumns,
-                    //'fontAwesome' => true,
-                    'columnSelectorOptions' => [
-                        'label' => 'Felder auswählen.',
-                        //'class' => 'btn btn-success',
-                    ],
-                    'exportConfig' => [
-                        ExportMenu::FORMAT_HTML => false,
-                        ExportMenu::FORMAT_TEXT => false,
-                        ExportMenu::FORMAT_PDF => false
-                    ],
-                    'dropdownOptions' => [
-                        'label' => 'Export Typ auswählen',
-                        //	'class' => 'btn btn-success',
-                        //
-                    ],
-                ]);
-
-                ?>
             </div>
-            <!-- /.info-box-content -->
-
         </div>
-    </div>
 
+    <?php endif; ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -130,7 +137,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'vorname2',
             'nachname2',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                    'update' => function ($url, $model, $key) {
+                        return User::hasPermission('write_customer') ? Html::a('Update', $url) : '';
+                    },
+                    'delete' => function ($url, $model, $key) {
+                        return User::hasPermission('write_customer') ? Html::a('Delete', $url) : '';
+                    }
+                ]
+            ],
         ],
     ]); ?>
 

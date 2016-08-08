@@ -12,7 +12,7 @@ ALTER TABLE `datenblatt`
 UPDATE `datenblatt` SET `creator_user_id`=1 WHERE 1;
 
 ALTER TABLE `haus`
-	ADD COLUMN `creator_user_id` INT UNSIGNED NOT NULL AFTER `tenummer`;
+	ADD COLUMN `creator_user_id` INT UNSIGNED NOT NULL AFTER `rechnung_vertrieb`;
 
 UPDATE `haus` SET `creator_user_id`=1 WHERE 1;
 

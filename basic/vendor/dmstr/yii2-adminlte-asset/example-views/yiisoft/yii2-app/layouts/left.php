@@ -74,11 +74,11 @@
                         'visible' => User::canRoute('/user-management/user/index', true),
                         'items'=>UserManagementModule::menuItems(),
                         'items' => [
-                            ['label' => UserManagementModule::t('back', 'Users'), 'icon' => 'fa fa-angle-double-right', 'url' => ['/user-management/user/index']],
-                            ['label' => UserManagementModule::t('back', 'Roles'), 'icon' => 'fa fa-angle-double-right', 'url' => ['/user-management/role/index']],
-                            ['label' => UserManagementModule::t('back', 'Permissions'), 'icon' => 'fa fa-angle-double-right', 'url' => ['/user-management/permission/index']],
-                            ['label' => UserManagementModule::t('back', 'Permission groups'), 'icon' => 'fa fa-angle-double-right', 'url' => ['/user-management/auth-item-group/index']],
-                            ['label' => UserManagementModule::t('back', 'Visit log'), 'icon' => 'fa fa-angle-double-right', 'url' => ['/user-management/user-visit-log/index']],
+                            ['label' => 'Benutzer', 'icon' => 'fa fa-angle-double-right', 'url' => ['/user-management/user/index']],
+                            ['label' => 'Rollen', 'icon' => 'fa fa-angle-double-right', 'url' => ['/user-management/role/index']],
+                            ['label' => 'Berechtigungen', 'icon' => 'fa fa-angle-double-right', 'url' => ['/user-management/permission/index']],
+                            ['label' => 'Berechtigungsgruppen', 'icon' => 'fa fa-angle-double-right', 'url' => ['/user-management/auth-item-group/index']],
+                            ['label' => 'Besucher-Log', 'icon' => 'fa fa-angle-double-right', 'url' => ['/user-management/user-visit-log/index']],
                         ]
                     ],
                     [
@@ -86,13 +86,12 @@
                         'icon' => 'fa fa-user',
                         'url' => '#',
                         'items' => [
-                            ['label'=>'Registration', 'url'=>['/user-management/auth/registration']],
-                            ['label'=>'Change own password', 'url'=>['/user-management/auth/change-own-password']],
-                            ['label'=>'Password recovery', 'url'=>['/user-management/auth/password-recovery']],
-                            ['label'=>'E-mail confirmation', 'url'=>['/user-management/auth/confirm-email']],
+                            //['label'=>'Registration', 'url'=>['/user-management/auth/registration']],
+                            ['label'=>'Passwort ändern', 'url'=>['/user-management/auth/change-own-password']],
+                            //['label'=>'Passwort zurücksetzen', 'url'=>['/user-management/auth/password-recovery']],
+                            //['label'=>'E-Mail Bestätigung', 'url'=>['/user-management/auth/confirm-email']],
                         ],
                     ],
-
 
                     
                     ['label' => 'Firmen', 'icon' => 'fa fa-building text-red', 'url' => ['/firma/index']],

@@ -88,6 +88,12 @@ class DatenblattSearch extends Datenblatt
             ]);
         }
 
+        //$a = ArrayHelper::getValue($_GET, 'toolbar');
+        //$b = ArrayHelper::getValue($_GET, 'tag');
+        //error_log(print_r($_GET, 1));
+        //error_log(print_r($_POST, 1));
+        //return $dataProvider
+
         $dataProvider->sort->attributes['haus_strasse'] = [
             // The tables are the ones our relation are configured to
             // in my case they are prefixed with "tbl_"

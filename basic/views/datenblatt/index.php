@@ -53,8 +53,32 @@ $this->params['breadcrumbs'][] = $this->title;
 -->        
     </div>
 
-
-    <?php  echo $this->render('_dynagrid', ['dataProvider' => $dataProvider, 'searchModel' => $searchModel]); ?>
+    <?php 
+    /*
+        if (User::hasPermission('export')) {
+            echo $this->render('_gridexport', [
+                'dataProvider' => $dataProvider, 
+                'searchModel' => $searchModel,
+                'maxCountTEEinheits' => $maxCountTEEinheits,
+                'maxCountSonderwunsches' => $maxCountSonderwunsches,
+                'maxCountAbschlags' => $maxCountAbschlags,
+                'maxCountNachlasses' => $maxCountNachlasses,
+                'maxCountZahlungs' => $maxCountZahlungs,
+                ]); 
+            
+        }
+    */
+    ?>
+    
+    <?php  echo $this->render('_dynagrid', [
+        'dataProvider' => $dataProvider, 
+        'searchModel' => $searchModel,
+        'maxCountTEEinheits' => $maxCountTEEinheits,
+        'maxCountSonderwunsches' => $maxCountSonderwunsches,
+        'maxCountAbschlags' => $maxCountAbschlags,
+        'maxCountNachlasses' => $maxCountNachlasses,
+        'maxCountZahlungs' => $maxCountZahlungs,
+    ]); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
     
 

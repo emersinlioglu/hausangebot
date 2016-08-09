@@ -88,7 +88,6 @@ class Datenblatt extends \yii\db\ActiveRecord
                 
                 $sonerwunsch = $this->sonderwunsches[$nth];
                 switch($attributeName) {
-                    
                     default:                
                         $value = $sonerwunsch->{$attributeName};
                         break;
@@ -154,7 +153,15 @@ class Datenblatt extends \yii\db\ActiveRecord
 
                 $zahlung = $this->zahlungs[$nth];
                 switch($attributeName) {
-                    
+                    case 'kaufvertrag_prozent':
+                        $value = $sonerwunsch->{$attributeName};
+                        break;
+                    case 'kaufvertrag_betrag':
+                        $value = $sonerwunsch->{$attributeName};
+                        break;
+                    case 'kaufvertrag_angefordert':
+                        $value = $sonerwunsch->{$attributeName};
+                        break;
                     default:                
                         $value = $zahlung->{$attributeName};
                         break;

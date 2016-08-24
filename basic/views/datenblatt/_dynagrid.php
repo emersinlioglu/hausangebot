@@ -474,6 +474,7 @@ echo DynaGrid::widget([
     'userSpecific'=>true,
     'enableMultiSort' => true,
 
+
     'gridOptions'=>[
         'dataProvider'=>$dataProvider,
         'filterModel'=>$searchModel,
@@ -483,6 +484,19 @@ echo DynaGrid::widget([
             'heading'=>'<h3 class="panel-title">Datenblätter</h3>',
             'before' => '{dynagridFilter} {dynagridSort} {dynagrid}',
         ],
+
+        'autoXlFormat'=>true,
+        'export'=>[
+            //'fontAwesome'=>true,
+            'showConfirmAlert'=>false,
+            'target'=>'_BLANK'
+        ],
+/*
+        'exportConfig' => [
+            'Excel5' => ['label'=>'aaa'], 
+            'Excel2007' => ['label'=>'bbb']
+        ]
+*/
         /*
         'toolbar' =>  [
             [

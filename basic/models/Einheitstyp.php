@@ -17,6 +17,7 @@ class Einheitstyp extends \yii\db\ActiveRecord
 {
     
     const TYPE_HAUS = 1;
+    const TYPE_STELLPLATZ = 2;
     /**
      * @inheritdoc
      */
